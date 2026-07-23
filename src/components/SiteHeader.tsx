@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import { MobileMenu } from './MobileMenu'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -14,6 +15,8 @@ export function SiteHeader() {
   return (
     <header className="hg-header">
       <div className="hg-shell hg-header__inner">
+        <MobileMenu />
+
         <Link to="/" className="hg-logo" aria-label="Hokkaido Group home">
           Hokkaido <span>Group</span>
         </Link>

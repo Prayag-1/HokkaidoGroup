@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#EAE3D6"/>
+  <circle cx="380" cy="250" r="150" fill="#1B2A4A" opacity=".06"/>
+  <circle cx="550" cy="200" r="70" fill="#C0442C" opacity=".08"/>
+  <text x="60" y="74" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="30" letter-spacing="6">PRESS</text>
+</svg>

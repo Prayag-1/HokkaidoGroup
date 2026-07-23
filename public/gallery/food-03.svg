@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850">
+  <rect width="700" height="850" fill="#E7E0D3"/>
+  <path d="M0 620h700" stroke="#1B2A4A" stroke-opacity=".18" stroke-width="24"/>
+  <path d="M120 180h460v300H120z" fill="#C0442C" opacity=".08"/>
+  <text x="56" y="80" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="34" letter-spacing="6">FOOD</text>
+</svg>

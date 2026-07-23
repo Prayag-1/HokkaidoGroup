@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#F0E9DB"/>
+  <rect x="100" y="120" width="600" height="250" rx="32" fill="#1B2A4A" opacity=".07"/>
+  <path d="M140 300h520" stroke="#C0442C" stroke-opacity=".1" stroke-width="18"/>
+  <text x="60" y="74" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="30" letter-spacing="6">PRESS</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 960">
+  <rect width="820" height="960" fill="#EFE8DB"/>
+  <circle cx="260" cy="350" r="110" fill="#1B2A4A" opacity=".08"/>
+  <circle cx="520" cy="410" r="150" fill="#C0442C" opacity=".08"/>
+  <text x="60" y="86" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="34" letter-spacing="6">PEOPLE</text>
+</svg>

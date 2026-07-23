@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 900">
+  <rect width="760" height="900" fill="#E9E2D4"/>
+  <rect x="130" y="180" width="500" height="540" rx="120" fill="#1B2A4A" opacity=".06"/>
+  <text x="54" y="78" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="34" letter-spacing="6">PEOPLE</text>
+</svg>

@@ -38,7 +38,7 @@ export function SiteFooter() {
             <p className="hg-meta">Businesses</p>
             <nav className="hg-footer__links" aria-label="Footer business directory">
               {businesses.map((business) => (
-                <Link key={business.id} to={business.websiteUrl ?? `/businesses#${business.slug}`}>
+                <Link key={business.id} to={`/businesses/${business.slug}`}>
                   {business.name}
                 </Link>
               ))}

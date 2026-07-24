@@ -1,24 +1,33 @@
 import { Link, NavLink } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
+import { hnbgCorporateContact } from '../data/businesses'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/#story', label: 'About' },
-  { to: '/#brands', label: 'Brands' },
-  { to: '/#locations', label: 'Locations' },
-  { to: '/#gallery', label: 'Gallery' },
-  { to: '/booking', label: 'Booking' },
+  { to: '/about', label: 'About Us' },
+  { to: '/businesses', label: 'Our Businesses' },
+  { to: '/careers', label: 'Careers' },
+  { to: '/press', label: 'Press & News' },
   { to: '/contact', label: 'Contact' },
 ] as const
 
 export function SiteHeader() {
+  const phone = hnbgCorporateContact.phone
+  const email = hnbgCorporateContact.email
+
   return (
     <header className="hg-header">
+      <div className="hg-topbar">
+        <div className="hg-shell hg-topbar__inner">
+          {phone ? <a href={`tel:${phone}`}>{phone}</a> : <span>Phone pending verification</span>}
+          {email ? <a href={`mailto:${email}`}>{email}</a> : <span>Email pending verification</span>}
+        </div>
+      </div>
       <div className="hg-shell hg-header__inner">
         <MobileMenu />
 
-        <Link to="/" className="hg-logo" aria-label="Hokkaido Group home">
-          Hokkaido <span>Group</span>
+        <Link to="/" className="hg-logo" aria-label="HNBG home">
+          HNBG<span>Corporate</span>
         </Link>
 
         <nav className="hg-nav" aria-label="Main navigation">
@@ -29,8 +38,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Link to="/booking" className="hg-button hg-button--outline-dark">
-          Reserve
+        <Link to="/contact" className="hg-button hg-button--outline-dark">
+          Get in Touch
         </Link>
       </div>
     </header>

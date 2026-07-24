@@ -3,11 +3,10 @@ import { Link, NavLink } from 'react-router-dom'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/#story', label: 'About' },
-  { to: '/#brands', label: 'Brands' },
-  { to: '/#locations', label: 'Locations' },
-  { to: '/#gallery', label: 'Gallery' },
-  { to: '/booking', label: 'Booking' },
+  { to: '/about', label: 'About Us' },
+  { to: '/businesses', label: 'Our Businesses' },
+  { to: '/careers', label: 'Careers' },
+  { to: '/press', label: 'Press & News' },
   { to: '/contact', label: 'Contact' },
 ] as const
 
@@ -24,7 +23,6 @@ export function MobileMenu() {
 
   return (
     <>
-      {/* Hamburger Button */}
       <button
         className="hg-hamburger"
         onClick={toggleMenu}
@@ -36,23 +34,15 @@ export function MobileMenu() {
         <span className="hg-hamburger__line"></span>
       </button>
 
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <div className="hg-mobile-menu-overlay" onClick={closeMenu} aria-hidden="true" />
-      )}
+      {isOpen && <div className="hg-mobile-menu-overlay" onClick={closeMenu} aria-hidden="true" />}
 
-      {/* Mobile Menu Sidebar */}
       <nav className={`hg-mobile-menu ${isOpen ? 'hg-mobile-menu--open' : ''}`} aria-label="Mobile navigation">
         <div className="hg-mobile-menu__header">
-          <Link to="/" className="hg-logo" onClick={closeMenu} aria-label="Hokkaido Group home">
-            Hokkaido <span>Group</span>
+          <Link to="/" className="hg-logo" onClick={closeMenu} aria-label="HNBG home">
+            HNBG<span>Corporate</span>
           </Link>
-          <button
-            className="hg-mobile-menu__close"
-            onClick={closeMenu}
-            aria-label="Close navigation menu"
-          >
-            ✕
+          <button className="hg-mobile-menu__close" onClick={closeMenu} aria-label="Close navigation menu">
+            X
           </button>
         </div>
 
@@ -71,12 +61,8 @@ export function MobileMenu() {
           ))}
         </div>
 
-        <Link
-          to="/booking"
-          className="hg-button hg-button--outline-dark hg-mobile-menu__button"
-          onClick={closeMenu}
-        >
-          Reserve
+        <Link to="/contact" className="hg-button hg-button--outline-dark hg-mobile-menu__button" onClick={closeMenu}>
+          Get in Touch
         </Link>
       </nav>
     </>

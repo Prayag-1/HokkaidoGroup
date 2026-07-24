@@ -2,14 +2,13 @@ import { galleryImages } from '../data/gallery'
 
 export function GallerySection() {
   return (
-    <section id="gallery" className="hg-section">
+    <section id="experiences" className="hg-section hg-section--dark">
       <div className="hg-shell">
         <div className="hg-section__intro hg-section__intro--left">
-          <p className="hg-eyebrow">Gallery</p>
-          <h2 className="hg-title">Atmosphere first, then detail.</h2>
+          <p className="hg-eyebrow">Hokkaido Experiences</p>
+          <h2 className="hg-title">Bringing people together</h2>
           <p className="hg-lead">
-            Replace these placeholders with real food, interior, team, and venue photography. The layout is ready for
-            an editorial hospitality image system.
+            Food, rooms, teams, and gatherings form the heart of the group.
           </p>
         </div>
 

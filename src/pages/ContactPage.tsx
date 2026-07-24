@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { SiteFooter } from '../components/SiteFooter'
 import { formEndpoints } from '../config/forms'
+import { hnbgCorporateContact } from '../data/businesses'
 
 export function ContactPage() {
   return (
@@ -19,12 +20,20 @@ export function ContactPage() {
               <p className="hg-eyebrow">Direct contact</p>
               <h3>Head Office</h3>
               <p>
-                <a href="mailto:hello@hokkaidogroup.com">hello@hokkaidogroup.com</a>
+                {hnbgCorporateContact.email ? (
+                  <a href={`mailto:${hnbgCorporateContact.email}`}>{hnbgCorporateContact.email}</a>
+                ) : (
+                  'Email pending verification'
+                )}
               </p>
               <p>
-                <a href="tel:+97714000000">+977 1 4000 000</a>
+                {hnbgCorporateContact.phone ? (
+                  <a href={`tel:${hnbgCorporateContact.phone}`}>{hnbgCorporateContact.phone}</a>
+                ) : (
+                  'Phone pending verification'
+                )}
               </p>
-              <p>Durbar Marg, Kathmandu 44600, Nepal</p>
+              <p>{hnbgCorporateContact.address ?? 'Address pending verification'}</p>
             </div>
           </div>
 

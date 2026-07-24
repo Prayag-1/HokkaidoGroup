@@ -6,67 +6,74 @@ export type Brand = {
   detail: string
   highlights: string[]
   slug: string
+  image: string
 }
 
 export const brands: Brand[] = [
   {
     name: 'Hokkaido Ramen House',
-    concept: 'Japanese comfort dining',
+    concept: 'Restaurant',
     location: 'Budhanilkantha and Thamel',
-    description: 'Warm ramen rooms built around broth, noodles, quick service, and reliable hospitality.',
+    description: 'Signature ramen, rice bowls, and Japanese comfort plates served in warm neighborhood rooms.',
     detail:
-      'The group-facing entry brand: approachable Japanese dining, strong lunch and dinner demand, and repeatable service standards across hotel and street-facing venues.',
+      'The everyday dining brand of the group: approachable, lively, dependable, and built for guests who return for familiar bowls and attentive service.',
     highlights: ['Ramen and rice bowls', 'Casual dining', 'Multiple outlets'],
     slug: 'ramen-house',
+    image: '/gallery/food-01.svg',
   },
   {
     name: 'Hokkaido House',
-    concept: 'All-day Japanese restaurant',
+    concept: 'Restaurant',
     location: 'Sanepa, Lalitpur',
-    description: 'A polished dining house for families, groups, and guests looking for a broader Japanese menu.',
+    description: 'An all-day Japanese restaurant for families, long lunches, celebrations, and group dining.',
     detail:
-      'This concept should carry the flagship restaurant story: atmosphere, menu variety, hospitality standards, and space for group dining.',
+      'The flagship dining room carries the fuller hospitality story: broader menus, polished interiors, private tables, and relaxed pacing.',
     highlights: ['Family dining', 'Private tables', 'Signature Japanese menu'],
     slug: 'hokkaido-house',
+    image: '/gallery/interior-01.svg',
   },
   {
     name: 'Izakaya Hokkaido',
-    concept: 'Hotel dining and evening plates',
+    concept: 'Restaurant',
     location: 'Lazimpat',
-    description: 'A quieter izakaya format for hotel guests, after-work dinners, and refined shared plates.',
+    description: 'Hotel dining with shared plates, evening drinks, and a quieter room for longer meals.',
     detail:
-      'The tone should be intimate and service-led, with emphasis on beverages, shared plates, hotel convenience, and evening reservations.',
+      'This concept is intimate and service-led, with emphasis on beverages, shared plates, hotel convenience, and evening reservations.',
     highlights: ['Shared plates', 'Hotel venue', 'Dinner-led service'],
     slug: 'izakaya',
+    image: '/gallery/interior-02.svg',
   },
   {
     name: 'Omakase',
-    concept: 'Chef-led counter experience',
+    concept: 'Restaurant',
     location: 'Naxal',
-    description: 'A premium tasting-counter format for guests who want a focused, reservation-led meal.',
+    description: 'A chef-led counter experience built around seasonal choices, limited seats, and calm service.',
     detail:
-      'This page should feel more exclusive: chef selection, seasonal ingredients, limited seats, and clear reservation expectations.',
+      'The most reservation-led format in the group, designed for guests who want a focused meal, seasonal ingredients, and direct chef attention.',
     highlights: ['Chef selection', 'Limited seating', 'Reservation preferred'],
     slug: 'omakase',
+    image: '/gallery/food-03.svg',
   },
   {
     name: 'Hokkaido Bento House',
-    concept: 'Fast casual and takeaway',
+    concept: 'Restaurant',
     location: 'Bauddha',
-    description: 'Compact Japanese meals designed for daily dining, takeaway, and dependable service.',
+    description: 'Fast casual bento meals for daily dining, takeaway, office lunches, and quick service.',
     detail:
-      'This concept supports volume and convenience while keeping the Hokkaido quality language visible in packaging, menu, and service.',
+      'A compact format that supports convenience while keeping the group standard visible in packaging, menu design, and staff care.',
     highlights: ['Bento meals', 'Takeaway', 'Daily dining'],
     slug: 'bento-house',
+    image: '/gallery/food-02.svg',
   },
   {
-    name: 'Catering and Partnerships',
-    concept: 'Events, supply, and growth',
+    name: 'Hokkaido Events',
+    concept: 'Catering',
     location: 'Kathmandu Valley',
-    description: 'Private dining, catering, imports, and future franchise conversations handled by the group office.',
+    description: 'Private dining, catering, imports, and partnership conversations handled by the group office.',
     detail:
-      'This is the group development page: suitable for event inquiries, corporate meals, partner venues, supply, and expansion leads.',
+      'This is the group development arm for event inquiries, corporate meals, partner venues, supply, and future expansion leads.',
     highlights: ['Event menus', 'Corporate meals', 'Partner inquiries'],
     slug: 'catering-partnerships',
+    image: '/gallery/people-01.svg',
   },
 ]

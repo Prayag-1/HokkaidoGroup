@@ -6,6 +6,10 @@ import { HomePage } from './pages/HomePage'
 import { BrandPage } from './pages/BrandPage'
 import { ContactPage } from './pages/ContactPage'
 import { BookingPage } from './pages/BookingPage'
+import { AboutPage } from './pages/AboutPage'
+import { BusinessDirectoryPage } from './pages/BusinessDirectoryPage'
+import { CareersPage } from './pages/CareersPage'
+import { PressPage } from './pages/PressPage'
 import { SiteHeader } from './components/SiteHeader'
 
 function AppRoutes() {
@@ -35,6 +39,38 @@ function AppRoutes() {
             element={
               <PageTransition>
                 <HomePage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PageTransition>
+                <AboutPage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/businesses"
+            element={
+              <PageTransition>
+                <BusinessDirectoryPage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/careers"
+            element={
+              <PageTransition>
+                <CareersPage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/press"
+            element={
+              <PageTransition>
+                <PressPage />
               </PageTransition>
             }
           />

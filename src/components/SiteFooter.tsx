@@ -1,61 +1,80 @@
 import { Link } from 'react-router-dom'
+import { businesses, hnbgCorporateContact } from '../data/businesses'
 
-const exploreLinks = [
-  ['Home', '/'],
-  ['About', '/#story'],
-  ['Brands', '/#brands'],
-  ['Locations', '/#locations'],
-  ['Gallery', '/#gallery'],
-  ['Booking', '/booking'],
+const companyLinks = [
+  ['About', '/about'],
+  ['Careers', '/careers'],
+  ['Press', '/press'],
   ['Contact', '/contact'],
 ] as const
 
 export function SiteFooter() {
+  const hasSocialLinks = hnbgCorporateContact.socialLinks.length > 0
+
   return (
     <footer className="hg-footer">
       <div className="hg-shell">
         <div className="hg-footer__main">
           <div>
-            <h2>Hokkaido Group</h2>
+            <h2>HNBG</h2>
             <p style={{ marginTop: '1.5rem' }}>
-              A hospitality house rooted in Kathmandu, guided by the Japanese principle of omotenashi: the quiet art
-              of anticipating a guest.
+              Hokkaido Nepal Business Group connects Japanese cuisine, business practice, and cultural exchange in
+              Nepal.
             </p>
             <div className="hg-actions">
-              <a href="https://instagram.com/hokkaidohousenp" target="_blank" rel="noreferrer" className="hg-button hg-button--outline-light">
-                Instagram
-              </a>
-              <a href="https://facebook.com/hokkaidoramenhousenepal" target="_blank" rel="noreferrer" className="hg-button hg-button--outline-light">
-                Facebook
-              </a>
+              {hasSocialLinks ? (
+                hnbgCorporateContact.socialLinks.map((link) => (
+                  <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="hg-button hg-button--outline-light">
+                    {link.label}
+                  </a>
+                ))
+              ) : (
+                <p>Social links pending verification</p>
+              )}
             </div>
           </div>
 
           <div>
-            <p className="hg-meta">Explore</p>
-            <nav className="hg-footer__links" aria-label="Footer navigation">
-              {exploreLinks.map(([label, to]) => (
-                <Link key={to} to={to}>
-                  {label}
+            <p className="hg-meta">Businesses</p>
+            <nav className="hg-footer__links" aria-label="Footer business directory">
+              {businesses.map((business) => (
+                <Link key={business.id} to={business.websiteUrl ?? `/businesses#${business.slug}`}>
+                  {business.name}
                 </Link>
               ))}
             </nav>
           </div>
 
           <div>
-            <p className="hg-meta">Contact</p>
+            <p className="hg-meta">Company</p>
+            <nav className="hg-footer__links" aria-label="Footer company navigation">
+              {companyLinks.map(([label, to]) => (
+                <Link key={to} to={to}>
+                  {label}
+                </Link>
+              ))}
+            </nav>
+
             <div className="hg-footer__links">
-              <a href="mailto:hello@hokkaidogroup.com">hello@hokkaidogroup.com</a>
-              <a href="tel:+97714000000">+977 1 4000 000</a>
-              <p>Head Office, Durbar Marg</p>
-              <p>Kathmandu 44600, Nepal</p>
+              <p className="hg-meta">Contact</p>
+              {hnbgCorporateContact.email ? (
+                <a href={`mailto:${hnbgCorporateContact.email}`}>{hnbgCorporateContact.email}</a>
+              ) : (
+                <p>Email pending verification</p>
+              )}
+              {hnbgCorporateContact.phone ? (
+                <a href={`tel:${hnbgCorporateContact.phone}`}>{hnbgCorporateContact.phone}</a>
+              ) : (
+                <p>Phone pending verification</p>
+              )}
+              <p>{hnbgCorporateContact.address ?? 'Address pending verification'}</p>
             </div>
           </div>
         </div>
 
         <div className="hg-footer__bottom">
-          <p>© 2026 Hokkaido Group. All rights reserved.</p>
-          <p className="hg-meta">Kathmandu · Pokhara · Nagarkot</p>
+          <p>Copyright 2026 Hokkaido Nepal Business Group. All rights reserved.</p>
+          <p className="hg-meta">Contact details pending final verification</p>
         </div>
       </div>
     </footer>

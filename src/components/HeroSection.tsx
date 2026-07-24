@@ -3,13 +3,13 @@ export function HeroSection() {
     <section className="hg-hero">
       <div className="hg-shell hg-hero__inner">
         <div className="hg-hero__copy">
-          <p className="hg-eyebrow">Est. Kathmandu, Nepal</p>
+          <p className="hg-eyebrow">Restaurants, hotels, catering and hospitality</p>
           <h1 className="hg-title">
-            A quiet house of hospitality, <em>shaped by patience.</em>
+            Hokkaido Group
           </h1>
           <p className="hg-lead">
-            Hokkaido Group is a family of Japanese restaurants, cafes, catering, and guest experiences rooted in
-            Kathmandu, where omotenashi meets the warmth of Nepal.
+            A Nepal-based hospitality group bringing guests together through Japanese dining rooms, thoughtful service,
+            private events, and warm city stays.
           </p>
 
           <div className="hg-actions">
@@ -17,23 +17,23 @@ export function HeroSection() {
               Reserve a table
             </a>
             <a href="#brands" className="hg-button hg-button--outline-light">
-              Our brands
+              Restaurants
             </a>
           </div>
         </div>
 
         <div className="hg-stats" aria-label="Hokkaido Group highlights">
           <div className="hg-stat">
-            <strong>06</strong>
-            <span>Venues</span>
+            <strong>1992</strong>
+            <span>Hospitality roots</span>
           </div>
           <div className="hg-stat">
-            <strong>12</strong>
-            <span>Years of craft</span>
+            <strong>06+</strong>
+            <span>Restaurants</span>
           </div>
           <div className="hg-stat">
             <strong>03</strong>
-            <span>Cities across Nepal</span>
+            <span>Guest formats</span>
           </div>
         </div>
       </div>

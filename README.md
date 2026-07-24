@@ -15,30 +15,35 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
-## Hokkaido Nepal Tokens
+## Hokkaido Nepal Business Group Theme Tokens
 
-Source of truth for the visual system lives in [`tailwind.config.ts`](./tailwind.config.ts).
+The centralized corporate theme lives in [`src/theme.css`](./src/theme.css). It is imported globally from [`src/main.tsx`](./src/main.tsx) after `index.css` and `editorial.css`, so these custom properties are available to every page and component.
 
-- Colors
-  - `ink` `#1B2A4A`
-  - `paper` `#F7F5F0`
-  - `vermillion` `#C0442C`
-  - `matcha` `#5B7553`
-  - `charcoal` `#2B2B2B`
-  - `stone` `#D8D3C8`
-- Typography
-  - `fontFamily.display`: `Zen Kaku Gothic New` with `Inter Tight` and `Inter` fallback
-  - `fontFamily.body`: `Inter`
-  - `fontFamily.label`: `Inter`
-- Type scale
-  - `caption`, `label`, `body`, `lead`, `title`, `display`, `hero`
-- Spacing
-  - Extended whitespace tokens from `18` through `128` for generous `ma`
-- Motif components
-  - `SnowflakeMark`
-  - `SakuraMark`
-  - `RiceStalkMark`
-  - `SectionDivider`
-  - `MotifField`
-- Motion
-  - `PageReveal` for route/page fade-rise transitions
+Use the CSS variables in `src/theme.css` for new page and component styling instead of hardcoding brand colors, typography, business card, section header, button, timeline, header, or footer values.
+
+Key token groups:
+
+- Brand colors: `--color-primary`, `--color-primary-text`, `--color-ink`, `--color-body`, `--color-secondary-text`, `--color-bg`, `--color-bg-alt`
+- Typography: `--font-heading`, `--font-body`, `--font-size-body-copy`, `--font-size-section-description`, `--font-size-form-control`
+- Buttons: `--button-primary-*`, `--button-secondary-*`, `--button-disabled-*`
+- Section headers: `--section-eyebrow-*`, `--section-heading-*`, `--section-description-*`, `--section-divider-color`
+- Business cards: `--business-card-*`
+- Timeline: `--timeline-*`
+- Header and footer: `--header-*`, `--footer-*`
+
+Contrast note: `--color-primary` remains the corporate red for solid CTAs, logo mark accents, active states, and section dividers. `--color-primary-text` is a slightly deeper red for text-only uses, improving WCAG AA contrast on white backgrounds.
+
+## Business Data Source
+
+The single source of truth for HNBG portfolio listings is [`src/data/businesses.ts`](./src/data/businesses.ts). It exports:
+
+- `BusinessCategory`: `Restaurant`, `Retail`, `Trading`, or `Farm & Resort`
+- `Business`: schema for name, category, address, phone, email, description, location summary, image, logo, website URL, and verification status
+- `businesses`: one entry per HNBG business
+- `getBusinessBySlug`: helper for detail pages
+
+Every future homepage grid, Our Businesses directory, and footer business link list should read from `businesses`. Do not hardcode business listings in page components.
+
+The reusable card shell for those listings is [`src/components/BusinessCard.tsx`](./src/components/BusinessCard.tsx). It accepts a single `Business` object and uses the global `.business-card*` classes from `src/theme.css`.
+
+Corporate history milestones live in [`src/data/milestones.ts`](./src/data/milestones.ts). The current entries are placeholders pending verified wording.

@@ -3,7 +3,6 @@ import izakaya2 from "../assets/gallery/izakaya/izakaya2.jpg"
 import izakaya3 from "../assets/gallery/izakaya/izakaya3.jpg"
 import izakaya4 from "../assets/gallery/izakaya/izakaya4.jpg"
 
-
 import ramenhouse1 from "../assets/gallery/ramenhouse/ramenhouse1.webp"
 import ramenhouse2 from "../assets/gallery/ramenhouse/ramenhouse2.webp"
 import ramenhouse3 from "../assets/gallery/ramenhouse/ramenhouse3.webp"
@@ -53,7 +52,7 @@ export type Business = {
   about: string | null
   locationSummary: string | null
   mapQuery: string | null
-  image: string
+  image: string | null
   galleryImages: string[]
   logo: string | null
   websiteUrl: string | null
@@ -248,8 +247,8 @@ export const businesses: Business[] = [
     about: `Located in Kamaladi, Kathmandu, HOMA Nepal is Hokkaido Group's specialty Japanese retail destination dedicated to bringing authentic Japanese products directly to Nepalese consumers. The store specializes in imported Japanese cosmetics, skincare products, food ingredients, sauces, beverages, snacks, kitchenware, lifestyle products, household essentials, and wellness items sourced directly from Japan. Every product is carefully selected to ensure authenticity, quality, and reliability while introducing customers to trusted Japanese brands. HOMA Nepal serves both individual shoppers and businesses seeking genuine Japanese products that are difficult to source locally. The store reflects Hokkaido Group's commitment to making Japanese quality and lifestyle more accessible throughout Nepal.`,
     locationSummary: 'Kamaladi, Kathmandu',
     mapQuery: 'HOMA Nepal, Kamaladi, Kathmandu, Nepal',
-    image: '/gallery/people-01.svg',
-    galleryImages: ['/gallery/people-01.svg'],
+    image: null,
+    galleryImages: [],
     logo: null,
     websiteUrl: null,
     featured: true,
@@ -267,8 +266,8 @@ export const businesses: Business[] = [
     about: `Located in Bansbari, Kathmandu, Janeichi Business serves as the official import and trading division of Hokkaido Group, ensuring the authenticity and quality of products supplied across every Hokkaido brand. The company specializes in directly importing premium Japanese ingredients, sauces, beverages, seafood, restaurant supplies, cosmetics, retail products, and specialty food items from Japan to Nepal. By working directly with trusted Japanese manufacturers and suppliers, Janeichi guarantees consistent quality while supporting the operational needs of Hokkaido restaurants and retail businesses. Beyond supplying the group's outlets, Janeichi also distributes authentic Japanese products to businesses throughout Nepal. Its commitment to quality sourcing, efficient logistics, and long-term partnerships has made it an essential pillar of Hokkaido Group's continued growth and reputation.`,
     locationSummary: 'Bansbari, Kathmandu',
     mapQuery: 'Janeichi Business, Bansbari, Kathmandu, Nepal',
-    image: '/gallery/people-02.svg',
-    galleryImages: ['/gallery/people-02.svg'],
+    image: null,
+    galleryImages: [],
     logo: null,
     websiteUrl: null,
     featured: true,

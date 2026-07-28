@@ -33,7 +33,8 @@ export function BusinessDetailPage() {
     business.about ??
     business.description ??
     'Detailed company information is pending verification for this business.'
-  const galleryImages = business.galleryImages.length > 0 ? business.galleryImages : [business.image]
+  const galleryImages = business.galleryImages.filter(Boolean)
+  const hasHeroMedia = Boolean(business.image)
   const mapSrc = business.mapQuery
     ? `https://www.google.com/maps?q=${encodeURIComponent(business.mapQuery)}&output=embed`
     : null
@@ -43,7 +44,7 @@ export function BusinessDetailPage() {
   return (
     <main className="corporate-page">
       <section className="corporate-section corporate-section--first">
-        <div className="corporate-shell business-detail__hero-shell">
+        <div className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">{business.category}</p>
             <h1 className="section-header__heading">{business.name}</h1>
@@ -66,9 +67,11 @@ export function BusinessDetailPage() {
             </dl>
           </div>
 
-          <figure className="business-detail__hero-media">
-            <img src={business.image} alt={business.name} loading="eager" />
-          </figure>
+          {hasHeroMedia ? (
+            <figure className="business-detail__hero-media">
+              <img src={business.image as string} alt={business.name} loading="eager" />
+            </figure>
+          ) : null}
         </div>
       </section>
 
@@ -105,21 +108,23 @@ export function BusinessDetailPage() {
         </div>
       </section>
 
-      <section className="hg-section hg-section--soft">
-        <div className="hg-shell business-detail__gallery-section">
-          <div className="hg-section__intro hg-section__intro--left business-detail__gallery-intro">
-            <p className="hg-eyebrow">Photos</p>
-            <h2 className="business-detail__gallery-title">Inside {business.name}</h2>
+      {galleryImages.length > 0 ? (
+        <section className="hg-section hg-section--soft">
+          <div className="hg-shell business-detail__gallery-section">
+            <div className="hg-section__intro hg-section__intro--left business-detail__gallery-intro">
+              <p className="hg-eyebrow">Photos</p>
+              <h2 className="business-detail__gallery-title">Inside {business.name}</h2>
+            </div>
+            <div className="business-detail__gallery">
+              {galleryImages.map((src, index) => (
+                <figure key={`${src}-${index}`} className="business-detail__gallery-item">
+                  <img src={src} alt={`${business.name} photo ${index + 1}`} loading="lazy" />
+                </figure>
+              ))}
+            </div>
           </div>
-          <div className="business-detail__gallery">
-            {galleryImages.map((src, index) => (
-              <figure key={`${src}-${index}`} className="business-detail__gallery-item">
-                <img src={src} alt={`${business.name} photo ${index + 1}`} loading="lazy" />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="hg-section">
         <div className="hg-shell business-detail__location-grid">

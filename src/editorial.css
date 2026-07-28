@@ -1041,6 +1041,19 @@ body {
   align-items: center;
 }
 
+.business-detail__hero-shell--text-only {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 52rem;
+}
+
+.business-card--text-only .business-card__body {
+  padding-top: 1.25rem;
+}
+
+.business-card--text-only .business-card__media {
+  display: none;
+}
+
 .business-detail__hero-media {
   margin: 0;
   border: 1px solid var(--hg-line);

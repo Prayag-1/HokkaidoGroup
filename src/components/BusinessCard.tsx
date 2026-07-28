@@ -9,11 +9,15 @@ export function BusinessCard({ business }: BusinessCardProps) {
   const href = `/businesses/${business.slug}`
   const location = business.locationSummary ?? business.address ?? 'Location pending verification'
 
+  const cardImage = business.logo ?? business.image
+
   return (
-    <article className="business-card" id={business.slug}>
-      <Link className="business-card__media" to={href} aria-label={`Learn more about ${business.name}`}>
-        <img src={business.logo ?? business.image} alt="" loading="lazy" />
-      </Link>
+    <article className={`business-card${cardImage ? '' : ' business-card--text-only'}`} id={business.slug}>
+      {cardImage ? (
+        <Link className="business-card__media" to={href} aria-label={`Learn more about ${business.name}`}>
+          <img src={cardImage} alt="" loading="lazy" />
+        </Link>
+      ) : null}
       <div className="business-card__body">
         <p className="business-card__tag">{business.category}</p>
         <h3 className="business-card__title">{business.name}</h3>

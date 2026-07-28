@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <main className="corporate-page">
       <section className="corporate-section corporate-section--first">
-        <div className="corporate-shell corporate-split">
+        <div className="corporate-shell corporate-split corporate-split--about">
           <div className="section-header">
             <p className="section-header__eyebrow">About Us</p>
             <h1 className="section-header__heading">HNBG timeline</h1>

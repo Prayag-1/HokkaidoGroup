@@ -307,6 +307,23 @@ body {
   align-items: start;
 }
 
+.hg-split--contact {
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.hg-contact-page .hg-panel {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.hg-contact-page .hg-lead {
+  max-width: 34rem;
+}
+
+.hg-contact-page .hg-form {
+  align-self: start;
+}
+
 .hg-panel {
   border: 1px solid var(--hg-line);
   background: rgba(250, 247, 241, 0.5);

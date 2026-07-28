@@ -5,9 +5,9 @@ import { hnbgCorporateContact } from '../data/businesses'
 
 export function ContactPage() {
   return (
-    <main>
+    <main className="hg-contact-page">
       <section className="hg-section">
-        <div className="hg-shell hg-split">
+        <div className="hg-shell hg-split hg-split--contact">
           <div>
             <p className="hg-eyebrow">Contact</p>
             <h1 className="hg-title">Reach the Hokkaido Group office.</h1>

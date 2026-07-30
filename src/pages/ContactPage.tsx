@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
+import { ContactForm } from '../components/ContactForm'
 import { SiteFooter } from '../components/SiteFooter'
-import { formEndpoints } from '../config/forms'
 import { hnbgCorporateContact } from '../data/businesses'
 
 export function ContactPage() {
@@ -37,39 +37,7 @@ export function ContactPage() {
             </div>
           </div>
 
-          <form action={formEndpoints.contact} method="POST" className="hg-panel hg-form">
-            <input type="hidden" name="_subject" value="New Hokkaido Group contact inquiry" />
-            <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-            <p className="hg-eyebrow">Send a message</p>
-
-            <label className="hg-field">
-              Name
-              <input name="name" autoComplete="name" required maxLength={120} />
-            </label>
-            <label className="hg-field">
-              Email
-              <input type="email" name="email" autoComplete="email" required maxLength={160} />
-            </label>
-            <label className="hg-field">
-              Inquiry type
-              <select name="inquiry" required>
-                <option>General inquiry</option>
-                <option>Reservation support</option>
-                <option>Catering</option>
-                <option>Franchise</option>
-                <option>Partnership</option>
-                <option>Supplier or import</option>
-                <option>Media</option>
-              </select>
-            </label>
-            <label className="hg-field">
-              Message
-              <textarea name="message" rows={6} required maxLength={1200} />
-            </label>
-            <button type="submit" className="hg-button hg-button--dark">
-              Send message
-            </button>
-          </form>
+          <ContactForm />
         </div>
 
         <div className="hg-shell hg-actions">

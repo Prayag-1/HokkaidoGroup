@@ -1,6 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
-import { hnbgCorporateContact } from '../data/businesses'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -12,17 +11,8 @@ const links = [
 ] as const
 
 export function SiteHeader() {
-  const phone = hnbgCorporateContact.phone
-  const email = hnbgCorporateContact.email
-
   return (
     <header className="hg-header">
-      <div className="hg-topbar">
-        <div className="hg-shell hg-topbar__inner">
-          {phone ? <a href={`tel:${phone}`}>{phone}</a> : <span>Phone pending verification</span>}
-          {email ? <a href={`mailto:${email}`}>{email}</a> : <span>Email pending verification</span>}
-        </div>
-      </div>
       <div className="hg-shell hg-header__inner">
         <MobileMenu />
 

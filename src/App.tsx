@@ -9,6 +9,7 @@ import { ContactPage } from './pages/ContactPage'
 import { BookingPage } from './pages/BookingPage'
 import { AboutPage } from './pages/AboutPage'
 import { BusinessDirectoryPage } from './pages/BusinessDirectoryPage'
+import { BusinessDetailPage } from './pages/BusinessDetailPage'
 import { CareersPage } from './pages/CareersPage'
 import { PressPage } from './pages/PressPage'
 import { SiteHeader } from './components/SiteHeader'
@@ -56,6 +57,14 @@ function AppRoutes() {
             element={
               <PageTransition>
                 <BusinessDirectoryPage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/businesses/:slug"
+            element={
+              <PageTransition>
+                <BusinessDetailPage />
               </PageTransition>
             }
           />

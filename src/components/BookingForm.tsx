@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useLocation } from 'react-router-dom'
 import { cn } from '../lib/cn'
 import { BOOKING_FORM_ENDPOINTS } from '../lib/site-data'
-import { BOOKABLE_BRANDS, bookingFormSchema, bookingStepSchemas, type BookingFormValues } from '../lib/schemas'
+import { BOOKABLE_BRANDS, bookingFormSchema, type BookingFormValues } from '../lib/schemas'
 
 type BookingFormProps = {
   className?: string
@@ -84,7 +84,6 @@ export function BookingForm({ className }: BookingFormProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
     watch,
     setValue,
     trigger,

@@ -474,6 +474,14 @@ body {
   align-items: start;
 }
 
+.corporate-split--about {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+}
+
+.corporate-split--about .section-header {
+  max-width: 32rem;
+}
+
 .corporate-copy-card,
 .corporate-empty-state,
 .corporate-milestone-card {

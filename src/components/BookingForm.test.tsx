@@ -28,7 +28,7 @@ describe('BookingForm', () => {
     await user.click(screen.getByRole('button', { name: /next/i }))
 
     expect(screen.getByText(/step 2 of 4: details/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/date/i)).toBeInTheDocument()
+    expect(await screen.findByLabelText(/date/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/time/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/party size/i)).toBeInTheDocument()
   })

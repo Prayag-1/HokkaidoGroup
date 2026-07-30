@@ -1,48 +1,58 @@
 import { Link } from 'react-router-dom'
 import { ContactForm } from '../components/ContactForm'
+import { PendingNotice } from '../components/PendingNotice'
+import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
 import { hnbgCorporateContact } from '../data/businesses'
 
 export function ContactPage() {
   return (
-    <main className="hg-contact-page">
-      <section className="hg-section">
-        <div className="hg-shell hg-split hg-split--contact">
+    <main className="corporate-page corporate-contact-page">
+      <section className="corporate-section corporate-section--first">
+        <ScrollReveal className="corporate-shell corporate-split corporate-split--contact">
           <div>
-            <p className="hg-eyebrow">Contact</p>
-            <h1 className="hg-title">Reach the Hokkaido Group office.</h1>
-            <p className="hg-lead">
-              For media, catering, partnerships, suppliers, events, or general questions, send a message to the group
-              office.
+            <p className="corporate-eyebrow">Contact</p>
+            <h1 className="corporate-title">Write to the group office.</h1>
+            <p className="corporate-lead">
+              For media, catering, partnerships, suppliers, events, or general questions, send a clear note.
             </p>
 
-            <div className="hg-panel">
-              <p className="hg-eyebrow">Direct contact</p>
-              <h3>Head Office</h3>
-              <p>
+            <div className="corporate-panel">
+              <p className="corporate-eyebrow">Direct contact</p>
+              <h3>Group office</h3>
+              <div className="corporate-contact-item">
+                <span>Email</span>
                 {hnbgCorporateContact.email ? (
                   <a href={`mailto:${hnbgCorporateContact.email}`}>{hnbgCorporateContact.email}</a>
                 ) : (
-                  'Email pending verification'
+                  <PendingNotice label="Email details coming soon" />
                 )}
-              </p>
-              <p>
+              </div>
+              <div className="corporate-contact-item">
+                <span>Phone</span>
                 {hnbgCorporateContact.phone ? (
                   <a href={`tel:${hnbgCorporateContact.phone}`}>{hnbgCorporateContact.phone}</a>
                 ) : (
-                  'Phone pending verification'
+                  <PendingNotice label="Phone details coming soon" />
                 )}
-              </p>
-              <p>{hnbgCorporateContact.address ?? 'Address pending verification'}</p>
+              </div>
+              <div className="corporate-contact-item">
+                <span>Address</span>
+                {hnbgCorporateContact.address ? (
+                  <strong>{hnbgCorporateContact.address}</strong>
+                ) : (
+                  <PendingNotice label="Address details coming soon" />
+                )}
+              </div>
             </div>
           </div>
 
           <ContactForm />
-        </div>
+        </ScrollReveal>
 
-        <div className="hg-shell hg-actions">
-          <Link to="/" className="hg-button hg-button--outline-dark">
-            Back home
+        <div className="corporate-shell corporate-actions">
+          <Link to="/" className="corporate-button corporate-button--secondary">
+            Return Home
           </Link>
         </div>
       </section>

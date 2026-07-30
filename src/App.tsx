@@ -1,18 +1,40 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect, type ComponentType } from 'react'
 import { PageTransition } from './components/PageTransition'
-import { HomePage } from './pages/HomePage'
-import { BrandPage } from './pages/BrandPage'
-import { ContactPage } from './pages/ContactPage'
-import { BookingPage } from './pages/BookingPage'
-import { AboutPage } from './pages/AboutPage'
-import { BusinessDirectoryPage } from './pages/BusinessDirectoryPage'
-import { BusinessDetailPage } from './pages/BusinessDetailPage'
-import { CareersPage } from './pages/CareersPage'
-import { PressPage } from './pages/PressPage'
 import { SiteHeader } from './components/SiteHeader'
+import { HomePage } from './pages/HomePage'
+
+const ContactPage = lazy(() => import('./pages/ContactPage').then(({ ContactPage }) => ({ default: ContactPage })))
+const BookingPage = lazy(() => import('./pages/BookingPage').then(({ BookingPage }) => ({ default: BookingPage })))
+const AboutPage = lazy(() => import('./pages/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })))
+const BusinessDirectoryPage = lazy(() => import('./pages/BusinessDirectoryPage').then(({ BusinessDirectoryPage }) => ({ default: BusinessDirectoryPage })))
+const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage').then(({ BusinessDetailPage }) => ({ default: BusinessDetailPage })))
+const CareersPage = lazy(() => import('./pages/CareersPage').then(({ CareersPage }) => ({ default: CareersPage })))
+const PressPage = lazy(() => import('./pages/PressPage').then(({ PressPage }) => ({ default: PressPage })))
+
+function RouteFallback() {
+  return (
+    <main className="corporate-page">
+      <section className="corporate-section corporate-section--first">
+        <div className="corporate-shell">
+          <p className="corporate-eyebrow">Loading</p>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function renderPage(Page: ComponentType) {
+  return (
+    <PageTransition>
+      <Suspense fallback={<RouteFallback />}>
+        <Page />
+      </Suspense>
+    </PageTransition>
+  )
+}
 
 function AppRoutes() {
   const location = useLocation()
@@ -36,78 +58,14 @@ function AppRoutes() {
       <SiteHeader />
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <PageTransition>
-                <HomePage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <PageTransition>
-                <AboutPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/businesses"
-            element={
-              <PageTransition>
-                <BusinessDirectoryPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/businesses/:slug"
-            element={
-              <PageTransition>
-                <BusinessDetailPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/careers"
-            element={
-              <PageTransition>
-                <CareersPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/press"
-            element={
-              <PageTransition>
-                <PressPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/booking"
-            element={
-              <PageTransition>
-                <BookingPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <PageTransition>
-                <ContactPage />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/brands/:slug"
-            element={
-              <PageTransition>
-                <BrandPage />
-              </PageTransition>
-            }
-          />
+          <Route path="/" element={renderPage(HomePage)} />
+          <Route path="/about" element={renderPage(AboutPage)} />
+          <Route path="/businesses" element={renderPage(BusinessDirectoryPage)} />
+          <Route path="/businesses/:slug" element={renderPage(BusinessDetailPage)} />
+          <Route path="/careers" element={renderPage(CareersPage)} />
+          <Route path="/press" element={renderPage(PressPage)} />
+          <Route path="/booking" element={renderPage(BookingPage)} />
+          <Route path="/contact" element={renderPage(ContactPage)} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>

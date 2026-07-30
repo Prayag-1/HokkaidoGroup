@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900">
-  <rect width="800" height="900" fill="#E9E2D4"/>
-  <rect x="120" y="180" width="560" height="520" rx="40" fill="#1B2A4A" opacity=".06"/>
-  <path d="M180 610h440" stroke="#C0442C" stroke-opacity=".08" stroke-width="16"/>
-  <text x="64" y="84" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="34" letter-spacing="6">FARM</text>
-</svg>

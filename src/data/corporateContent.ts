@@ -1,7 +1,7 @@
 export type CoreValue = {
   name: string
   explanation: string
-  icon: string
+  icon: 'diversity' | 'moments' | 'growth' | 'innovation'
   needsClientConfirmation: boolean
 }
 
@@ -11,25 +11,25 @@ export const coreValues: CoreValue[] = [
   {
     name: 'Thriving through diversity',
     explanation: 'Welcoming different people, ideas, and cultures across the group.',
-    icon: 'D',
+    icon: 'diversity',
     needsClientConfirmation: true,
   },
   {
     name: 'Inspiring moments',
     explanation: 'Creating memorable guest and team experiences through thoughtful service.',
-    icon: 'M',
+    icon: 'moments',
     needsClientConfirmation: true,
   },
   {
     name: 'Living by growth',
     explanation: 'Improving skills, standards, and opportunities with every new step.',
-    icon: 'G',
+    icon: 'growth',
     needsClientConfirmation: true,
   },
   {
     name: 'Promoting innovation',
     explanation: 'Building better food, retail, and business practices for Nepal.',
-    icon: 'I',
+    icon: 'innovation',
     needsClientConfirmation: true,
   },
 ]

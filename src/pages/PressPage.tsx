@@ -1,3 +1,5 @@
+import { Newspaper } from 'lucide-react'
+import { EmptyState } from '../components/EmptyState'
 import { SiteFooter } from '../components/SiteFooter'
 import { publishedPressItems } from '../data/pressItems'
 
@@ -7,10 +9,10 @@ export function PressPage() {
       <section className="corporate-section corporate-section--first">
         <div className="corporate-shell">
           <div className="section-header corporate-section__header">
-            <p className="section-header__eyebrow">Press & News</p>
-            <h1 className="section-header__heading">Latest HNBG updates</h1>
+            <p className="section-header__eyebrow">Notes</p>
+            <h1 className="section-header__heading">Public updates, when ready.</h1>
             <p className="section-header__description">
-              Press items are shown only when verified posts exist in the real news data source.
+              Verified posts appear only when the real news data source is ready.
             </p>
           </div>
 
@@ -29,10 +31,12 @@ export function PressPage() {
               ))}
             </div>
           ) : (
-            <div className="corporate-empty-state">
-              <h2>Coming Soon</h2>
-              <p>No verified press or news posts are available yet.</p>
-            </div>
+            <EmptyState
+              title="Stories will appear here."
+              description="Press updates and opening notes will appear when they are ready for the public site."
+              headingLevel={2}
+              icon={Newspaper}
+            />
           )}
         </div>
       </section>

@@ -40,7 +40,8 @@ describe('ContactForm', () => {
     await user.type(screen.getByLabelText(/name/i), 'Asha Sharma')
     await user.type(screen.getByLabelText(/email/i), 'asha@example.com')
     await user.type(screen.getByLabelText(/phone/i), '9812345678')
-    await user.selectOptions(screen.getByLabelText(/brand/i), 'Hokkaido Ramen (House)')
+    await user.click(screen.getByRole('combobox', { name: /brand/i }))
+    await user.click(await screen.findByRole('option', { name: 'Hokkaido Ramen (House)' }))
     await user.type(screen.getByLabelText(/message/i), 'I would like to discuss a catering event for our office.')
 
     await user.click(screen.getByRole('button', { name: /send message/i }))

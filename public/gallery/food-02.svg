@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900">
-  <rect width="800" height="900" fill="#EEE7DB"/>
-  <rect x="110" y="160" width="580" height="620" rx="28" fill="#1B2A4A" opacity=".08"/>
-  <circle cx="560" cy="240" r="120" fill="#C0442C" opacity=".1"/>
-  <text x="64" y="84" fill="#1B2A4A" font-family="Inter, sans-serif" font-size="36" letter-spacing="6">FOOD</text>
-</svg>

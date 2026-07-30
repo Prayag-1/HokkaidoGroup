@@ -1,49 +1,37 @@
-# React + Vite
+# Hokkaido Nepal Business Group Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Corporate website for Hokkaido Nepal Business Group, built with React, TypeScript, Vite, React Router, React Hook Form, Zod, TanStack Query, Framer Motion, Radix UI primitives, Lucide icons, and a custom token-driven CSS system.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `npm install` - install dependencies
+- `npm run dev` - start the local Vite server
+- `npm run lint` - run ESLint
+- `npm exec vitest run` - run the test suite
+- `npm run build` - create a production build
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/App.tsx` - route configuration and route transition shell
+- `src/pages/` - page-level route components
+- `src/components/` - shared UI components, forms, header, footer, transitions
+- `src/data/businesses.ts` - canonical business portfolio data
+- `src/data/milestones.ts` - company milestone data
+- `src/data/pressItems.ts` - verified press/news source
+- `src/lib/schemas.ts` - form validation schemas
+- `src/lib/site-data.ts` - Formspree endpoint wiring
+- `src/theme.css` - canonical design tokens and global component styles
+- `src/assets/gallery/` - real business imagery imported through Vite
+- `public/favicon.svg` - brand favicon
 
-## Expanding the ESLint configuration
+## Design System
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The canonical design system lives in `src/theme.css`. New UI should use existing CSS variables for color, spacing, type, motion, elevation, radius, and focus states. Avoid reintroducing legacy `hg-*` classes, ad hoc Tailwind utility styling in component markup, or parallel theme token blocks.
 
-## Hokkaido Nepal Business Group Theme Tokens
+## Data Rules
 
-The centralized corporate theme lives in [`src/theme.css`](./src/theme.css). It is imported globally from [`src/main.tsx`](./src/main.tsx) after `index.css` and `editorial.css`, so these custom properties are available to every page and component.
+Business pages and listings should read from `src/data/businesses.ts`. Do not recreate a second brand/location model. Do not invent contact details, testimonials, mission copy, or press items; use the shared pending/empty-state components until verified content exists.
 
-Use the CSS variables in `src/theme.css` for new page and component styling instead of hardcoding brand colors, typography, business card, section header, button, timeline, header, or footer values.
+## Forms
 
-Key token groups:
-
-- Brand colors: `--color-primary`, `--color-primary-text`, `--color-ink`, `--color-body`, `--color-secondary-text`, `--color-bg`, `--color-bg-alt`
-- Typography: `--font-heading`, `--font-body`, `--font-size-body-copy`, `--font-size-section-description`, `--font-size-form-control`
-- Buttons: `--button-primary-*`, `--button-secondary-*`, `--button-disabled-*`
-- Section headers: `--section-eyebrow-*`, `--section-heading-*`, `--section-description-*`, `--section-divider-color`
-- Business cards: `--business-card-*`
-- Timeline: `--timeline-*`
-- Header and footer: `--header-*`, `--footer-*`
-
-Contrast note: `--color-primary` remains the corporate red for solid CTAs, logo mark accents, active states, and section dividers. `--color-primary-text` is a slightly deeper red for text-only uses, improving WCAG AA contrast on white backgrounds.
-
-## Business Data Source
-
-The single source of truth for HNBG portfolio listings is [`src/data/businesses.ts`](./src/data/businesses.ts). It exports:
-
-- `BusinessCategory`: `Restaurant`, `Retail`, `Trading`, or `Farm & Resort`
-- `Business`: schema for name, category, address, phone, email, description, location summary, image, logo, website URL, and verification status
-- `businesses`: one entry per HNBG business
-- `getBusinessBySlug`: helper for detail pages
-
-Every future homepage grid, Our Businesses directory, and footer business link list should read from `businesses`. Do not hardcode business listings in page components.
-
-The reusable card shell for those listings is [`src/components/BusinessCard.tsx`](./src/components/BusinessCard.tsx). It accepts a single `Business` object and uses the global `.business-card*` classes from `src/theme.css`.
-
-Corporate history milestones live in [`src/data/milestones.ts`](./src/data/milestones.ts). The current entries are placeholders pending verified wording.
+Contact and booking forms use React Hook Form, Zod schemas, TanStack Query mutations, Radix Label/Select where appropriate, and shared success/error status treatments. Do not change Formspree endpoints or validation schemas unless the backend contract changes.

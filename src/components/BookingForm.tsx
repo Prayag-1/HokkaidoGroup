@@ -1,9 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { motion, useReducedMotion } from 'motion/react'
+import * as Label from '@radix-ui/react-label'
 import { useMutation } from '@tanstack/react-query'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { Check } from 'lucide-react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { useLocation } from 'react-router-dom'
+import { FormStatus } from './FormStatus'
 import { cn } from '../lib/cn'
 import { BOOKING_FORM_ENDPOINTS } from '../lib/site-data'
 import { BOOKABLE_BRANDS, bookingFormSchema, type BookingFormValues } from '../lib/schemas'
@@ -84,7 +87,7 @@ export function BookingForm({ className }: BookingFormProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    watch,
+    control,
     setValue,
     trigger,
     getValues,
@@ -100,18 +103,9 @@ export function BookingForm({ className }: BookingFormProps) {
       setSuccessSummary(getValues())
     },
     onError: () => {
-      setStatusMessage('We could not send your booking request right now. Please try again in a moment.')
+      setStatusMessage(null)
     },
   })
-
-  useEffect(() => {
-    if (!statusMessage) {
-      return
-    }
-
-    const timer = window.setTimeout(() => setStatusMessage(null), 5000)
-    return () => window.clearTimeout(timer)
-  }, [statusMessage])
 
   useEffect(() => {
     const heading = stepRefs.current[step]
@@ -164,246 +158,255 @@ export function BookingForm({ className }: BookingFormProps) {
     }
 
     setStatusMessage(null)
+    setSuccessSummary(null)
+    mutation.reset()
     mutation.mutate(values)
   }
 
-  const brandValue = watch('brand')
+  const watchedValues = useWatch({ control })
+  const brandValue = watchedValues.brand
   const selectedBrandName = brandValue ? brandLabelMap[brandValue as keyof typeof brandLabelMap] : 'Selected restaurant'
 
   const stepOrder: BookingStep[] = ['brand', 'details', 'guest', 'confirmation']
 
   return (
     <motion.form
-      className={cn('hg-panel hg-form', className)}
+      className={cn('corporate-panel corporate-form', className)}
       onSubmit={handleSubmit(onSubmit)}
       initial={reduceMotion ? { opacity: 1 } : { opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -16 }}
-      transition={reduceMotion ? { duration: 0.01 } : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      transition={reduceMotion ? { duration: 0.01 } : { duration: 0.25, ease: [0.2, 0, 0, 1] }}
     >
-      <input type="text" {...register('_gotcha')} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input type="text" {...register('_gotcha')} tabIndex={-1} autoComplete="off" className="corporate-honeypot" aria-hidden="true" />
 
-      <div className="mb-6" aria-label="Booking progress">
-        <p className="hg-eyebrow">Reservation details</p>
-        <div className="mt-3 flex items-center gap-2" role="list">
+      <div className="corporate-stepper" aria-label="Booking progress">
+        <p className="corporate-eyebrow">Reservation details</p>
+        <div className="corporate-stepper__list" role="list">
           {stepOrder.map((item, index) => {
             const isActive = step === item
             const isComplete = stepOrder.indexOf(step) > index
             return (
-              <div key={item} className="flex items-center gap-2" role="listitem">
-                <div
+              <div key={item} className="corporate-stepper__item" role="listitem">
+                <span
                   className={cn(
-                    'flex h-8 w-8 items-center justify-center rounded-full border text-sm font-semibold',
-                    isActive ? 'border-[var(--color-primary)] bg-[var(--color-primary)] text-[var(--color-bg)]' : '',
-                    isComplete ? 'border-[var(--color-success)] text-[var(--color-success)]' : '',
-                    !isActive && !isComplete ? 'border-[var(--color-border)] text-[var(--color-muted)]' : '',
+                    'corporate-stepper__marker',
+                    isActive ? 'corporate-stepper__marker--active' : '',
+                    isComplete ? 'corporate-stepper__marker--complete' : '',
                   )}
                   aria-current={isActive ? 'step' : undefined}
                 >
-                  {index + 1}
-                </div>
-                {index < stepOrder.length - 1 ? <span className="h-px w-6 bg-[var(--color-border)]" /> : null}
+                  {isComplete ? <Check aria-hidden="true" size={15} strokeWidth={2.2} /> : index + 1}
+                </span>
+                <span className="corporate-stepper__label">{stepLabels[item]}</span>
+                {index < stepOrder.length - 1 ? <span className="corporate-stepper__line" /> : null}
               </div>
             )
           })}
         </div>
-        <p className="mt-3 text-sm text-[var(--color-secondary-text)]">Step {stepOrder.indexOf(step) + 1} of {stepOrder.length}: {stepLabels[step]}</p>
+        <p className="corporate-stepper__meta">Step {stepOrder.indexOf(step) + 1} of {stepOrder.length}: {stepLabels[step]}</p>
       </div>
 
-      <motion.div
-        key={step}
-        initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={reduceMotion ? { duration: 0.01 } : { duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <h2 ref={(node) => { stepRefs.current[step] = node }} tabIndex={-1} className="sr-only" id={headingId}>
-          {stepLabels[step]} step
-        </h2>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={step}
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
+          transition={reduceMotion ? { duration: 0.01 } : { duration: 0.2, ease: [0.2, 0, 0, 1] }}
+        >
+          <h2 ref={(node) => { stepRefs.current[step] = node }} tabIndex={-1} className="corporate-sr-only" id={headingId}>
+            {stepLabels[step]} step
+          </h2>
 
-        {step === 'brand' ? (
-          <div className="space-y-4">
-            <p className="text-sm text-[var(--color-secondary-text)]">Choose the restaurant that will receive your reservation request.</p>
-            <div className="grid gap-3 md:grid-cols-2">
-              {BOOKABLE_BRANDS.map((brand) => (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={() => setValue('brand', brand, { shouldValidate: true })}
-                  className={cn(
-                    'rounded-[var(--radius-input)] border px-4 py-3 text-left transition-colors',
-                    brandValue === brand
-                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/8 text-[var(--color-primary-text)]'
-                      : 'border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-body)]',
-                  )}
-                >
-                  {brandLabelMap[brand]}
-                </button>
-              ))}
+          {step === 'brand' ? (
+            <div className="corporate-form__section">
+              <p className="corporate-form__hint">Choose the restaurant that will receive your reservation request.</p>
+              <div className="corporate-choice-grid">
+                {BOOKABLE_BRANDS.map((brand) => (
+                  <button
+                    key={brand}
+                    type="button"
+                    onClick={() => setValue('brand', brand, { shouldValidate: true })}
+                    className={cn(
+                      'corporate-choice-card',
+                      brandValue === brand ? 'corporate-choice-card--active' : '',
+                    )}
+                    aria-pressed={brandValue === brand}
+                  >
+                    {brandLabelMap[brand]}
+                  </button>
+                ))}
+              </div>
+              {errors.brand ? <p className="corporate-form-error">{errors.brand.message}</p> : null}
             </div>
-            {errors.brand ? <p className="text-sm text-[var(--color-primary-text)]">{errors.brand.message}</p> : null}
-          </div>
-        ) : null}
+          ) : null}
 
         {step === 'details' ? (
-          <div className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="hg-field" htmlFor="booking-date">
+          <div className="corporate-form__section">
+            <div className="corporate-form__grid corporate-form__grid--2">
+              <Label.Root className="corporate-field" htmlFor="booking-date">
                 Date
                 <input
                   id="booking-date"
                   type="date"
                   min={new Date().toISOString().split('T')[0]}
-                  className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                   aria-invalid={Boolean(errors.date)}
                   aria-describedby={errors.date ? 'booking-date-error' : undefined}
                   {...register('date')}
                 />
-                {errors.date ? <p id="booking-date-error" className="text-sm text-[var(--color-primary-text)]">{errors.date.message}</p> : null}
-              </label>
-              <label className="hg-field" htmlFor="booking-time">
+                {errors.date ? <p id="booking-date-error" className="corporate-form-error">{errors.date.message}</p> : null}
+              </Label.Root>
+              <Label.Root className="corporate-field" htmlFor="booking-time">
                 Time
                 <input
                   id="booking-time"
                   type="time"
-                  className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                   aria-invalid={Boolean(errors.time)}
                   aria-describedby={errors.time ? 'booking-time-error' : undefined}
                   {...register('time')}
                 />
-                {errors.time ? <p id="booking-time-error" className="text-sm text-[var(--color-primary-text)]">{errors.time.message}</p> : null}
-              </label>
+                {errors.time ? <p id="booking-time-error" className="corporate-form-error">{errors.time.message}</p> : null}
+              </Label.Root>
             </div>
-            <label className="hg-field" htmlFor="booking-party-size">
+            <Label.Root className="corporate-field" htmlFor="booking-party-size">
               Party size
               <input
                 id="booking-party-size"
                 type="number"
                 min={1}
                 max={30}
-                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                 aria-invalid={Boolean(errors.partySize)}
                 aria-describedby={errors.partySize ? 'booking-party-size-error' : undefined}
                 {...register('partySize', { valueAsNumber: true })}
               />
-              {errors.partySize ? <p id="booking-party-size-error" className="text-sm text-[var(--color-primary-text)]">{errors.partySize.message}</p> : null}
-            </label>
+              {errors.partySize ? <p id="booking-party-size-error" className="corporate-form-error">{errors.partySize.message}</p> : null}
+            </Label.Root>
           </div>
         ) : null}
 
         {step === 'guest' ? (
-          <div className="space-y-4">
-            <label className="hg-field" htmlFor="booking-name">
+          <div className="corporate-form__section">
+            <Label.Root className="corporate-field" htmlFor="booking-name">
               Full name
               <input
                 id="booking-name"
                 autoComplete="name"
-                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? 'booking-name-error' : undefined}
                 {...register('name')}
               />
-              {errors.name ? <p id="booking-name-error" className="text-sm text-[var(--color-primary-text)]">{errors.name.message}</p> : null}
-            </label>
-            <label className="hg-field" htmlFor="booking-phone">
+              {errors.name ? <p id="booking-name-error" className="corporate-form-error">{errors.name.message}</p> : null}
+            </Label.Root>
+            <Label.Root className="corporate-field" htmlFor="booking-phone">
               Phone
               <input
                 id="booking-phone"
                 type="tel"
                 autoComplete="tel"
-                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                 aria-invalid={Boolean(errors.phone)}
                 aria-describedby={errors.phone ? 'booking-phone-error' : undefined}
                 {...register('phone')}
               />
-              {errors.phone ? <p id="booking-phone-error" className="text-sm text-[var(--color-primary-text)]">{errors.phone.message}</p> : null}
-            </label>
-            <label className="hg-field" htmlFor="booking-email">
+              {errors.phone ? <p id="booking-phone-error" className="corporate-form-error">{errors.phone.message}</p> : null}
+            </Label.Root>
+            <Label.Root className="corporate-field" htmlFor="booking-email">
               Email (optional)
               <input
                 id="booking-email"
                 type="email"
                 autoComplete="email"
-                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'booking-email-error' : undefined}
                 {...register('email')}
               />
-              {errors.email ? <p id="booking-email-error" className="text-sm text-[var(--color-primary-text)]">{errors.email.message}</p> : null}
-            </label>
-            <label className="hg-field" htmlFor="booking-special-requests">
+              {errors.email ? <p id="booking-email-error" className="corporate-form-error">{errors.email.message}</p> : null}
+            </Label.Root>
+            <Label.Root className="corporate-field" htmlFor="booking-special-requests">
               Special requests (optional)
               <textarea
                 id="booking-special-requests"
                 rows={4}
-                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                 aria-invalid={Boolean(errors.specialRequests)}
                 aria-describedby={errors.specialRequests ? 'booking-special-requests-error' : undefined}
                 {...register('specialRequests')}
               />
-              {errors.specialRequests ? <p id="booking-special-requests-error" className="text-sm text-[var(--color-primary-text)]">{errors.specialRequests.message}</p> : null}
-            </label>
+              {errors.specialRequests ? <p id="booking-special-requests-error" className="corporate-form-error">{errors.specialRequests.message}</p> : null}
+            </Label.Root>
           </div>
         ) : null}
 
         {step === 'confirmation' ? (
-          <div className="space-y-4">
-            <p className="text-sm text-[var(--color-secondary-text)]">Review your request before sending it to {selectedBrandName}.</p>
-            <div className="rounded-[var(--radius-input)] border border-[var(--color-border)] bg-[var(--color-bg-alt)] p-4">
-              <dl className="grid gap-3 text-sm">
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Restaurant</dt>
+          <div className="corporate-form__section">
+            <p className="corporate-form__hint">Review your request before sending it to {selectedBrandName}.</p>
+            <div className="corporate-summary">
+              <dl>
+                <div className="corporate-summary__row">
+                  <dt>Restaurant</dt>
                   <dd>{selectedBrandName}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Date</dt>
-                  <dd>{watch('date')}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Date</dt>
+                  <dd>{watchedValues.date}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Time</dt>
-                  <dd>{watch('time')}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Time</dt>
+                  <dd>{watchedValues.time}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Party size</dt>
-                  <dd>{watch('partySize')}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Party size</dt>
+                  <dd>{watchedValues.partySize}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Guest</dt>
-                  <dd>{watch('name')}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Guest</dt>
+                  <dd>{watchedValues.name}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Phone</dt>
-                  <dd>{watch('phone')}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Phone</dt>
+                  <dd>{watchedValues.phone}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Email</dt>
-                  <dd>{watch('email') || '—'}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Email</dt>
+                  <dd>{watchedValues.email || '-'}</dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="font-semibold text-[var(--color-secondary-text)]">Requests</dt>
-                  <dd>{watch('specialRequests') || '—'}</dd>
+                <div className="corporate-summary__row">
+                  <dt>Requests</dt>
+                  <dd>{watchedValues.specialRequests || '-'}</dd>
                 </div>
               </dl>
             </div>
           </div>
         ) : null}
-      </motion.div>
+        </motion.div>
+      </AnimatePresence>
 
-      <div aria-live="polite" className="mt-6 space-y-3">
-        {statusMessage ? <p className="text-sm text-[var(--color-success)]">{statusMessage}</p> : null}
-        {mutation.isError ? <p className="text-sm text-[var(--color-primary-text)]">{mutation.error instanceof Error ? mutation.error.message : 'We could not send your booking request right now.'}</p> : null}
-        {successSummary ? <p className="text-sm text-[var(--color-success)]">{successSummary.name} — {successSummary.date} at {successSummary.time} for {successSummary.partySize} guests.</p> : null}
+      <div aria-live="polite" className="corporate-form__status-region">
+        {statusMessage && successSummary ? (
+          <FormStatus
+            tone="success"
+            title="Booking request sent"
+            message={`${statusMessage} ${successSummary.name} - ${successSummary.date} at ${successSummary.time} for ${successSummary.partySize} guests.`}
+          />
+        ) : null}
+        {mutation.isError ? (
+          <FormStatus
+            tone="error"
+            title="Booking not sent"
+            message={mutation.error instanceof Error ? mutation.error.message : 'We could not send your booking request right now.'}
+          />
+        ) : null}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-        <button type="button" className="hg-button hg-button--outline-dark" onClick={goBack} disabled={step === 'brand'}>
+      <div className="corporate-form__actions corporate-form__actions--split">
+        <button type="button" className="corporate-button corporate-button--secondary" onClick={goBack} disabled={step === 'brand'}>
           Back
         </button>
         {step === 'confirmation' ? (
-          <button type="submit" className="hg-button hg-button--dark" disabled={mutation.isPending || isSubmitting}>
+          <button type="submit" className="corporate-button corporate-button--primary" disabled={mutation.isPending || isSubmitting}>
             {mutation.isPending || isSubmitting ? 'Sending…' : 'Confirm booking'}
           </button>
         ) : (
-          <button type="button" className="hg-button hg-button--dark" onClick={goNext}>
+          <button type="button" className="corporate-button corporate-button--primary" onClick={goNext}>
             Next
           </button>
         )}

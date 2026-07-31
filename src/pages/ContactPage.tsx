@@ -1,60 +1,55 @@
 import { Link } from 'react-router-dom'
-import { ContactForm } from '../components/ContactForm'
-import { PendingNotice } from '../components/PendingNotice'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
-import { hnbgCorporateContact } from '../data/businesses'
+import { businesses } from '../data/businesses'
 
 export function ContactPage() {
   return (
     <main className="corporate-page corporate-contact-page">
       <section className="corporate-section corporate-section--first">
-        <ScrollReveal className="corporate-shell corporate-split corporate-split--contact">
-          <div>
-            <p className="corporate-eyebrow">Contact</p>
-            <h1 className="corporate-title">Write to the group office.</h1>
-            <p className="corporate-lead">
-              For media, catering, partnerships, suppliers, events, or general questions, send a clear note.
+        <ScrollReveal className="corporate-shell">
+          <div className="section-header corporate-section__header">
+            <p className="section-header__eyebrow">Contact</p>
+            <h1 className="section-header__heading">Hokkaido Group brand contacts</h1>
+            <p className="section-header__description">
+              Direct phone and email details listed in the source document.
             </p>
-
-            <div className="corporate-panel">
-              <p className="corporate-eyebrow">Direct contact</p>
-              <h3>Group office</h3>
-              <div className="corporate-contact-item">
-                <span>Email</span>
-                {hnbgCorporateContact.email ? (
-                  <a href={`mailto:${hnbgCorporateContact.email}`}>{hnbgCorporateContact.email}</a>
-                ) : (
-                  <PendingNotice label="Email details coming soon" />
-                )}
-              </div>
-              <div className="corporate-contact-item">
-                <span>Phone</span>
-                {hnbgCorporateContact.phone ? (
-                  <a href={`tel:${hnbgCorporateContact.phone}`}>{hnbgCorporateContact.phone}</a>
-                ) : (
-                  <PendingNotice label="Phone details coming soon" />
-                )}
-              </div>
-              <div className="corporate-contact-item">
-                <span>Address</span>
-                {hnbgCorporateContact.address ? (
-                  <strong>{hnbgCorporateContact.address}</strong>
-                ) : (
-                  <PendingNotice label="Address details coming soon" />
-                )}
-              </div>
-            </div>
           </div>
 
-          <ContactForm />
+          <div className="corporate-business-grid">
+            {businesses.map((business) => (
+              <article key={business.id} className="business-detail__panel">
+                <p className="section-header__eyebrow">{business.category}</p>
+                <h2 className="business-detail__panel-title">{business.name}</h2>
+                <dl className="business-detail__contact-list">
+                  <div>
+                    <dt>Location</dt>
+                    <dd>{business.locationSummary ?? business.address}</dd>
+                  </div>
+                  {business.phone ? (
+                    <div>
+                      <dt>Phone</dt>
+                      <dd>
+                        <a href={`tel:${business.phone}`}>{business.phone}</a>
+                      </dd>
+                    </div>
+                  ) : null}
+                  {business.email ? (
+                    <div>
+                      <dt>Email</dt>
+                      <dd>
+                        <a href={`mailto:${business.email}`}>{business.email}</a>
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+                <Link to={`/businesses/${business.slug}`} className="corporate-button corporate-button--secondary">
+                  View Brand
+                </Link>
+              </article>
+            ))}
+          </div>
         </ScrollReveal>
-
-        <div className="corporate-shell corporate-actions">
-          <Link to="/" className="corporate-button corporate-button--secondary">
-            Return Home
-          </Link>
-        </div>
       </section>
       <SiteFooter />
     </main>

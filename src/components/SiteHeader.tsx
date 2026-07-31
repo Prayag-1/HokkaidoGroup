@@ -69,7 +69,7 @@ export function SiteHeader() {
         </nav>
 
         <Link to="/contact" className="corporate-button corporate-button--secondary">
-          Start a Conversation
+          Contact the Group
         </Link>
       </div>
     </header>

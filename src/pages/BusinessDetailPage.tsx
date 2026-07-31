@@ -1,6 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
 import { LocationSpotlight } from '../components/LocationSpotlight'
-import { PendingNotice } from '../components/PendingNotice'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
 import { getBusinessBySlug } from '../data/businesses'
@@ -34,6 +33,7 @@ export function BusinessDetailPage() {
   const locationLabel = business.locationSummary ?? business.address
   const aboutText = business.about ?? business.description
   const galleryImages = business.galleryImages.filter(Boolean)
+  const scrollingGalleryImages = [...galleryImages, ...galleryImages]
   const hasHeroMedia = Boolean(business.image)
   const emailValue = business.email
   const phoneValue = business.phone
@@ -49,26 +49,22 @@ export function BusinessDetailPage() {
               {business.description ?? locationLabel ?? business.category}
             </p>
             <dl className="business-detail__hero-contact">
-              <div>
-                <dt>Email</dt>
-                <dd>
-                  {emailValue ? (
+              {emailValue ? (
+                <div>
+                  <dt>Email</dt>
+                  <dd>
                     <a href={`mailto:${emailValue}`}>{emailValue}</a>
-                  ) : (
-                    <PendingNotice label="Email details coming soon" />
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt>Phone</dt>
-                <dd>
-                  {phoneValue ? (
+                  </dd>
+                </div>
+              ) : null}
+              {phoneValue ? (
+                <div>
+                  <dt>Phone</dt>
+                  <dd>
                     <a href={`tel:${phoneValue}`}>{phoneValue}</a>
-                  ) : (
-                    <PendingNotice label="Phone details coming soon" />
-                  )}
-                </dd>
-              </div>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
           </div>
 
@@ -94,47 +90,35 @@ export function BusinessDetailPage() {
           <article className="business-detail__panel">
             <p className="section-header__eyebrow">Story</p>
             <h2 className="business-detail__panel-title">About {business.name}</h2>
-            {aboutText ? (
-              <p className="business-detail__copy">{aboutText}</p>
-            ) : (
-              <PendingNotice label="Business story coming soon" />
-            )}
+            {aboutText ? <p className="business-detail__copy">{aboutText}</p> : null}
           </article>
 
           <article className="business-detail__panel">
             <p className="section-header__eyebrow">Contact</p>
             <h2 className="business-detail__panel-title">Reach this location</h2>
             <dl className="business-detail__contact-list">
-              <div>
+              {business.address ? (
+                <div>
                 <dt>Address</dt>
-                <dd>
-                  {business.address ? (
-                    business.address
-                  ) : (
-                    <PendingNotice label="Address details coming soon" />
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt>Phone</dt>
-                <dd>
-                  {phoneValue ? (
+                  <dd>{business.address}</dd>
+                </div>
+              ) : null}
+              {phoneValue ? (
+                <div>
+                  <dt>Phone</dt>
+                  <dd>
                     <a href={`tel:${phoneValue}`}>{phoneValue}</a>
-                  ) : (
-                    <PendingNotice label="Phone details coming soon" />
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt>Email</dt>
-                <dd>
-                  {emailValue ? (
+                  </dd>
+                </div>
+              ) : null}
+              {emailValue ? (
+                <div>
+                  <dt>Email</dt>
+                  <dd>
                     <a href={`mailto:${emailValue}`}>{emailValue}</a>
-                  ) : (
-                    <PendingNotice label="Email details coming soon" />
-                  )}
-                </dd>
-              </div>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
           </article>
         </ScrollReveal>
@@ -147,8 +131,8 @@ export function BusinessDetailPage() {
               <p className="corporate-eyebrow">Scenes</p>
               <h2 className="business-detail__gallery-title">A look inside {business.name}</h2>
             </div>
-            <div className="business-detail__gallery">
-              {galleryImages.map((src, index) => (
+            <div className="business-detail__gallery" aria-label={`${business.name} image gallery`}>
+              {scrollingGalleryImages.map((src, index) => (
                 <figure key={`${src}-${index}`} className="business-detail__gallery-item">
                   <img
                     src={src}
@@ -167,11 +151,7 @@ export function BusinessDetailPage() {
         <ScrollReveal className="corporate-shell business-detail__location-grid">
           <div className="business-detail__panel">
             <p className="corporate-eyebrow">Place</p>
-            {locationLabel ? (
-              <h3>{locationLabel}</h3>
-            ) : (
-              <PendingNotice label="Location details coming soon" />
-            )}
+            {locationLabel ? <h3>{locationLabel}</h3> : null}
             {business.mapQuery ? <p>{business.mapQuery}</p> : null}
             {business.mapQuery ? (
               <a

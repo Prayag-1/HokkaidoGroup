@@ -7,12 +7,9 @@ import { SiteHeader } from './components/SiteHeader'
 import { HomePage } from './pages/HomePage'
 
 const ContactPage = lazy(() => import('./pages/ContactPage').then(({ ContactPage }) => ({ default: ContactPage })))
-const BookingPage = lazy(() => import('./pages/BookingPage').then(({ BookingPage }) => ({ default: BookingPage })))
 const AboutPage = lazy(() => import('./pages/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })))
 const BusinessDirectoryPage = lazy(() => import('./pages/BusinessDirectoryPage').then(({ BusinessDirectoryPage }) => ({ default: BusinessDirectoryPage })))
 const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage').then(({ BusinessDetailPage }) => ({ default: BusinessDetailPage })))
-const CareersPage = lazy(() => import('./pages/CareersPage').then(({ CareersPage }) => ({ default: CareersPage })))
-const PressPage = lazy(() => import('./pages/PressPage').then(({ PressPage }) => ({ default: PressPage })))
 
 function RouteFallback() {
   return (
@@ -62,9 +59,9 @@ function AppRoutes() {
           <Route path="/about" element={renderPage(AboutPage)} />
           <Route path="/businesses" element={renderPage(BusinessDirectoryPage)} />
           <Route path="/businesses/:slug" element={renderPage(BusinessDetailPage)} />
-          <Route path="/careers" element={renderPage(CareersPage)} />
-          <Route path="/press" element={renderPage(PressPage)} />
-          <Route path="/booking" element={renderPage(BookingPage)} />
+          <Route path="/careers" element={<Navigate to="/" replace />} />
+          <Route path="/press" element={<Navigate to="/" replace />} />
+          <Route path="/booking" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={renderPage(ContactPage)} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

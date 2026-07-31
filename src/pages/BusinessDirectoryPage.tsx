@@ -18,7 +18,7 @@ export function BusinessDirectoryPage() {
             <p className="section-header__eyebrow">Portfolio</p>
             <h1 className="section-header__heading">Business directory</h1>
             <p className="section-header__description">
-              Browse each current division in the HNBG source data.
+              Browse the Hokkaido Group brands listed in the source document.
             </p>
             {selectedCategory ? (
               <div className="corporate-section__actions">

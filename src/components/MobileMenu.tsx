@@ -95,7 +95,7 @@ export function MobileMenu() {
               </div>
 
               <Link to="/contact" className="corporate-button corporate-button--secondary corporate-mobile-menu__button" onClick={closeMenu}>
-                Start a Conversation
+                Contact the Group
               </Link>
             </motion.nav>
           </>

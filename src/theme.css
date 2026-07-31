@@ -2271,7 +2271,7 @@ body {
   border-radius: var(--radius-card);
   box-shadow: var(--elevation-card-rest);
   flex: 0 0 clamp(14rem, 28vw, 22rem);
-  min-height: 9rem;
+  min-height: 25rem;
   overflow: hidden;
 }
 

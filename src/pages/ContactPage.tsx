@@ -3,8 +3,10 @@ import { ArrowUpRight, Building2, Clock, Mail, MapPin, MessageSquare, Navigation
 import { ContactForm } from '../components/ContactForm'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
-import { businesses } from '../data/businesses'
+import { businesses, hnbgLogo } from '../data/businesses'
 import contactHeroImage from '../assets/gallery/izakaya/izakaya2.webp'
+import contactDetailImage from '../assets/gallery/sora/sora4.webp'
+import contactRoomImage from '../assets/gallery/umami/umami1.webp'
 
 function phoneHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, '')}`
@@ -18,11 +20,15 @@ export function ContactPage() {
       <section className="contact-hero corporate-section corporate-section--first">
         <ScrollReveal className="corporate-shell contact-hero__grid">
           <div className="contact-hero__copy">
+            <div className="contact-hero__brandmark">
+              <img src={hnbgLogo} alt="" aria-hidden="true" />
+              <span>Hokkaido Nepal Business Group</span>
+            </div>
             <p className="section-header__eyebrow">Contact HNBG</p>
-            <h1>Reach the right Hokkaido team.</h1>
+            <h1>Book a table. Reach a brand. Start a partnership.</h1>
             <p>
-              Reservations, retail inquiries, resort visits, import questions, and partnership conversations for every
-              Hokkaido Nepal Business Group brand.
+              Choose the right outlet directly or send one group inquiry for reservations, retail, resort, import, and
+              business conversations.
             </p>
             <div className="contact-hero__actions">
               <a href="#brand-contacts" className="corporate-button corporate-button--primary">
@@ -51,31 +57,23 @@ export function ContactPage() {
           </div>
 
           <div className="contact-hero__visual">
-            <figure className="contact-hero__photo">
-              <img src={contactHeroImage} alt="Hokkaido Group dining room" loading="eager" />
-            </figure>
-            <div className="contact-route-panel" aria-label="Contact routes">
-              <article>
-                <Clock size={18} strokeWidth={2.1} aria-hidden="true" />
+            <div className="contact-showcase" aria-label="Hokkaido Group dining spaces">
+              <figure className="contact-showcase__primary">
+                <img src={contactHeroImage} alt="Hokkaido Group dining room" loading="eager" />
+              </figure>
+              <figure className="contact-showcase__tile contact-showcase__tile--top">
+                <img src={contactDetailImage} alt="Hokkaido Sora dining view" loading="eager" />
+              </figure>
+              <figure className="contact-showcase__tile contact-showcase__tile--bottom">
+                <img src={contactRoomImage} alt="Hokkaido Umami dining room" loading="eager" />
+              </figure>
+              <div className="contact-showcase__badge">
+                <img src={hnbgLogo} alt="" aria-hidden="true" />
                 <div>
-                  <h2>Dining bookings</h2>
-                  <p>Call the branch directly for table availability and same-day requests.</p>
+                  <span>Concierge line</span>
+                  <strong>{businesses.length} brands across Nepal</strong>
                 </div>
-              </article>
-              <article>
-                <MessageSquare size={18} strokeWidth={2.1} aria-hidden="true" />
-                <div>
-                  <h2>Group inquiries</h2>
-                  <p>Use the inquiry form for partnerships, supply, press, or general questions.</p>
-                </div>
-              </article>
-              <article>
-                <Navigation size={18} strokeWidth={2.1} aria-hidden="true" />
-                <div>
-                  <h2>Outlet directions</h2>
-                  <p>Each brand card includes a direct map search link for its location.</p>
-                </div>
-              </article>
+              </div>
             </div>
           </div>
         </ScrollReveal>
@@ -85,12 +83,32 @@ export function ContactPage() {
         <ScrollReveal className="corporate-shell contact-workbench__grid">
           <div className="contact-workbench__intro">
             <p className="section-header__eyebrow">Message the group</p>
-            <h2>One form for brand, business, and partnership inquiries.</h2>
+            <h2>Tell us where the conversation should go.</h2>
             <p className="section-header__description">
               Select the brand that matches your request, or choose a general Hokkaido Group inquiry.
             </p>
-            <div className="contact-workbench__note">
-              <span>For urgent table bookings, phone the outlet from the brand directory below.</span>
+            <div className="contact-route-panel" aria-label="Contact routes">
+              <article>
+                <Clock size={18} strokeWidth={2.1} aria-hidden="true" />
+                <div>
+                  <h3>Reservations</h3>
+                  <p>Call the outlet for same-day table availability.</p>
+                </div>
+              </article>
+              <article>
+                <Navigation size={18} strokeWidth={2.1} aria-hidden="true" />
+                <div>
+                  <h3>Visits</h3>
+                  <p>Open the map link before heading to a branch.</p>
+                </div>
+              </article>
+              <article>
+                <MessageSquare size={18} strokeWidth={2.1} aria-hidden="true" />
+                <div>
+                  <h3>Partnerships</h3>
+                  <p>Use the form for group and supplier inquiries.</p>
+                </div>
+              </article>
             </div>
           </div>
           <ContactForm className="contact-form-card" />
@@ -108,83 +126,99 @@ export function ContactPage() {
           </div>
 
           <div className="contact-brand-grid">
-            {businesses.map((business) => (
-              <article key={business.id} className="contact-brand-card">
-                <div className="contact-brand-card__header">
-                  {business.logo ? (
-                    <div className="contact-brand-card__logo">
+            {businesses.map((business) => {
+              const contactCardImage = business.image && business.image !== business.logo ? business.image : null
+
+              return (
+                <article key={business.id} className={`contact-brand-card${contactCardImage ? '' : ' contact-brand-card--logo-only'}`}>
+                  <div className="contact-brand-card__media">
+                    {contactCardImage ? (
+                      <img src={contactCardImage} alt={`${business.name} location`} loading="lazy" />
+                    ) : business.logo ? (
                       <img src={business.logo} alt={`${business.name} logo`} loading="lazy" />
-                    </div>
-                  ) : null}
-                  <div>
-                    <p>{business.category === 'Restaurant' ? 'Dining' : business.category}</p>
-                    <h3>{business.name}</h3>
+                    ) : (
+                      <span>{business.name}</span>
+                    )}
                   </div>
-                </div>
 
-                <dl className="contact-brand-card__details">
-                  <div className="contact-brand-card__detail">
-                    <dt>
-                      <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
-                      Location
-                    </dt>
-                    <dd>{business.locationSummary ?? business.address}</dd>
+                  <div className="contact-brand-card__content">
+                    <div className="contact-brand-card__header">
+                      {business.logo ? (
+                        <div className="contact-brand-card__logo">
+                          <img src={business.logo} alt={`${business.name} logo`} loading="lazy" />
+                        </div>
+                      ) : null}
+                      <div>
+                        <p>{business.category === 'Restaurant' ? 'Dining' : business.category}</p>
+                        <h3>{business.name}</h3>
+                      </div>
+                    </div>
+
+                    <dl className="contact-brand-card__details">
+                      <div className="contact-brand-card__detail">
+                        <dt>
+                          <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
+                          Location
+                        </dt>
+                        <dd>{business.locationSummary ?? business.address}</dd>
+                      </div>
+                      {business.phone ? (
+                        <div className="contact-brand-card__detail">
+                          <dt>
+                            <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
+                            Phone
+                          </dt>
+                          <dd>
+                            <a href={phoneHref(business.phone)}>{business.phone}</a>
+                          </dd>
+                        </div>
+                      ) : null}
+                      {business.email ? (
+                        <div className="contact-brand-card__detail">
+                          <dt>
+                            <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
+                            Email
+                          </dt>
+                          <dd>
+                            <a href={`mailto:${business.email}`}>{business.email}</a>
+                          </dd>
+                        </div>
+                      ) : null}
+                    </dl>
+
+                    <div className="contact-brand-card__actions">
+                      {business.phone ? (
+                        <a href={phoneHref(business.phone)} aria-label={`Call ${business.name}`}>
+                          <Phone size={16} strokeWidth={2.2} aria-hidden="true" />
+                          Call
+                        </a>
+                      ) : null}
+                      {business.email ? (
+                        <a href={`mailto:${business.email}`} aria-label={`Email ${business.name}`}>
+                          <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
+                          Email
+                        </a>
+                      ) : null}
+                      {business.mapQuery ? (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${business.name} in Google Maps`}
+                        >
+                          <Navigation size={16} strokeWidth={2.2} aria-hidden="true" />
+                          Map
+                        </a>
+                      ) : null}
+                      <Link to={`/businesses/${business.slug}`} aria-label={`View ${business.name}`}>
+                        <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
+                        Brand
+                      </Link>
+                    </div>
                   </div>
-                  {business.phone ? (
-                    <div className="contact-brand-card__detail">
-                      <dt>
-                        <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
-                        Phone
-                      </dt>
-                      <dd>
-                        <a href={phoneHref(business.phone)}>{business.phone}</a>
-                      </dd>
-                    </div>
-                  ) : null}
-                  {business.email ? (
-                    <div className="contact-brand-card__detail">
-                      <dt>
-                        <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
-                        Email
-                      </dt>
-                      <dd>
-                        <a href={`mailto:${business.email}`}>{business.email}</a>
-                      </dd>
-                    </div>
-                  ) : null}
-                </dl>
-
-                <div className="contact-brand-card__actions">
-                  {business.phone ? (
-                    <a href={phoneHref(business.phone)} aria-label={`Call ${business.name}`}>
-                      <Phone size={16} strokeWidth={2.2} aria-hidden="true" />
-                      Call
-                    </a>
-                  ) : null}
-                  {business.email ? (
-                    <a href={`mailto:${business.email}`} aria-label={`Email ${business.name}`}>
-                      <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
-                      Email
-                    </a>
-                  ) : null}
-                  {business.mapQuery ? (
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`Open ${business.name} in Google Maps`}
-                    >
-                      <Navigation size={16} strokeWidth={2.2} aria-hidden="true" />
-                      Map
-                    </a>
-                  ) : null}
-                  <Link to={`/businesses/${business.slug}`} aria-label={`View ${business.name}`}>
-                    <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
-                    Brand
-                  </Link>
-                </div>
-              </article>
-            ))}
+                </article>
+              )
+            })}
           </div>
         </ScrollReveal>
       </section>

@@ -4,13 +4,10 @@ import { ContactForm } from '../components/ContactForm'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
 import { businesses, hnbgLogo } from '../data/businesses'
+import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
 import contactHeroImage from '../assets/gallery/izakaya/izakaya2.webp'
 import contactDetailImage from '../assets/gallery/sora/sora4.webp'
 import contactRoomImage from '../assets/gallery/umami/umami1.webp'
-
-function phoneHref(phone: string) {
-  return `tel:${phone.replace(/[^\d+]/g, '')}`
-}
 
 export function ContactPage() {
   const cityCount = new Set(businesses.map((business) => business.address?.match(/Kathmandu|Lalitpur|Pokhara/)?.[0]).filter(Boolean)).size
@@ -92,7 +89,7 @@ export function ContactPage() {
                 <Clock size={18} strokeWidth={2.1} aria-hidden="true" />
                 <div>
                   <h3>Reservations</h3>
-                  <p>Call the outlet for same-day table availability.</p>
+                  <p>Message the outlet for same-day table availability.</p>
                 </div>
               </article>
               <article>
@@ -128,6 +125,8 @@ export function ContactPage() {
           <div className="contact-brand-grid">
             {businesses.map((business) => {
               const contactCardImage = business.image && business.image !== business.logo ? business.image : null
+              const gmailUrl = getBusinessGmailUrl(business)
+              const whatsAppUrl = getBusinessWhatsAppUrl(business)
 
               return (
                 <article key={business.id} className={`contact-brand-card${contactCardImage ? '' : ' contact-brand-card--logo-only'}`}>
@@ -166,10 +165,10 @@ export function ContactPage() {
                         <div className="contact-brand-card__detail">
                           <dt>
                             <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
-                            Phone
+                            WhatsApp
                           </dt>
                           <dd>
-                            <a href={phoneHref(business.phone)}>{business.phone}</a>
+                            <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{business.phone}</a>
                           </dd>
                         </div>
                       ) : null}
@@ -180,7 +179,7 @@ export function ContactPage() {
                             Email
                           </dt>
                           <dd>
-                            <a href={`mailto:${business.email}`}>{business.email}</a>
+                            <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{business.email}</a>
                           </dd>
                         </div>
                       ) : null}
@@ -188,13 +187,13 @@ export function ContactPage() {
 
                     <div className="contact-brand-card__actions">
                       {business.phone ? (
-                        <a href={phoneHref(business.phone)} aria-label={`Call ${business.name}`}>
+                        <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer" aria-label={`Message ${business.name} on WhatsApp`}>
                           <Phone size={16} strokeWidth={2.2} aria-hidden="true" />
-                          Call
+                          WhatsApp
                         </a>
                       ) : null}
                       {business.email ? (
-                        <a href={`mailto:${business.email}`} aria-label={`Email ${business.name}`}>
+                        <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer" aria-label={`Email ${business.name} in Gmail`}>
                           <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
                           Email
                         </a>

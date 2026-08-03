@@ -4,6 +4,7 @@ import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
 import { getBusinessBySlug } from '../data/businesses'
+import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
 
 export function BusinessDetailPage() {
   const { slug } = useParams()
@@ -39,6 +40,8 @@ export function BusinessDetailPage() {
   const heroUsesLogo = Boolean(business.logo && business.image === business.logo)
   const emailValue = business.email
   const phoneValue = business.phone
+  const gmailUrl = getBusinessGmailUrl(business)
+  const whatsAppUrl = getBusinessWhatsAppUrl(business)
 
   return (
     <main className="corporate-page">
@@ -71,7 +74,7 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={`mailto:${emailValue}`}>{emailValue}</a>
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{emailValue}</a>
                   </dd>
                 </div>
               ) : null}
@@ -79,10 +82,10 @@ export function BusinessDetailPage() {
                 <div>
                   <dt>
                     <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
-                    Phone
+                    WhatsApp
                   </dt>
                   <dd>
-                    <a href={`tel:${phoneValue}`}>{phoneValue}</a>
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{phoneValue}</a>
                   </dd>
                 </div>
               ) : null}
@@ -131,10 +134,10 @@ export function BusinessDetailPage() {
                 <div>
                   <dt>
                     <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
-                    Phone
+                    WhatsApp
                   </dt>
                   <dd>
-                    <a href={`tel:${phoneValue}`}>{phoneValue}</a>
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{phoneValue}</a>
                   </dd>
                 </div>
               ) : null}
@@ -145,7 +148,7 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={`mailto:${emailValue}`}>{emailValue}</a>
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{emailValue}</a>
                   </dd>
                 </div>
               ) : null}

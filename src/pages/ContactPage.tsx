@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Building2, Clock, Mail, MapPin, MessageSquare, Navigation, Phone } from 'lucide-react'
-import { ContactForm } from '../components/ContactForm'
+import { ArrowUpRight, Building2, Mail, MapPin, MessageSquare, Navigation, Phone } from 'lucide-react'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
 import { businesses, hnbgLogo } from '../data/businesses'
@@ -32,9 +31,9 @@ export function ContactPage() {
                 <Building2 size={17} strokeWidth={2.2} aria-hidden="true" />
                 Brand contacts
               </a>
-              <a href="#contact-form" className="corporate-button corporate-button--secondary">
+              <a href="#brand-contacts" className="corporate-button corporate-button--secondary">
                 <MessageSquare size={17} strokeWidth={2.2} aria-hidden="true" />
-                Send inquiry
+                Quick links
               </a>
             </div>
             <dl className="contact-hero__metrics" aria-label="Hokkaido Group contact summary">
@@ -73,42 +72,6 @@ export function ContactPage() {
               </div>
             </div>
           </div>
-        </ScrollReveal>
-      </section>
-
-      <section id="contact-form" className="contact-workbench corporate-section corporate-section--alt">
-        <ScrollReveal className="corporate-shell contact-workbench__grid">
-          <div className="contact-workbench__intro">
-            <p className="section-header__eyebrow">Message the group</p>
-            <h2>Tell us where the conversation should go.</h2>
-            <p className="section-header__description">
-              Select the brand that matches your request, or choose a general Hokkaido Group inquiry.
-            </p>
-            <div className="contact-route-panel" aria-label="Contact routes">
-              <article>
-                <Clock size={18} strokeWidth={2.1} aria-hidden="true" />
-                <div>
-                  <h3>Reservations</h3>
-                  <p>Message the outlet for same-day table availability.</p>
-                </div>
-              </article>
-              <article>
-                <Navigation size={18} strokeWidth={2.1} aria-hidden="true" />
-                <div>
-                  <h3>Visits</h3>
-                  <p>Open the map link before heading to a branch.</p>
-                </div>
-              </article>
-              <article>
-                <MessageSquare size={18} strokeWidth={2.1} aria-hidden="true" />
-                <div>
-                  <h3>Partnerships</h3>
-                  <p>Use the form for group and supplier inquiries.</p>
-                </div>
-              </article>
-            </div>
-          </div>
-          <ContactForm className="contact-form-card" />
         </ScrollReveal>
       </section>
 
@@ -160,6 +123,18 @@ export function ContactPage() {
                           Location
                         </dt>
                         <dd>{business.locationSummary ?? business.address}</dd>
+                        {business.mapQuery ? (
+                          <dd>
+                            <a
+                              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Open map
+                              <Navigation size={14} strokeWidth={2.2} aria-hidden="true" />
+                            </a>
+                          </dd>
+                        ) : null}
                       </div>
                       {business.phone ? (
                         <div className="contact-brand-card__detail">
@@ -185,35 +160,10 @@ export function ContactPage() {
                       ) : null}
                     </dl>
 
-                    <div className="contact-brand-card__actions">
-                      {business.phone ? (
-                        <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer" aria-label={`Message ${business.name} on WhatsApp`}>
-                          <Phone size={16} strokeWidth={2.2} aria-hidden="true" />
-                          WhatsApp
-                        </a>
-                      ) : null}
-                      {business.email ? (
-                        <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer" aria-label={`Email ${business.name} in Gmail`}>
-                          <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
-                          Email
-                        </a>
-                      ) : null}
-                      {business.mapQuery ? (
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Open ${business.name} in Google Maps`}
-                        >
-                          <Navigation size={16} strokeWidth={2.2} aria-hidden="true" />
-                          Map
-                        </a>
-                      ) : null}
-                      <Link to={`/businesses/${business.slug}`} aria-label={`View ${business.name}`}>
-                        <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
-                        Brand
-                      </Link>
-                    </div>
+                    <Link to={`/businesses/${business.slug}`} className="contact-brand-card__brand-link" aria-label={`View ${business.name}`}>
+                      View brand
+                      <ArrowUpRight size={15} strokeWidth={2.2} aria-hidden="true" />
+                    </Link>
                   </div>
                 </article>
               )

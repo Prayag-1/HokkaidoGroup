@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
 import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SiteFooter } from '../components/SiteFooter'
@@ -35,6 +36,7 @@ export function BusinessDetailPage() {
   const galleryImages = business.galleryImages.filter(Boolean)
   const scrollingGalleryImages = [...galleryImages, ...galleryImages]
   const hasHeroMedia = Boolean(business.image)
+  const heroUsesLogo = Boolean(business.logo && business.image === business.logo)
   const emailValue = business.email
   const phoneValue = business.phone
 
@@ -42,16 +44,32 @@ export function BusinessDetailPage() {
     <main className="corporate-page">
       <section className="corporate-section corporate-section--first">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
-          <div className="section-header corporate-section__header">
-            <p className="section-header__eyebrow">{business.category}</p>
+          <div className="section-header corporate-section__header business-detail__hero-copy">
+            <Link to="/businesses" className="business-detail__back-link">
+              <ArrowLeft size={16} strokeWidth={2.2} aria-hidden="true" />
+              All brands
+            </Link>
+            <p className="section-header__eyebrow">{business.category === 'Restaurant' ? 'Hokkaido dining' : `${business.category} division`}</p>
             <h1 className="section-header__heading">{business.name}</h1>
             <p className="section-header__description">
               {business.description ?? locationLabel ?? business.category}
             </p>
             <dl className="business-detail__hero-contact">
+              {locationLabel ? (
+                <div>
+                  <dt>
+                    <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Location
+                  </dt>
+                  <dd>{locationLabel}</dd>
+                </div>
+              ) : null}
               {emailValue ? (
                 <div>
-                  <dt>Email</dt>
+                  <dt>
+                    <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Email
+                  </dt>
                   <dd>
                     <a href={`mailto:${emailValue}`}>{emailValue}</a>
                   </dd>
@@ -59,7 +77,10 @@ export function BusinessDetailPage() {
               ) : null}
               {phoneValue ? (
                 <div>
-                  <dt>Phone</dt>
+                  <dt>
+                    <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Phone
+                  </dt>
                   <dd>
                     <a href={`tel:${phoneValue}`}>{phoneValue}</a>
                   </dd>
@@ -69,7 +90,7 @@ export function BusinessDetailPage() {
           </div>
 
           {hasHeroMedia ? (
-            <figure className="business-detail__hero-media">
+            <figure className={`business-detail__hero-media${heroUsesLogo ? ' business-detail__hero-media--logo' : ''}`}>
               <img
                 src={business.image as string}
                 alt={business.logo && business.image === business.logo ? `${business.name} logo` : `${business.name} venue photo`}
@@ -88,24 +109,30 @@ export function BusinessDetailPage() {
       <section className="corporate-section corporate-section--alt">
         <ScrollReveal className="corporate-shell business-detail__info-grid">
           <article className="business-detail__panel">
-            <p className="section-header__eyebrow">Story</p>
-            <h2 className="business-detail__panel-title">About {business.name}</h2>
+            <p className="section-header__eyebrow">Profile</p>
+            <h2 className="business-detail__panel-title">What to expect</h2>
             {aboutText ? <p className="business-detail__copy">{aboutText}</p> : null}
           </article>
 
           <article className="business-detail__panel">
-            <p className="section-header__eyebrow">Contact</p>
-            <h2 className="business-detail__panel-title">Reach this location</h2>
+            <p className="section-header__eyebrow">Visit</p>
+            <h2 className="business-detail__panel-title">Contact details</h2>
             <dl className="business-detail__contact-list">
               {business.address ? (
                 <div>
-                <dt>Address</dt>
+                  <dt>
+                    <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Address
+                  </dt>
                   <dd>{business.address}</dd>
                 </div>
               ) : null}
               {phoneValue ? (
                 <div>
-                  <dt>Phone</dt>
+                  <dt>
+                    <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Phone
+                  </dt>
                   <dd>
                     <a href={`tel:${phoneValue}`}>{phoneValue}</a>
                   </dd>
@@ -113,7 +140,10 @@ export function BusinessDetailPage() {
               ) : null}
               {emailValue ? (
                 <div>
-                  <dt>Email</dt>
+                  <dt>
+                    <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
+                    Email
+                  </dt>
                   <dd>
                     <a href={`mailto:${emailValue}`}>{emailValue}</a>
                   </dd>
@@ -128,8 +158,8 @@ export function BusinessDetailPage() {
         <section className="corporate-section corporate-section--alt">
           <ScrollReveal className="corporate-shell business-detail__gallery-section">
             <div className="corporate-section__intro corporate-section__intro--left business-detail__gallery-intro">
-              <p className="corporate-eyebrow">Scenes</p>
-              <h2 className="business-detail__gallery-title">A look inside {business.name}</h2>
+              <p className="corporate-eyebrow">Gallery</p>
+              <h2 className="business-detail__gallery-title">{business.name} in view</h2>
             </div>
             <div className="business-detail__gallery" aria-label={`${business.name} image gallery`}>
               {scrollingGalleryImages.map((src, index) => (
@@ -161,6 +191,7 @@ export function BusinessDetailPage() {
                 rel="noreferrer"
               >
                 Open in Google Maps
+                <ExternalLink size={15} strokeWidth={2.2} aria-hidden="true" />
               </a>
             ) : null}
           </div>
@@ -169,7 +200,7 @@ export function BusinessDetailPage() {
             businesses={[business]}
             eyebrow="Map"
             title="Map view"
-            description="Saved Google Maps place details frame this outlet."
+            description="Use the map to check the area before you visit."
           />
         </ScrollReveal>
       </section>

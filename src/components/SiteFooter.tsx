@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
-import { businesses, hnbgCorporateContact } from '../data/businesses'
+import { businesses, hnbgCorporateContact, hnbgLogo } from '../data/businesses'
 import { footerCompanyLinks, footerSupportLinks } from '../config/nav'
 
 export function SiteFooter() {
@@ -10,7 +10,10 @@ export function SiteFooter() {
     <footer className="corporate-footer">
       <div className="corporate-shell">
         <div className="corporate-footer__brand-row">
-          <h2>HNBG</h2>
+          <div className="corporate-footer__brand-lockup">
+            <img src={hnbgLogo} alt="Hokkaido Nepal Business Group logo" loading="lazy" />
+            <h2>Hokkaido Nepal Business Group</h2>
+          </div>
           <p className="corporate-footer__summary">
             Authentic Japanese dining, retail, wellness, and trading operations in Nepal.
           </p>

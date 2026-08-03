@@ -188,9 +188,10 @@ export function ContactForm({ className }: ContactFormProps) {
 
       <div className="corporate-form__actions">
         <button type="submit" className="corporate-button corporate-button--primary" disabled={mutation.isPending || isSubmitting}>
-          {mutation.isPending || isSubmitting ? 'Sending…' : 'Send message'}
+          {mutation.isPending || isSubmitting ? 'Sending...' : 'Send message'}
         </button>
       </div>
     </motion.form>
   )
 }
+

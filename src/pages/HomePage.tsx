@@ -19,7 +19,7 @@ export function HomePage() {
       <section className="corporate-hero corporate-hero--image" style={{ backgroundImage: `url(${homeHeroImage})` }}>
         <ScrollReveal className="corporate-shell corporate-hero__inner">
           <div className="corporate-hero__copy">
-            <p className="section-header__eyebrow">Since 2018 · Nepal</p>
+            <p className="section-header__eyebrow">Since 2018 in Nepal</p>
             <h1>A quiet house of Japanese hospitality.</h1>
             <p>
               Hokkaido Group brings authentic Japanese dining, retail, wellness, and trading experiences closer to
@@ -27,7 +27,7 @@ export function HomePage() {
             </p>
             <div className="corporate-actions">
               <Link to="/businesses" className="corporate-button corporate-button--primary">
-                Our Brands
+                Our brands
               </Link>
               <Link to="/contact" className="corporate-button corporate-button--secondary">
                 Contact the Group
@@ -58,7 +58,7 @@ export function HomePage() {
           <div className="corporate-brand-strip__rail">
             {businesses.map((business) => (
               <Link key={business.id} to={`/businesses/${business.slug}`} className="corporate-brand-strip__item">
-                {business.logo ? <img src={business.logo} alt={`${business.name} logo`} loading="lazy" /> : <span>{business.name}</span>}
+                <span>{business.name}</span>
               </Link>
             ))}
           </div>
@@ -71,7 +71,7 @@ export function HomePage() {
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Portfolio</p>
-            <h2 className="section-header__heading">Our Brands</h2>
+            <h2 className="section-header__heading">Our brands</h2>
             <p className="section-header__description">
               A portfolio of restaurants, retail businesses, wellness destinations, and trading operations.
             </p>
@@ -85,7 +85,7 @@ export function HomePage() {
 
           <div className="corporate-section__actions">
             <Link to="/businesses" className="corporate-button corporate-button--secondary">
-              View Full Directory
+              View full directory
             </Link>
           </div>
         </ScrollReveal>
@@ -113,7 +113,7 @@ export function HomePage() {
           </div>
           <div className="corporate-section__actions">
             <Link to="/about" className="corporate-button corporate-button--secondary">
-              Read About Hokkaido Group
+              Read about Hokkaido Group
             </Link>
           </div>
         </ScrollReveal>

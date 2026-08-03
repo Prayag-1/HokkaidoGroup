@@ -15,15 +15,15 @@ export function BusinessDirectoryPage() {
       <section className="corporate-section corporate-section--first">
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
-            <p className="section-header__eyebrow">Portfolio</p>
-            <h1 className="section-header__heading">Business directory</h1>
+            <p className="section-header__eyebrow">Brands</p>
+            <h1 className="section-header__heading">Restaurants, retail, resort, and trading</h1>
             <p className="section-header__description">
-              Browse the Hokkaido Group brands listed in the source document.
+              Explore the Hokkaido Group locations and operating divisions across Nepal.
             </p>
             {selectedCategory ? (
               <div className="corporate-section__actions">
                 <Link to="/businesses" className="corporate-button corporate-button--secondary">
-                  Show All Divisions
+                  Show all divisions
                 </Link>
               </div>
             ) : null}
@@ -36,7 +36,7 @@ export function BusinessDirectoryPage() {
               return (
                 <section key={category} className="business-directory__group" aria-labelledby={`${category}-heading`}>
                   <header className="business-directory__group-header">
-                    <p className="section-header__eyebrow">{categoryBusinesses.length} listings</p>
+                    <p className="section-header__eyebrow">{categoryBusinesses.length} {categoryBusinesses.length === 1 ? 'location' : 'locations'}</p>
                     <h2 id={`${category}-heading`}>{category}</h2>
                   </header>
                   <div className="corporate-business-grid">

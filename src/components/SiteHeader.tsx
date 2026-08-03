@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
 import { primaryNavLinks } from '../config/nav'
-import { hnbgCorporateContact } from '../data/businesses'
+import { hnbgCorporateContact, hnbgLogo } from '../data/businesses'
 
 function useHeaderScrolled() {
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 24)
@@ -57,7 +57,8 @@ export function SiteHeader() {
         <MobileMenu />
 
         <Link to="/" className="corporate-logo" aria-label="HNBG home">
-          HNBG<span>Corporate</span>
+          <img src={hnbgLogo} alt="" aria-hidden="true" />
+          <span>Hokkaido Nepal Business Group</span>
         </Link>
 
         <nav className="corporate-nav" aria-label="Main navigation">

@@ -3,6 +3,7 @@ import { X } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link, NavLink } from 'react-router-dom'
 import { primaryNavLinks } from '../config/nav'
+import { hnbgLogo } from '../data/businesses'
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
@@ -72,7 +73,8 @@ export function MobileMenu() {
             >
               <div className="corporate-mobile-menu__header">
                 <Link to="/" className="corporate-logo" onClick={closeMenu} aria-label="HNBG home">
-                  HNBG<span>Corporate</span>
+                  <img src={hnbgLogo} alt="" aria-hidden="true" />
+                  <span>Hokkaido Nepal Business Group</span>
                 </Link>
                 <button className="corporate-mobile-menu__close" onClick={closeMenu} aria-label="Close navigation menu">
                   <X aria-hidden="true" size={20} strokeWidth={2} />

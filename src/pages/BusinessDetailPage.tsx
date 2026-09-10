@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
 import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
 import { getBusinessBySlug } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
@@ -13,7 +14,7 @@ export function BusinessDetailPage() {
   if (!business) {
     return (
       <main className="corporate-page">
-        <section className="corporate-section corporate-section--first">
+        <SectionSurface variant="rice-paper" className="corporate-section--first">
           <div className="corporate-shell">
             <div className="section-header corporate-section__header">
               <p className="section-header__eyebrow">Business unavailable</p>
@@ -26,7 +27,7 @@ export function BusinessDetailPage() {
               </Link>
             </div>
           </div>
-        </section>
+        </SectionSurface>
         <SiteFooter />
       </main>
     )
@@ -45,7 +46,7 @@ export function BusinessDetailPage() {
 
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+      <SectionSurface variant="rice-paper" className="corporate-section--first">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header business-detail__hero-copy">
             <Link to="/businesses" className="business-detail__back-link">
@@ -107,9 +108,9 @@ export function BusinessDetailPage() {
             </div>
           )}
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <section className="corporate-section corporate-section--alt">
+      <SectionSurface variant="rice-paper" className="corporate-section--alt">
         <ScrollReveal className="corporate-shell business-detail__info-grid">
           <article className="business-detail__panel">
             <p className="section-header__eyebrow">Profile</p>
@@ -155,10 +156,10 @@ export function BusinessDetailPage() {
             </dl>
           </article>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
       {galleryImages.length > 0 ? (
-        <section className="corporate-section corporate-section--alt">
+        <SectionSurface variant="rice-paper" className="corporate-section--alt">
           <ScrollReveal className="corporate-shell business-detail__gallery-section">
             <div className="corporate-section__intro corporate-section__intro--left business-detail__gallery-intro">
               <p className="corporate-eyebrow">Gallery</p>
@@ -177,10 +178,10 @@ export function BusinessDetailPage() {
               ))}
             </div>
           </ScrollReveal>
-        </section>
+        </SectionSurface>
       ) : null}
 
-      <section className="corporate-section">
+      <SectionSurface variant="rice-paper">
         <ScrollReveal className="corporate-shell business-detail__location-grid">
           <div className="business-detail__panel">
             <p className="corporate-eyebrow">Place</p>
@@ -206,7 +207,7 @@ export function BusinessDetailPage() {
             description="Use the map to check the area before you visit."
           />
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
       <SiteFooter />
     </main>

@@ -10,7 +10,35 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
+.vite
 *.local
+*.tsbuildinfo
+.eslintcache
+
+# Local environment files (keep a safe example file if one is added)
+.env
+.env.*
+!.env.example
+
+# Browser/test artifacts
+.tmp-edge-*/
+playwright-report/
+test-results/
+
+# Local agent/editor state
+.agents/
+.codex/
+
+# Generated visual-review screenshots at the repository root
+/*-before.png
+/*-after.png
+/*-themed.png
+/*-japanese-bg.png
+/*-japanese-bg-mobile.png
+
+# Local high-resolution source assets; optimized web assets belong in src/assets
+/local-assets/
 
 # Editor directories and files
 .vscode/*

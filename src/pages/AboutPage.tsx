@@ -1,4 +1,5 @@
 import { ScrollReveal } from '../components/ScrollReveal'
+import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
 import { hokkaidoVisionParagraphs } from '../data/corporateContent'
 import { businesses } from '../data/businesses'
@@ -10,16 +11,16 @@ const storyBrands = businesses.slice(0, 6)
 export function AboutPage() {
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first about-hero">
+      <SectionSurface variant="rice-paper" className="corporate-section--first about-hero">
         <ScrollReveal className="corporate-shell">
           <div className="about-hero__title">
             <p className="section-header__eyebrow">About Us</p>
             <h1>Hokkaido Group</h1>
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <section className="corporate-section about-story">
+      <SectionSurface variant="rice-paper" className="about-story">
         <ScrollReveal className="corporate-shell about-story__grid">
           {storyImage ? (
             <figure className="about-story__image">
@@ -35,21 +36,21 @@ export function AboutPage() {
             ))}
           </article>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <section className="corporate-section about-founder">
+      <SectionSurface variant="rice-paper" className="about-founder">
         <ScrollReveal className="corporate-shell about-founder__grid">
           <article className="about-founder__copy">
             <p className="section-header__eyebrow">Founder</p>
             <h2>Mr. Arjun Adhikari</h2>
-            <p className="about-founder__role">Founder and Chairman, Hokkaido Nepal Business Group Pvt. Ltd.</p>
+            <p className="about-founder__role">Founder and Chairman, Hokkaido Group Pvt. Ltd.</p>
             <p>
               Mr. Arjun Adhikari is a restaurateur and entrepreneur focused on introducing and promoting Japanese food
               culture in Nepal. His work connects culinary tradition, hospitality, and business innovation through
               Hokkaido Group's growing Japanese restaurant portfolio.
             </p>
             <p>
-              Public profiles of Hokkaido Nepal Business Group describe the company as founded and led by Mr. Adhikari,
+              Public profiles of Hokkaido Group describe the company as founded and led by Mr. Adhikari,
               with roots in his earlier Bistarai Bistarai restaurant in Hokkaido, Abashiri, Japan. His Nepal journey
               includes Hokkaido Ramen House, the group's inaugural venture at Park Village, and the development of
               multiple Japanese dining concepts in Kathmandu, Lalitpur, and Pokhara.
@@ -60,9 +61,9 @@ export function AboutPage() {
             <img src={founderPhoto} alt="Mr. Arjun Adhikari" loading="lazy" />
           </figure>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <section className="corporate-section corporate-section--alt">
+      <SectionSurface variant="rice-paper" className="corporate-section--alt">
         <ScrollReveal className="corporate-shell">
           <div className="about-section-heading">
             <p className="section-header__eyebrow">Our Story</p>
@@ -82,7 +83,7 @@ export function AboutPage() {
             ))}
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
       <SiteFooter />
     </main>

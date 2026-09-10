@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
 import { primaryNavLinks } from '../config/nav'
-import { hnbgCorporateContact, hnbgLogo } from '../data/businesses'
+import { hokkaidoGroupCorporateContact, hokkaidoGroupLogo } from '../data/businesses'
 
 function useHeaderScrolled() {
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 24)
@@ -32,13 +32,13 @@ export function SiteHeader() {
   const isScrolled = useHeaderScrolled()
   const hasSolidChrome = !isHome || isScrolled
   const quickContactLinks = [
-    hnbgCorporateContact.phone ? { href: `tel:${hnbgCorporateContact.phone}`, label: hnbgCorporateContact.phone } : null,
-    hnbgCorporateContact.email ? { href: `mailto:${hnbgCorporateContact.email}`, label: hnbgCorporateContact.email } : null,
+    hokkaidoGroupCorporateContact.phone ? { href: `tel:${hokkaidoGroupCorporateContact.phone}`, label: hokkaidoGroupCorporateContact.phone } : null,
+    hokkaidoGroupCorporateContact.email ? { href: `mailto:${hokkaidoGroupCorporateContact.email}`, label: hokkaidoGroupCorporateContact.email } : null,
   ].filter(Boolean) as { href: string; label: string }[]
   const hasQuickContact = quickContactLinks.length > 0
 
   return (
-    <header className={`corporate-header ${hasSolidChrome ? 'corporate-header--scrolled' : 'corporate-header--home-top'}`}>
+    <header className={`corporate-header ${hasSolidChrome ? 'corporate-header--scrolled' : 'corporate-header--home-top'}`} data-surface="ink">
       {hasQuickContact ? (
         <div className="corporate-quickbar">
           <div className="corporate-shell corporate-quickbar__inner">
@@ -56,9 +56,9 @@ export function SiteHeader() {
       <div className="corporate-shell corporate-header__inner">
         <MobileMenu />
 
-        <Link to="/" className="corporate-logo" aria-label="HNBG home">
-          <img src={hnbgLogo} alt="" aria-hidden="true" />
-          <span>Hokkaido Nepal Business Group</span>
+        <Link to="/" className="corporate-logo" aria-label="Hokkaido Group home">
+          <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
+          <span>Hokkaido Group</span>
         </Link>
 
         <nav className="corporate-nav" aria-label="Main navigation">

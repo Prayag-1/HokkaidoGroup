@@ -6,7 +6,7 @@ import { SiteFooter } from '../components/SiteFooter'
 export function BookingPage() {
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+      <section className="corporate-section corporate-section--first corporate-section--rice-paper">
         <ScrollReveal className="corporate-shell corporate-split">
           <div>
             <p className="corporate-eyebrow">Reservations</p>

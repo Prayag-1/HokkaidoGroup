@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { BusinessCard } from '../components/BusinessCard'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
 import { businessCategories, businesses, type BusinessCategory } from '../data/businesses'
 
@@ -11,8 +12,8 @@ export function BusinessDirectoryPage() {
   const visibleCategories = selectedCategory ? [selectedCategory] : businessCategories
 
   return (
-    <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+    <main className="corporate-page corporate-page--business-directory">
+      <SectionSurface variant="rice-paper" className="corporate-section--first">
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Brands</p>
@@ -34,7 +35,12 @@ export function BusinessDirectoryPage() {
               const categoryBusinesses = businesses.filter((business) => business.category === category)
 
               return (
-                <section key={category} className="business-directory__group" aria-labelledby={`${category}-heading`}>
+                <section
+                  key={category}
+                  className="business-directory__group"
+                  data-card-count={Math.min(categoryBusinesses.length, 3)}
+                  aria-labelledby={`${category}-heading`}
+                >
                   <header className="business-directory__group-header">
                     <p className="section-header__eyebrow">{categoryBusinesses.length} {categoryBusinesses.length === 1 ? 'location' : 'locations'}</p>
                     <h2 id={`${category}-heading`}>{category}</h2>
@@ -49,7 +55,7 @@ export function BusinessDirectoryPage() {
             })}
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
       <SiteFooter />
     </main>
   )

@@ -1,12 +1,13 @@
 import { Newspaper } from 'lucide-react'
 import { EmptyState } from '../components/EmptyState'
+import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
 import { publishedPressItems } from '../data/pressItems'
 
 export function PressPage() {
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+      <SectionSurface variant="rice-paper" className="corporate-section--first">
         <div className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Notes</p>
@@ -39,7 +40,7 @@ export function PressPage() {
             />
           )}
         </div>
-      </section>
+      </SectionSurface>
       <SiteFooter />
     </main>
   )

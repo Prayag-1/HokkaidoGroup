@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { lazy, Suspense, useEffect, type ComponentType } from 'react'
 import { PageTransition } from './components/PageTransition'
+import { SectionSurface } from './components/SectionSurface'
 import { SiteHeader } from './components/SiteHeader'
 import { HomePage } from './pages/HomePage'
 
@@ -14,11 +15,11 @@ const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage').then(
 function RouteFallback() {
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+      <SectionSurface variant="rice-paper" className="corporate-section--first">
         <div className="corporate-shell">
           <p className="corporate-eyebrow">Loading</p>
         </div>
-      </section>
+      </SectionSurface>
     </main>
   )
 }

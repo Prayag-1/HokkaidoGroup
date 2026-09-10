@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Building2, Mail, MapPin, MessageSquare, Navigation, Phone } from 'lucide-react'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
-import { businesses, hnbgLogo } from '../data/businesses'
+import { businesses, hokkaidoGroupLogo } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
 import contactHeroImage from '../assets/gallery/izakaya/izakaya2.webp'
 import contactDetailImage from '../assets/gallery/sora/sora4.webp'
@@ -13,14 +14,14 @@ export function ContactPage() {
 
   return (
     <main className="corporate-page corporate-contact-page">
-      <section className="contact-hero corporate-section corporate-section--first">
+      <SectionSurface variant="rice-paper" className="corporate-section--first contact-hero">
         <ScrollReveal className="corporate-shell contact-hero__grid">
           <div className="contact-hero__copy">
             <div className="contact-hero__brandmark">
-              <img src={hnbgLogo} alt="" aria-hidden="true" />
-              <span>Hokkaido Nepal Business Group</span>
+              <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
+              <span>Hokkaido Group</span>
             </div>
-            <p className="section-header__eyebrow">Contact HNBG</p>
+            <p className="section-header__eyebrow">Contact Hokkaido Group</p>
             <h1>Book a table. Reach a brand. Start a partnership.</h1>
             <p>
               Choose the right outlet directly or send one group inquiry for reservations, retail, resort, import, and
@@ -63,8 +64,8 @@ export function ContactPage() {
               <figure className="contact-showcase__tile contact-showcase__tile--bottom">
                 <img src={contactRoomImage} alt="Hokkaido Umami dining room" loading="eager" />
               </figure>
-              <div className="contact-showcase__badge">
-                <img src={hnbgLogo} alt="" aria-hidden="true" />
+              <div className="contact-showcase__badge" data-surface="ink">
+                <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
                 <div>
                   <span>Concierge line</span>
                   <strong>{businesses.length} brands across Nepal</strong>
@@ -73,15 +74,15 @@ export function ContactPage() {
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <section id="brand-contacts" className="contact-directory corporate-section">
+      <SectionSurface id="brand-contacts" variant="rice-paper" className="contact-directory">
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Brand directory</p>
             <h2 className="section-header__heading">Call, email, or find the right location.</h2>
             <p className="section-header__description">
-              Direct contact details for every Hokkaido Nepal Business Group outlet and division.
+              Direct contact details for every Hokkaido Group outlet and division.
             </p>
           </div>
 
@@ -170,7 +171,7 @@ export function ContactPage() {
             })}
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
       <SiteFooter />
     </main>
   )

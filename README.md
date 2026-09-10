@@ -1,6 +1,6 @@
-# Hokkaido Nepal Business Group Website
+# Hokkaido Group Website
 
-Corporate website for Hokkaido Nepal Business Group, built with React, TypeScript, Vite, React Router, React Hook Form, Zod, TanStack Query, Framer Motion, Radix UI primitives, Lucide icons, and a custom token-driven CSS system.
+Corporate website for Hokkaido Group, built with React, TypeScript, Vite, React Router, React Hook Form, Zod, TanStack Query, Framer Motion, Radix UI primitives, Lucide icons, and a custom token-driven CSS system.
 
 ## Commands
 

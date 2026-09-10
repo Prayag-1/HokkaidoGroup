@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000" fill="none">
+  <defs>
+    <pattern id="paper-grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" stroke="#2B2118" stroke-opacity=".035" stroke-width="1"/>
+      <path d="M0 36H72M36 0V72" stroke="#2B2118" stroke-opacity=".018" stroke-width="1"/>
+    </pattern>
+    <pattern id="waves" width="96" height="48" patternUnits="userSpaceOnUse">
+      <path d="M0 48c12-26 36-26 48 0s36 26 48 0" stroke="#2B2118" stroke-opacity=".06" stroke-width="2" fill="none"/>
+      <path d="M0 24c12-26 36-26 48 0s36 26 48 0" stroke="#2B2118" stroke-opacity=".035" stroke-width="1.4" fill="none"/>
+    </pattern>
+  </defs>
+
+  <rect width="1400" height="1000" fill="url(#paper-grid)"/>
+  <rect width="1400" height="1000" fill="url(#waves)" opacity=".55"/>
+
+  <circle cx="188" cy="155" r="96" fill="#EB1C24" opacity=".16"/>
+  <circle cx="1148" cy="702" r="130" fill="#EB1C24" opacity=".105"/>
+  <circle cx="1038" cy="118" r="26" fill="#EB1C24" opacity=".35"/>
+  <circle cx="312" cy="725" r="22" fill="#EB1C24" opacity=".24"/>
+
+  <g opacity=".11" stroke="#111" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1094 766h210"/>
+    <path d="M1126 766v132M1272 766v132"/>
+    <path d="M1148 810h102"/>
+    <path d="M1082 735c64 22 144 22 236 0"/>
+  </g>
+
+  <g opacity=".13" stroke="#EB1C24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M930 105c84 8 156-22 229-82"/>
+    <path d="M1008 82c23 24 47 36 75 42"/>
+    <path d="M1068 54c-4 34 4 62 25 86"/>
+    <path d="M980 120c20 4 40 16 58 36"/>
+  </g>
+  <g opacity=".18" fill="#EB1C24">
+    <circle cx="956" cy="100" r="11"/>
+    <circle cx="1018" cy="70" r="15"/>
+    <circle cx="1087" cy="124" r="12"/>
+    <circle cx="1128" cy="52" r="16"/>
+    <circle cx="1038" cy="156" r="9"/>
+  </g>
+
+  <g opacity=".13" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 842c34-44 68-44 102 0"/>
+    <path d="M187 840v-82h68v82"/>
+    <path d="M200 758c10-38 42-38 42 0"/>
+    <path d="M196 802h62"/>
+  </g>
+
+  <g opacity=".1" fill="#111" font-family="Yu Mincho, Hiragino Mincho ProN, Noto Serif JP, serif" font-size="62" letter-spacing="14">
+    <text x="116" y="420" writing-mode="vertical-rl">北海道</text>
+    <text x="1232" y="246" writing-mode="vertical-rl">寿司</text>
+    <text x="650" y="912" writing-mode="vertical-rl">旬味</text>
+  </g>
+</svg>

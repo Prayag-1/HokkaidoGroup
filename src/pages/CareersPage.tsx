@@ -6,7 +6,7 @@ import { SiteFooter } from '../components/SiteFooter'
 export function CareersPage() {
   return (
     <main className="corporate-page">
-      <section className="corporate-section corporate-section--first">
+      <section className="corporate-section corporate-section--first corporate-section--rice-paper">
         <div className="corporate-shell">
           <EmptyState
             eyebrow="Careers"

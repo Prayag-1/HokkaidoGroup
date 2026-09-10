@@ -12,7 +12,8 @@ const categoryIconMap: Record<BusinessCategory, LucideIcon> = {
 
 export function CategoryDivisionBand() {
   return (
-    <section className="corporate-division-band" aria-label="HNBG business divisions">
+    <section className="section-surface corporate-division-band" data-surface="rice-paper" data-texture="true" aria-label="Hokkaido Group business divisions">
+      <span className="section-surface__texture" aria-hidden="true" />
       <div className="corporate-shell corporate-division-band__inner">
         <div className="corporate-division-band__intro">
           <p className="corporate-eyebrow">Divisions</p>

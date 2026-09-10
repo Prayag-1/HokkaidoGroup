@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" fill="none">
+  <circle cx="146" cy="106" r="70" fill="#EB1C24" opacity=".2"/>
+  <circle cx="190" cy="62" r="13" fill="#EB1C24" opacity=".34"/>
+  <path d="M30 320c58-74 118-74 176 0" stroke="#1B1511" stroke-opacity=".1" stroke-width="9" stroke-linecap="round"/>
+  <path d="M62 320V196h112v124M86 196c15-62 64-62 76 0M72 260h102" stroke="#1B1511" stroke-opacity=".105" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M470 82c72 12 130-6 206-72M540 56c22 28 48 44 82 52M598 36c-2 38 8 68 32 92M510 108c24 4 46 18 68 42" stroke="#EB1C24" stroke-opacity=".17" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#EB1C24" opacity=".2">
+    <circle cx="494" cy="80" r="11"/>
+    <circle cx="548" cy="50" r="14"/>
+    <circle cx="624" cy="108" r="12"/>
+    <circle cx="678" cy="32" r="16"/>
+    <circle cx="574" cy="146" r="9"/>
+  </g>
+  <g fill="#1B1511" opacity=".08" font-family="Yu Mincho, Hiragino Mincho ProN, Noto Serif JP, serif" font-size="58" letter-spacing="12">
+    <text x="360" y="340" writing-mode="vertical-rl">和食</text>
+    <text x="692" y="316" writing-mode="vertical-rl">北海道</text>
+  </g>
+</svg>

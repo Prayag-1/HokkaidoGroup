@@ -12,16 +12,16 @@ import house1 from "../assets/gallery/hokkaidohouse/house1.webp"
 import house2 from "../assets/gallery/hokkaidohouse/house2.webp"
 import house3 from "../assets/gallery/hokkaidohouse/house3.webp"
 import janeichiLogo from '../assets/gallery/janeichi/janeichi-logo.webp'
-import hnbgLogoImage from '../assets/logo/hnbg-logo-transparent.png'
-import hokkaidoRamenHouseLogo from '../assets/logo/images (3).jpg'
-import hokkaidoHouseLogo from '../assets/logo/images.jpg'
-import hokkaidoYakitoriLogo from '../assets/logo/images (1).jpg'
-import hokkaidoPokharaLogo from '../assets/logo/images (2).jpg'
+import hokkaidoGroupLogoImage from '../assets/logo/Hokkaido Group.jpg'
+import hokkaidoRamenHouseLogo from '../assets/logo/Hokkaido Ramen.jpg'
+import hokkaidoHouseLogo from '../assets/logo/Hokkaido House.jpg'
+import hokkaidoYakitoriLogo from '../assets/logo/Hokkaido Yakitori.jpg'
+import hokkaidoPokharaLogo from '../assets/logo/Hokkaido Pokhara.jpg'
 import hokkaidoDekkaidoLogo from '../assets/logo/Hokkaido Dekkaido.jpg'
 import hokkaidoSoraLogo from '../assets/logo/Hokkaido Sora.jpg'
 import hokkaidoUmamiLogo from '../assets/logo/Hokkaido Umami.jpg'
-import homaNepalLogo from '../assets/logo/HOMA Nepal.jpg'
-import izakayaHokkaidoLogo from '../assets/logo/Izakaya Hokkaido.jpg'
+import izakayaHokkaidoLogo from '../assets/logo/Hokkaido izakaya.jpg'
+import homaNepalLogo from '../assets/logo/images.png'
 
 import umamiImage from '../assets/gallery/umami/umami1.webp'
 import umami2 from '../assets/gallery/umami/umami2.webp'
@@ -88,8 +88,8 @@ export type CorporateContact = {
   verified: boolean
 }
 
-export const hnbgCorporateContact: CorporateContact = {
-  name: 'Hokkaido Nepal Business Group',
+export const hokkaidoGroupCorporateContact: CorporateContact = {
+  name: 'Hokkaido Group',
   address: null,
   phone: null,
   email: null,
@@ -97,7 +97,7 @@ export const hnbgCorporateContact: CorporateContact = {
   verified: false,
 }
 
-export const hnbgLogo = hnbgLogoImage
+export const hokkaidoGroupLogo = hokkaidoGroupLogoImage
 
 export const businesses: Business[] = [
   {

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import { BusinessCard } from '../components/BusinessCard'
 import { CategoryDivisionBand } from '../components/CategoryDivisionBand'
+import { FeaturedOutletsCarousel } from '../components/FeaturedOutletsCarousel'
 import { PendingNotice } from '../components/PendingNotice'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
@@ -10,35 +9,23 @@ import { SiteFooter } from '../components/SiteFooter'
 import { businesses, featuredBusinesses } from '../data/businesses'
 import { hokkaidoVisionParagraphs } from '../data/corporateContent'
 import homeHeroImage from '../assets/gallery/sora/sora4.webp'
-import homeHeroCrossfadeImage from '../assets/gallery/sora/sora3.webp'
 
-const featuredBusinessPreview = featuredBusinesses.slice(0, 6)
 const LocationSpotlight = lazy(() => import('../components/LocationSpotlight').then(({ LocationSpotlight }) => ({ default: LocationSpotlight })))
 const cityCount = new Set(businesses.map((business) => business.address?.match(/Kathmandu|Lalitpur|Pokhara/)?.[0]).filter(Boolean)).size
 
 export function HomePage() {
-  const reduceMotion = useReducedMotion()
-
   return (
     <main className="corporate-page corporate-page--home">
-      <section className="corporate-hero corporate-hero--image corporate-hero--ink photo-text-overlay" data-surface="ink">
+      <section className="corporate-hero corporate-hero--image corporate-hero--ink photo-text-overlay" data-surface="ink" aria-labelledby="home-hero-title">
         <div
-          className="corporate-hero__image-layer corporate-hero__image-layer--base"
+          className="corporate-hero__image-layer"
           style={{ backgroundImage: `url(${homeHeroImage})` }}
-          aria-hidden="true"
-        />
-        <motion.div
-          className="corporate-hero__image-layer corporate-hero__image-layer--crossfade"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: reduceMotion ? 0 : 1 }}
-          transition={{ duration: 6, ease: 'easeInOut' }}
-          style={{ backgroundImage: `url(${homeHeroCrossfadeImage})` }}
           aria-hidden="true"
         />
         <ScrollReveal className="corporate-shell corporate-hero__inner">
           <div className="corporate-hero__copy">
             <p className="section-header__eyebrow">Since 2018 in Nepal</p>
-            <h1>A quiet house of Japanese hospitality.</h1>
+            <h1 id="home-hero-title">A quiet house of Japanese hospitality.</h1>
             <p>
               Hokkaido Group brings authentic Japanese dining, retail, wellness, and trading experiences closer to
               Nepalese communities.
@@ -67,6 +54,7 @@ export function HomePage() {
               </div>
             </dl>
           </div>
+
         </ScrollReveal>
       </section>
 
@@ -85,12 +73,11 @@ export function HomePage() {
 
       <CategoryDivisionBand />
 
-      <section className="section-surface home-philosophy home-philosophy--ink" data-surface="ink" data-texture="true" aria-labelledby="home-philosophy-title">
-        <span className="section-surface__texture" aria-hidden="true" />
+      <SectionSurface variant="ink" className="home-philosophy" aria-labelledby="home-philosophy-title">
         <ScrollReveal className="corporate-shell home-philosophy__inner">
-          <div className="home-philosophy__mark" aria-hidden="true">
-            <span>おもてなし</span>
-            <small>OMOTENASHI</small>
+          <div className="home-philosophy__mark">
+            <span lang="ja">おもてなし</span>
+            <small>Omotenashi — hospitality and care</small>
           </div>
           <div className="home-philosophy__copy">
             <p className="section-header__eyebrow">The Hokkaido way</p>
@@ -100,15 +87,15 @@ export function HomePage() {
               restraint, and a respect for the everyday ritual.
             </p>
             <div className="home-philosophy__principles" aria-label="Hokkaido hospitality principles">
-              <span>季節 <small>Season</small></span>
-              <span>手仕事 <small>Craft</small></span>
-              <span>余白 <small>Space</small></span>
+              <span><b lang="ja">季節</b><small>Kisetsu — seasonality</small></span>
+              <span><b lang="ja">手仕事</b><small>Teshi-goto — craft</small></span>
+              <span><b lang="ja">余白</b><small>Yohaku — meaningful space</small></span>
             </div>
           </div>
         </ScrollReveal>
-      </section>
+      </SectionSurface>
 
-      <SectionSurface id="businesses" variant="rice-paper" className="corporate-section--alt">
+      <SectionSurface id="businesses" variant="ink" className="corporate-section--alt home-featured-outlets">
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Portfolio</p>
@@ -118,11 +105,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="corporate-business-rail" aria-label="Featured businesses">
-            {featuredBusinessPreview.map((business) => (
-              <BusinessCard key={business.id} business={business} />
-            ))}
-          </div>
+          <FeaturedOutletsCarousel businesses={featuredBusinesses} />
 
           <div className="corporate-section__actions">
             <Link to="/businesses" className="corporate-button corporate-button--secondary">

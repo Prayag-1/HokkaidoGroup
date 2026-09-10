@@ -13,8 +13,8 @@ export function ContactPage() {
   const cityCount = new Set(businesses.map((business) => business.address?.match(/Kathmandu|Lalitpur|Pokhara/)?.[0]).filter(Boolean)).size
 
   return (
-    <main className="corporate-page corporate-contact-page">
-      <SectionSurface variant="rice-paper" className="corporate-section--first contact-hero">
+    <main className="corporate-page corporate-contact-page contact-page--editorial">
+      <SectionSurface variant="ink" className="corporate-section--first contact-hero">
         <ScrollReveal className="corporate-shell contact-hero__grid">
           <div className="contact-hero__copy">
             <div className="contact-hero__brandmark">
@@ -23,6 +23,7 @@ export function ContactPage() {
             </div>
             <p className="section-header__eyebrow">Contact Hokkaido Group</p>
             <h1>Book a table. Reach a brand. Start a partnership.</h1>
+            <p className="editorial-japanese-note"><span lang="ja">おもてなし</span> / Omotenashi — hospitality and care.</p>
             <p>
               Choose the right outlet directly or send one group inquiry for reservations, retail, resort, import, and
               business conversations.
@@ -104,18 +105,13 @@ export function ContactPage() {
                     )}
                   </div>
 
-                  <div className="contact-brand-card__content">
-                    <div className="contact-brand-card__header">
-                      {business.logo ? (
-                        <div className="contact-brand-card__logo">
-                          <img src={business.logo} alt={`${business.name} logo`} loading="lazy" />
+                    <div className="contact-brand-card__content">
+                      <div className="contact-brand-card__header">
+                        <div>
+                          <p>{business.category === 'Restaurant' ? 'Dining' : business.category}</p>
+                          <h3>{business.name}</h3>
                         </div>
-                      ) : null}
-                      <div>
-                        <p>{business.category === 'Restaurant' ? 'Dining' : business.category}</p>
-                        <h3>{business.name}</h3>
                       </div>
-                    </div>
 
                     <dl className="contact-brand-card__details">
                       <div className="contact-brand-card__detail">
@@ -144,7 +140,10 @@ export function ContactPage() {
                             WhatsApp
                           </dt>
                           <dd>
-                            <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{business.phone}</a>
+                            <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                              <MessageSquare size={15} strokeWidth={2.2} aria-hidden="true" />
+                              <span>{business.phone}</span>
+                            </a>
                           </dd>
                         </div>
                       ) : null}
@@ -155,7 +154,10 @@ export function ContactPage() {
                             Email
                           </dt>
                           <dd>
-                            <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{business.email}</a>
+                            <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                              <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
+                              <span>{business.email}</span>
+                            </a>
                           </dd>
                         </div>
                       ) : null}
@@ -163,7 +165,7 @@ export function ContactPage() {
 
                     <Link to={`/businesses/${business.slug}`} className="contact-brand-card__brand-link" aria-label={`View ${business.name}`}>
                       View brand
-                      <ArrowUpRight size={15} strokeWidth={2.2} aria-hidden="true" />
+                      <ArrowUpRight size={15} strokeWidth={1.5} aria-hidden="true" />
                     </Link>
                   </div>
                 </article>

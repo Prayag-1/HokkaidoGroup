@@ -119,6 +119,25 @@
 }
 
 @media (max-width: 64rem) {
+  .home-hero::before {
+    display: none;
+  }
+
+  .corporate-hero__inner.home-hero__inner {
+    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-hero .corporate-hero__copy {
+    padding-bottom: 0;
+  }
+
+  .home-hero__media {
+    justify-self: end;
+    min-height: 28rem;
+    width: min(72vw, 34rem);
+  }
+
   .home-philosophy__inner {
     gap: var(--space-7);
     grid-template-columns: 1fr;
@@ -127,12 +146,17 @@
 
   .home-philosophy__mark {
     justify-self: start;
-    grid-template-columns: auto auto;
     padding-block: var(--space-3);
+    width: min(100%, 24rem);
   }
 
-  .home-philosophy__mark span {
-    writing-mode: initial;
+  .corporate-business-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .corporate-business-rail .business-card:nth-child(3) {
+    margin-top: 0;
+    max-width: none;
   }
 
   .corporate-header__inner {
@@ -176,6 +200,7 @@
   .corporate-principle-grid,
   .corporate-footer__main,
   .about-brand-grid,
+  .about-leadership__grid,
   .corporate-division-band__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -191,6 +216,24 @@
   }
 
   .business-detail__hero-contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-detail--restaurant .business-detail__hero-shell {
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+  }
+
+  .business-detail--restaurant .business-detail__hero-copy {
+    padding-top: 0;
+  }
+
+  .business-detail--restaurant .business-detail__hero-media {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+
+  .business-detail--restaurant .business-detail__gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -230,6 +273,46 @@
     padding-block: calc(var(--space-8) + 5rem) var(--space-8);
   }
 
+  .corporate-hero__inner.home-hero__inner {
+    gap: var(--space-7);
+    max-width: calc(100vw - var(--space-5));
+    min-height: auto;
+    width: calc(100vw - var(--space-5));
+  }
+
+  .home-hero .corporate-hero__copy {
+    max-width: calc(100vw - var(--space-5));
+    width: calc(100vw - var(--space-5));
+  }
+
+  .home-hero .corporate-hero__copy h1 {
+    font-size: clamp(2.35rem, 12.5vw, 4.5rem);
+    max-width: 100%;
+  }
+
+  .home-hero .corporate-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero .corporate-actions .corporate-button {
+    width: 100%;
+  }
+
+  .home-hero__media {
+    justify-self: stretch;
+    min-height: 24rem;
+    width: calc(100% - var(--space-5));
+  }
+
+  .home-hero__media::before {
+    inset: var(--space-3) calc(var(--space-3) * -1) calc(var(--space-3) * -1) var(--space-3);
+  }
+
+  .home-philosophy__principles {
+    grid-template-columns: 1fr;
+  }
+
   .corporate-hero--image .corporate-hero__copy h1 {
     font-size: clamp(2.75rem, 15vw, 4.5rem);
   }
@@ -247,6 +330,21 @@
 
   .about-hero {
     padding-block: var(--space-5);
+  }
+
+  .business-directory--editorial .business-directory__intro {
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+  }
+
+  .business-directory--editorial .corporate-section__header {
+    padding-top: 0;
+  }
+
+  .business-directory__hero-image {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    max-width: 34rem;
   }
 
   .about-story {
@@ -270,6 +368,7 @@
   .corporate-choice-grid,
   .corporate-footer__main,
   .about-brand-grid,
+  .about-leadership__grid,
   .corporate-division-band__list,
   .location-spotlight__carousel {
     grid-template-columns: 1fr;
@@ -321,8 +420,60 @@
     position: static;
   }
 
+  .about-leadership__card,
+  .about-leadership__card:nth-child(3) {
+    grid-column: auto;
+    grid-template-columns: minmax(7rem, 0.58fr) minmax(0, 1fr);
+  }
+
+  .about-page--editorial .about-founder__photo {
+    margin-top: 0;
+  }
+
   .corporate-business-rail {
-    grid-auto-columns: minmax(16rem, 86vw);
+    gap: var(--space-8);
+    grid-template-columns: 1fr;
+  }
+
+  .corporate-business-rail .business-card:nth-child(2),
+  .corporate-business-rail .business-card:nth-child(3) {
+    margin-top: 0;
+    max-width: none;
+  }
+
+  .featured-outlets__stage {
+    height: auto;
+  }
+
+  .featured-outlets__stage {
+    display: flex;
+    gap: var(--space-4);
+    margin-inline: calc(var(--space-3) * -1);
+    overflow-x: auto;
+    padding: var(--space-3);
+    scroll-snap-type: x mandatory;
+  }
+
+  .featured-outlets__card,
+  .featured-outlets__card[data-position='center'],
+  .featured-outlets__card[data-position='previous'],
+  .featured-outlets__card[data-position='next'],
+  .featured-outlets__card[data-position='hidden'] {
+    flex: 0 0 calc(100% - var(--space-5));
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    scroll-snap-align: center;
+    transform: none;
+    width: auto;
+  }
+
+  .featured-outlets__card > img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .featured-outlets__controls {
+    display: none;
   }
 
   .corporate-hero__visual-frame {
@@ -338,8 +489,48 @@
     transition-duration: 1ms;
   }
 
+  .featured-outlets__card {
+    transition: none;
+  }
+
+  .featured-outlets--reduced-motion .featured-outlets__stage {
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    padding: var(--space-3) 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .featured-outlets--reduced-motion .featured-outlets__card,
+  .featured-outlets--reduced-motion .featured-outlets__card[data-position] {
+    flex: 0 0 min(100%, 29rem);
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    scroll-snap-align: center;
+    transform: none;
+    width: auto;
+  }
+
+  .featured-outlets--reduced-motion .featured-outlets__controls {
+    display: none;
+  }
+
   .corporate-scroll-reveal {
     opacity: 1;
+    transform: none;
+  }
+
+  .corporate-business-rail .business-card,
+  .corporate-business-rail .business-card__media img,
+  .corporate-division-band__item {
+    transition-duration: 1ms;
+  }
+
+  .corporate-business-rail .business-card:hover,
+  .corporate-business-rail .business-card:focus-within,
+  .corporate-business-rail .business-card:hover .business-card__media img,
+  .corporate-business-rail .business-card:focus-within .business-card__media img {
     transform: none;
   }
 

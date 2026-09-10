@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { HandPlatter, PackageSearch, ShoppingBag, Sprout, type LucideIcon } from 'lucide-react'
 import type { BusinessCategory } from '../data/businesses'
 import { businessCategories } from '../data/businesses'
+import { SectionSurface } from './SectionSurface'
 
 const categoryIconMap: Record<BusinessCategory, LucideIcon> = {
   Restaurant: HandPlatter,
@@ -12,14 +13,18 @@ const categoryIconMap: Record<BusinessCategory, LucideIcon> = {
 
 export function CategoryDivisionBand() {
   return (
-    <section className="section-surface corporate-division-band" data-surface="rice-paper" data-texture="true" aria-label="Hokkaido Group business divisions">
-      <span className="section-surface__texture" aria-hidden="true" />
+    <SectionSurface
+      variant="rice-paper"
+      className="corporate-division-band"
+      aria-labelledby="business-divisions-title"
+    >
       <div className="corporate-shell corporate-division-band__inner">
         <div className="corporate-division-band__intro">
-          <p className="corporate-eyebrow">Divisions</p>
+          <p className="section-header__eyebrow">Divisions</p>
+          <h2 id="business-divisions-title">Our business divisions</h2>
         </div>
         <div className="corporate-division-band__list">
-          {businessCategories.map((category) => {
+          {businessCategories.map((category, index) => {
             const Icon = categoryIconMap[category]
 
             return (
@@ -28,13 +33,16 @@ export function CategoryDivisionBand() {
                 to={`/businesses?category=${encodeURIComponent(category)}`}
                 className="corporate-division-band__item"
               >
-                <Icon aria-hidden="true" size={34} strokeWidth={1.65} />
-                <span>{category}</span>
+                <span className="corporate-division-band__number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <Icon aria-hidden="true" size={26} strokeWidth={1.5} />
+                <span className="corporate-division-band__label">{category}</span>
               </Link>
             )
           })}
         </div>
       </div>
-    </section>
+    </SectionSurface>
   )
 }

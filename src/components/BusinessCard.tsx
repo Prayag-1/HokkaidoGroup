@@ -45,7 +45,7 @@ export function BusinessCard({ business }: BusinessCardProps) {
         {business.description ? <p className="business-card__description">{business.description}</p> : null}
         <Link className="business-card__link" to={href}>
           View location
-          <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
+          <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
         </Link>
       </div>
     </article>

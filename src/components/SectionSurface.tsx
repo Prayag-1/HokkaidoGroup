@@ -11,7 +11,7 @@ type SectionSurfaceProps = Omit<ComponentPropsWithoutRef<'section'>, 'children'>
 
 export function SectionSurface({
   variant,
-  texture = true,
+  texture = false,
   className,
   children,
   ...props

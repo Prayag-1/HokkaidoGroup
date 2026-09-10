@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Mail, MapPin, MessageCircle } from 'lucide-react'
 import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
@@ -36,6 +36,7 @@ export function BusinessDetailPage() {
   const locationLabel = business.locationSummary ?? business.address
   const aboutText = business.about ?? business.description
   const galleryImages = business.galleryImages.filter(Boolean)
+  const isRestaurant = business.category === 'Restaurant'
   const scrollingGalleryImages = [...galleryImages, ...galleryImages]
   const hasHeroMedia = Boolean(business.image)
   const heroUsesLogo = Boolean(business.logo && business.image === business.logo)
@@ -45,8 +46,8 @@ export function BusinessDetailPage() {
   const whatsAppUrl = getBusinessWhatsAppUrl(business)
 
   return (
-    <main className="corporate-page">
-      <SectionSurface variant="rice-paper" className="corporate-section--first">
+    <main className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}`}>
+      <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--first business-detail__hero-surface">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header business-detail__hero-copy">
             <Link to="/businesses" className="business-detail__back-link">
@@ -55,6 +56,7 @@ export function BusinessDetailPage() {
             </Link>
             <p className="section-header__eyebrow">{business.category === 'Restaurant' ? 'Hokkaido dining' : `${business.category} division`}</p>
             <h1 className="section-header__heading">{business.name}</h1>
+            <p className="business-detail__japanese-note"><span lang="ja">おもてなし</span> / Omotenashi — thoughtful hospitality.</p>
             <p className="section-header__description">
               {business.description ?? locationLabel ?? business.category}
             </p>
@@ -75,18 +77,24 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{emailValue}</a>
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                      <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
+                      <span>{emailValue}</span>
+                    </a>
                   </dd>
                 </div>
               ) : null}
               {phoneValue ? (
                 <div>
                   <dt>
-                    <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
+                    <MessageCircle size={15} strokeWidth={2.2} aria-hidden="true" />
                     WhatsApp
                   </dt>
                   <dd>
-                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{phoneValue}</a>
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                      <MessageCircle size={16} strokeWidth={2.2} aria-hidden="true" />
+                      <span>{phoneValue}</span>
+                    </a>
                   </dd>
                 </div>
               ) : null}
@@ -134,11 +142,14 @@ export function BusinessDetailPage() {
               {phoneValue ? (
                 <div>
                   <dt>
-                    <Phone size={15} strokeWidth={2.2} aria-hidden="true" />
+                    <MessageCircle size={15} strokeWidth={2.2} aria-hidden="true" />
                     WhatsApp
                   </dt>
                   <dd>
-                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">{phoneValue}</a>
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                      <MessageCircle size={16} strokeWidth={2.2} aria-hidden="true" />
+                      <span>{phoneValue}</span>
+                    </a>
                   </dd>
                 </div>
               ) : null}
@@ -149,7 +160,10 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">{emailValue}</a>
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                      <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
+                      <span>{emailValue}</span>
+                    </a>
                   </dd>
                 </div>
               ) : null}
@@ -159,14 +173,14 @@ export function BusinessDetailPage() {
       </SectionSurface>
 
       {galleryImages.length > 0 ? (
-        <SectionSurface variant="rice-paper" className="corporate-section--alt">
+        <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--alt">
           <ScrollReveal className="corporate-shell business-detail__gallery-section">
             <div className="corporate-section__intro corporate-section__intro--left business-detail__gallery-intro">
               <p className="corporate-eyebrow">Gallery</p>
               <h2 className="business-detail__gallery-title">{business.name} in view</h2>
             </div>
             <div className="business-detail__gallery" aria-label={`${business.name} image gallery`}>
-              {scrollingGalleryImages.map((src, index) => (
+              {(isRestaurant ? galleryImages : scrollingGalleryImages).map((src, index) => (
                 <figure key={`${src}-${index}`} className="business-detail__gallery-item">
                   <img
                     src={src}

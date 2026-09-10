@@ -23,6 +23,7 @@ coverage
 
 # Browser/test artifacts
 .tmp-edge-*/
+.tmp-chrome-*/
 playwright-report/
 test-results/
 

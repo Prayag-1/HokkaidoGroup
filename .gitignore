@@ -31,6 +31,10 @@ test-results/
 .agents/
 .codex/
 
+# Local Cloudflare Tunnel downloads and configuration
+cloudflared*
+.cloudflared/
+
 # Generated visual-review screenshots at the repository root
 /*-before.png
 /*-after.png

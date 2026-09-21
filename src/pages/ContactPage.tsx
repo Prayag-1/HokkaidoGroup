@@ -13,7 +13,7 @@ export function ContactPage() {
   const cityCount = new Set(businesses.map((business) => business.address?.match(/Kathmandu|Lalitpur|Pokhara/)?.[0]).filter(Boolean)).size
 
   return (
-    <main className="corporate-page corporate-contact-page contact-page--editorial">
+    <main id="main-content" className="corporate-page corporate-contact-page contact-page--editorial">
       <SectionSurface variant="ink" className="corporate-section--first contact-hero">
         <ScrollReveal className="corporate-shell contact-hero__grid">
           <div className="contact-hero__copy">

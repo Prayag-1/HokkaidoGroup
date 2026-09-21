@@ -24,13 +24,13 @@
 }
 
 .corporate-cta .corporate-button--primary:hover {
-  background: var(--surface-gold);
-  border-color: var(--surface-gold);
+  background: var(--surface-subtle);
+  border-color: var(--surface-subtle);
 }
 
 .business-directory__group-header {
   align-items: end;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent-wood) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-detail) 18%, transparent);
   display: flex;
   gap: var(--space-4);
   justify-content: space-between;
@@ -38,7 +38,7 @@
 }
 
 .corporate-page--business-directory .business-directory__group + .business-directory__group {
-  border-top: 1px solid color-mix(in srgb, var(--accent-wood) 14%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent-detail) 14%, transparent);
   padding-top: var(--space-6);
 }
 
@@ -150,7 +150,7 @@
 }
 
 .about-story__image {
-  border: 1px solid color-mix(in srgb, var(--accent-amber) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-neutral) 22%, transparent);
   border-radius: var(--radius-card);
   box-shadow: var(--elevation-panel);
   margin: 0;
@@ -227,7 +227,7 @@
 }
 
 .about-brand-card:nth-child(3n + 3) {
-  --brand-card-accent: var(--color-accent-amber);
+  --brand-card-accent: var(--color-accent-neutral);
 }
 
 .about-brand-card:hover {
@@ -315,8 +315,8 @@
 
 .about-founder__photo {
   background:
-    linear-gradient(135deg, var(--surface-gold), var(--surface-cool));
-  border: 1px solid color-mix(in srgb, var(--accent-amber) 22%, transparent);
+    linear-gradient(135deg, var(--surface-subtle), var(--surface-cool));
+  border: 1px solid color-mix(in srgb, var(--accent-neutral) 22%, transparent);
   border-radius: var(--radius-card);
   box-shadow: var(--elevation-panel);
   margin: 0;
@@ -1332,7 +1332,7 @@
 }
 
 .business-detail__panel:nth-child(3n + 3) {
-  --panel-accent: var(--color-accent-amber);
+  --panel-accent: var(--color-accent-neutral);
 }
 
 .business-detail__panel-title,
@@ -1447,7 +1447,7 @@
 
 .location-spotlight__map {
   background:
-    linear-gradient(135deg, var(--surface-cool), var(--surface-gold));
+    linear-gradient(135deg, var(--surface-cool), var(--surface-subtle));
   aspect-ratio: 4 / 5;
   min-height: 24rem;
   position: relative;
@@ -1497,7 +1497,7 @@
 }
 
 .location-spotlight__pin {
-  background: var(--color-accent-amber);
+  background: var(--color-accent-neutral);
   border: 0.22rem solid var(--surface-card);
   border-radius: var(--radius-round);
   bottom: 7.25rem;

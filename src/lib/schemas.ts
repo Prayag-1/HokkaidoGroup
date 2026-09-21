@@ -23,13 +23,13 @@ export const BOOKABLE_BRANDS = [
 
 export const bookingFormSchema = z.object({
   brand: z.enum(BOOKABLE_BRANDS, {
-    errorMap: () => ({ message: 'Please choose a restaurant' }),
+    error: 'Please choose a restaurant',
   }),
   date: z.string().refine((val) => new Date(val) >= new Date(new Date().toDateString()), {
     message: 'Date cannot be in the past',
   }),
   time: z.string().min(1, 'Please choose a time'),
-  partySize: z.coerce.number().int().min(1).max(30),
+  partySize: z.coerce.number<number>().int().min(1).max(30),
   name: z.string().min(2).max(80),
   phone: z.string().min(7, 'Please enter a valid phone number'),
   email: z.string().email().optional().or(z.literal('')),

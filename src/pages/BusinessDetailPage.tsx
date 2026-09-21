@@ -13,7 +13,7 @@ export function BusinessDetailPage() {
 
   if (!business) {
     return (
-      <main className="corporate-page">
+      <main id="main-content" className="corporate-page">
         <SectionSurface variant="rice-paper" className="corporate-section--first">
           <div className="corporate-shell">
             <div className="section-header corporate-section__header">
@@ -46,7 +46,7 @@ export function BusinessDetailPage() {
   const whatsAppUrl = getBusinessWhatsAppUrl(business)
 
   return (
-    <main className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}`}>
+    <main id="main-content" className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}`}>
       <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--first business-detail__hero-surface">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header business-detail__hero-copy">

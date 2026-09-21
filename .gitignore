@@ -55,3 +55,7 @@ cloudflared*
 *.njsproj
 *.sln
 *.sw?
+
+# Local visual verification
+.tmp-reference-browser/
+.audit/

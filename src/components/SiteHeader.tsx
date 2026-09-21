@@ -1,76 +1,35 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+﻿import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
-import { primaryNavLinks } from '../config/nav'
-import { hokkaidoGroupCorporateContact, hokkaidoGroupLogo } from '../data/businesses'
-
-function useHeaderScrolled() {
-  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 24)
-
-  useEffect(() => {
-    const updateHeaderState = () => {
-      const heroThreshold = Math.min(window.innerHeight * 0.62, 520)
-      setIsScrolled(window.scrollY > heroThreshold)
-    }
-
-    updateHeaderState()
-    window.addEventListener('scroll', updateHeaderState, { passive: true })
-    window.addEventListener('resize', updateHeaderState)
-
-    return () => {
-      window.removeEventListener('scroll', updateHeaderState)
-      window.removeEventListener('resize', updateHeaderState)
-    }
-  }, [])
-
-  return isScrolled
-}
-
+import { hokkaidoGroupLogo } from '../data/businesses'
 export function SiteHeader() {
-  const location = useLocation()
-  const isHome = location.pathname === '/'
-  const isScrolled = useHeaderScrolled()
-  const hasSolidChrome = !isHome || isScrolled
-  const quickContactLinks = [
-    hokkaidoGroupCorporateContact.phone ? { href: `tel:${hokkaidoGroupCorporateContact.phone}`, label: hokkaidoGroupCorporateContact.phone } : null,
-    hokkaidoGroupCorporateContact.email ? { href: `mailto:${hokkaidoGroupCorporateContact.email}`, label: hokkaidoGroupCorporateContact.email } : null,
-  ].filter(Boolean) as { href: string; label: string }[]
-  const hasQuickContact = quickContactLinks.length > 0
-
+  const { pathname } = useLocation()
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 60)
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
   return (
-    <header className={`corporate-header ${hasSolidChrome ? 'corporate-header--scrolled' : 'corporate-header--home-top'}`} data-surface="ink">
-      {hasQuickContact ? (
-        <div className="corporate-quickbar">
-          <div className="corporate-shell corporate-quickbar__inner">
-            <span>Quick Contact</span>
-            <div>
-              {quickContactLinks.map((link) => (
-                <a key={link.href} href={link.href}>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      ) : null}
-      <div className="corporate-shell corporate-header__inner">
+    <header
+      className={`corporate-header ${pathname === '/' && !scrolled ? 'corporate-header--home-top' : 'corporate-header--scrolled'}`}
+    >
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <div className="corporate-header__inner">
         <MobileMenu />
-
-        <Link to="/" className="corporate-logo" aria-label="Hokkaido Group home">
-          <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
+        <Link
+          to="/"
+          className="corporate-logo"
+          aria-label="Hokkaido Group home"
+        >
+          <img src={hokkaidoGroupLogo} alt="" />
           <span>Hokkaido Group</span>
         </Link>
-
-        <nav className="corporate-nav" aria-label="Main navigation">
-          {primaryNavLinks.map((link) => (
-            <NavLink key={link.to} to={link.to} className={({ isActive }) => (isActive ? 'active' : undefined)}>
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <Link to="/contact" className="corporate-button corporate-button--secondary">
-          Contact the Group
+        <Link className="header-contact" to="/contact">
+          Get in touch
         </Link>
       </div>
     </header>

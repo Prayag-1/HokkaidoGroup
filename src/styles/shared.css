@@ -74,7 +74,7 @@
 
 .corporate-section--ink {
   background: var(--bg-ink);
-  border-top-color: color-mix(in srgb, var(--accent-vermillion) 35%, transparent);
+  border-top-color: color-mix(in srgb, var(--accent-slate) 35%, transparent);
 }
 
 .corporate-section--ink .section-header,
@@ -252,7 +252,7 @@
 
 .home-hero {
   background:
-    linear-gradient(115deg, color-mix(in srgb, var(--accent-wood) 8%, transparent), transparent 42%),
+    linear-gradient(115deg, color-mix(in srgb, var(--accent-detail) 8%, transparent), transparent 42%),
     var(--bg-ink);
   border-bottom: 1px solid var(--border-on-ink);
 }
@@ -450,7 +450,7 @@
 }
 
 .home-philosophy__mark {
-  border-top: 1px solid color-mix(in srgb, var(--accent-wood) 54%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent-detail) 54%, transparent);
   color: var(--color-primary-contrast);
   display: grid;
   gap: var(--space-4);
@@ -572,7 +572,7 @@
 }
 
 .corporate-hero__stats {
-  border-top: 1px solid color-mix(in srgb, var(--accent-wood) 16%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent-detail) 16%, transparent);
   display: grid;
   gap: var(--space-5);
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1266,7 +1266,7 @@
 }
 
 .business-card:nth-child(4n + 3) {
-  --card-accent: var(--color-accent-amber);
+  --card-accent: var(--color-accent-neutral);
 }
 
 .business-card:nth-child(4n + 4) {
@@ -1604,7 +1604,7 @@
 }
 
 .featured-outlets__card-copy > p {
-  color: var(--accent-vermillion);
+  color: var(--accent-slate);
   font-size: var(--type-label);
   font-weight: var(--font-weight-link);
   letter-spacing: 0.08em;
@@ -1639,7 +1639,7 @@
 
 .featured-outlets__card-copy a {
   align-items: center;
-  color: var(--accent-vermillion);
+  color: var(--accent-slate);
   display: inline-flex;
   font-size: var(--type-small);
   font-weight: var(--font-weight-link);

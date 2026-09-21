@@ -317,9 +317,7 @@
     font-size: clamp(2.75rem, 15vw, 4.5rem);
   }
 
-  .corporate-logo span {
-    display: none;
-  }
+
 
   .corporate-hero__stats {
     gap: var(--space-3);

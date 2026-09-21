@@ -12,6 +12,10 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(({ AboutPage }) =>
 const BusinessDirectoryPage = lazy(() => import('./pages/BusinessDirectoryPage').then(({ BusinessDirectoryPage }) => ({ default: BusinessDirectoryPage })))
 const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage').then(({ BusinessDetailPage }) => ({ default: BusinessDetailPage })))
 
+const MartPage = lazy(() => import('./pages/MartPage').then(m => ({ default: m.MartPage })))
+const FranchisesPage = lazy(() => import('./pages/FranchisesPage').then(m => ({ default: m.FranchisesPage })))
+const StoryPage = lazy(() => import('./pages/StoryPage').then(m => ({ default: m.StoryPage })))
+
 function RouteFallback() {
   return (
     <main className="corporate-page">
@@ -57,6 +61,11 @@ function AppRoutes() {
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={renderPage(HomePage)} />
+          <Route path="/about-us" element={renderPage(AboutPage)} />
+          <Route path="/our-brands" element={renderPage(BusinessDirectoryPage)} />
+          <Route path="/mart" element={renderPage(MartPage)} />
+          <Route path="/franchises" element={renderPage(FranchisesPage)} />
+          <Route path="/our-story" element={renderPage(StoryPage)} />
           <Route path="/about" element={renderPage(AboutPage)} />
           <Route path="/businesses" element={renderPage(BusinessDirectoryPage)} />
           <Route path="/businesses/:slug" element={renderPage(BusinessDetailPage)} />

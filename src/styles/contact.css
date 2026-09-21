@@ -92,7 +92,7 @@
 }
 
 .contact-hero__metrics {
-  border-block: 1px solid color-mix(in srgb, var(--accent-wood) 14%, transparent);
+  border-block: 1px solid color-mix(in srgb, var(--accent-detail) 14%, transparent);
   display: grid;
   gap: var(--space-4);
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -227,7 +227,7 @@
 }
 
 .contact-route-panel article:nth-child(3) {
-  border-top-color: var(--color-accent-amber);
+  border-top-color: var(--color-accent-neutral);
 }
 
 .contact-route-panel svg {
@@ -282,7 +282,7 @@
 }
 
 .contact-brand-card:nth-child(3n) {
-  --contact-card-accent: var(--color-accent-amber);
+  --contact-card-accent: var(--color-accent-neutral);
 }
 
 .contact-brand-card:hover {

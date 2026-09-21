@@ -1,109 +1,183 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link, NavLink } from 'react-router-dom'
 import { primaryNavLinks } from '../config/nav'
-import { hokkaidoGroupLogo } from '../data/businesses'
+import { businesses, hokkaidoGroupLogo } from '../data/businesses'
+import { GroupContact } from './GroupContact'
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
-  const reduceMotion = useReducedMotion()
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
-
+  const dialog = useRef<HTMLDialogElement>(null)
+  const trigger = useRef<HTMLButtonElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const closeMenu = () => {
-    setIsOpen(false)
+    if (!dialog.current || closeTimer.current) return
+    dialog.current.dataset.closing = 'true'
+    closeTimer.current = setTimeout(
+      () => {
+        dialog.current?.close()
+        closeTimer.current = null
+      },
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 220,
+    )
   }
-
   useEffect(() => {
-    if (!isOpen) {
-      return
+    if (!isOpen) return
+    const element = dialog.current
+    if (!element) return
+    const triggerElement = trigger.current
+    const scrollY = window.scrollY
+    const openedUrl = window.location.href
+    const oldStyle = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
     }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeMenu()
-      }
+    element.removeAttribute('data-closing')
+    element.showModal()
+    const panel = element.querySelector('.site-menu__panel')
+    if (panel) panel.scrollTop = 0
+    element
+      .querySelector<HTMLButtonElement>(
+        'button[aria-label="Close navigation menu"]',
+      )
+      ?.focus({ preventScroll: true })
+    Object.assign(document.body.style, {
+      overflow: 'hidden',
+      position: 'fixed',
+      top: `-${scrollY}px`,
+      width: '100%',
+    })
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current)
+      closeTimer.current = null
+      element.close()
+      Object.assign(document.body.style, oldStyle)
+      window.scrollTo({ top: window.location.href === openedUrl ? scrollY : 0, behavior: 'instant' })
+      triggerElement?.focus({ preventScroll: true })
     }
-
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
   }, [isOpen])
-
-  const overlayTransition = reduceMotion ? { duration: 0.01 } : { duration: 0.15, ease: [0.2, 0, 0, 1] }
-  const panelTransition = reduceMotion
-    ? { duration: 0.01 }
-    : { duration: 0.25, ease: [0.22, 1, 0.36, 1] }
-
   return (
     <>
       <button
+        ref={trigger}
         className="corporate-hamburger"
-        onClick={toggleMenu}
-        aria-label="Toggle navigation menu"
+        onClick={() => setIsOpen(true)}
+        aria-label="Open navigation menu"
         aria-expanded={isOpen}
+        aria-controls="site-menu"
       >
-        <span className="corporate-hamburger__line"></span>
-        <span className="corporate-hamburger__line"></span>
-        <span className="corporate-hamburger__line"></span>
+        <span />
+        <span />
+        <span />
       </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen ? (
-          <>
-            <motion.div
-              className="corporate-mobile-menu-overlay"
-              onClick={closeMenu}
-              aria-hidden="true"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={overlayTransition}
-            />
-
-            <motion.nav
-              className="corporate-mobile-menu"
-              data-surface="ink"
-              aria-label="Mobile navigation"
-              initial={reduceMotion ? { opacity: 1 } : { x: '100%' }}
-              animate={reduceMotion ? { opacity: 1 } : { x: 0 }}
-              exit={reduceMotion ? { opacity: 0 } : { x: '100%' }}
-              transition={panelTransition}
-            >
-              <div className="corporate-mobile-menu__header">
-                <Link to="/" className="corporate-logo" onClick={closeMenu} aria-label="Hokkaido Group home">
-                  <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
-                  <span>Hokkaido Group</span>
-                </Link>
-                <button className="corporate-mobile-menu__close" onClick={closeMenu} aria-label="Close navigation menu">
-                  <X aria-hidden="true" size={20} strokeWidth={2} />
-                </button>
+      {createPortal(
+        <dialog
+          ref={dialog}
+          id="site-menu"
+          className="site-menu"
+          aria-label="Hokkaido Group navigation"
+          onKeyDown={(event) => {
+            if (event.key !== 'Tab') return
+            const focusable = Array.from(
+              event.currentTarget.querySelectorAll<HTMLElement>(
+                'a[href],button:not([disabled]),[tabindex="0"]',
+              ),
+            ).filter((el) => el.getClientRects().length > 0)
+            const first = focusable[0]
+            const last = focusable[focusable.length - 1]
+            if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault()
+              last?.focus()
+            } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault()
+              first?.focus()
+            }
+          }}
+          onCancel={(event) => {
+            event.preventDefault()
+            closeMenu()
+          }}
+          onClose={() => setIsOpen(false)}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closeMenu()
+          }}
+        >
+          <div
+            className="site-menu__panel"
+            onClick={(event) => {
+              if ((event.target as HTMLElement).closest('a')) closeMenu()
+            }}
+          >
+            <div className="site-menu__top">
+              <Link to="/" className="corporate-logo">
+                <img src={hokkaidoGroupLogo} alt="Hokkaido Group" />
+                <span>Hokkaido Group</span>
+              </Link>
+              <button
+                autoFocus
+                onClick={closeMenu}
+                aria-label="Close navigation menu"
+              >
+                <X />
+              </button>
+            </div>
+            <div className="site-menu__layout">
+              <div className="site-menu__navigation">
+                <nav aria-label="All pages">
+                  {primaryNavLinks.map((link) => (
+                    <NavLink key={link.to} to={link.to}>
+                      {link.label}
+                    </NavLink>
+                  ))}
+                </nav>
+                <GroupContact />
               </div>
-
-              <div className="corporate-mobile-menu__links">
-                {primaryNavLinks.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    className={({ isActive }) =>
-                      `corporate-mobile-menu__link ${isActive ? 'corporate-mobile-menu__link--active' : ''}`
-                    }
-                    onClick={closeMenu}
-                  >
-                    {link.label}
-                  </NavLink>
+              <div className="site-menu__brands">
+                {[
+                  { title: 'Restaurants', category: 'Restaurant' },
+                  { title: 'Hotels & resort', category: 'Farm & Resort' },
+                  { title: 'Retail & imports', category: 'Other' },
+                ].map((group) => (
+                  <section key={group.title}>
+                    <h2>{group.title}</h2>
+                    <div className="site-menu__brand-grid">
+                      {businesses
+                        .filter((b) =>
+                          group.category === 'Other'
+                            ? ['Retail', 'Trading'].includes(b.category)
+                            : b.category === group.category,
+                        )
+                        .map((b) => (
+                          <article key={b.id}>
+                            <Link to={`/businesses/${b.slug}`}>
+                              <img
+                                className={b.image === b.logo ? 'is-logo' : ''}
+                                src={b.image ?? b.logo ?? undefined}
+                                alt={b.name}
+                                loading="lazy"
+                              />
+                              <h3>{b.name}</h3>
+                            </Link>
+                            <Link
+                              className="site-menu__location"
+                              to={`/businesses/${b.slug}`}
+                            >
+                              {b.locationSummary ?? b.address}
+                            </Link>
+                          </article>
+                        ))}
+                    </div>
+                  </section>
                 ))}
               </div>
-
-              <Link to="/contact" className="corporate-button corporate-button--secondary corporate-mobile-menu__button" onClick={closeMenu}>
-                Contact the Group
-              </Link>
-            </motion.nav>
-          </>
-        ) : null}
-      </AnimatePresence>
+            </div>
+          </div>
+        </dialog>,
+        document.body,
+      )}
     </>
   )
 }

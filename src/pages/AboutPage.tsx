@@ -1,5 +1,5 @@
-import { ScrollReveal } from '../components/ScrollReveal'
-import { SectionSurface } from '../components/SectionSurface'
+import { Link } from 'react-router-dom'
+import { PageBreadcrumb } from '../components/PageBreadcrumb'
 import { SiteFooter } from '../components/SiteFooter'
 import { hokkaidoVisionParagraphs } from '../data/corporateContent'
 import { businesses } from '../data/businesses'
@@ -10,7 +10,9 @@ import manojBhattaraiPhoto from '../assets/gallery/staff/manoj bhatrai.jpeg'
 import ramTamangPhoto from '../assets/gallery/staff/Ram tamang operations.jpeg'
 import sandeshPoudelPhoto from '../assets/gallery/staff/sandesh poudel.jpeg'
 
-const storyImage = businesses.find((business) => business.id === 'hokkaido-ramen-house')?.image
+const storyImage = businesses.find(
+  (business) => business.id === 'hokkaido-ramen-house',
+)?.image
 const storyBrands = businesses.slice(0, 6)
 const leadershipTeam = [
   {
@@ -66,109 +68,90 @@ const leadershipTeam = [
 
 export function AboutPage() {
   return (
-    <main className="corporate-page about-page--editorial">
-      <SectionSurface variant="ink" className="corporate-section--first about-hero">
-        <ScrollReveal className="corporate-shell">
-          <div className="about-hero__title">
-            <p className="section-header__eyebrow">About Us</p>
-            <h1>Hokkaido Group</h1>
-            <p className="editorial-japanese-note"><span lang="ja">余白</span> / Yohaku — meaningful space.</p>
-          </div>
-        </ScrollReveal>
-      </SectionSurface>
-
-      <SectionSurface variant="rice-paper" className="about-story">
-        <ScrollReveal className="corporate-shell about-story__grid">
-          {storyImage ? (
-            <figure className="about-story__image">
-              <img src={storyImage} alt="Hokkaido Ramen House dining experience" loading="eager" />
-            </figure>
-          ) : null}
-
-          <article className="about-story__copy">
-            <p className="section-header__eyebrow">Our Vision</p>
-            <h2>Bringing the authentic taste, culture, and lifestyle of Japan closer to Nepal.</h2>
-            {hokkaidoVisionParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+    <main id="main-content" className="editorial-page">
+      <PageBreadcrumb title="About us" />
+      <h1 className="page-title">About us</h1>
+      <section className="about-intro corporate-shell">
+        <div className="vertical-rule" />
+        <h2>
+          Japanese hospitality in Nepal,
+          <br />
+          <em>since 2018.</em>
+        </h2>
+        <p>{hokkaidoVisionParagraphs[0]}</p>
+      </section>
+      <section
+        className="story-banner"
+        style={{ backgroundImage: 'url(' + storyImage + ')' }}
+      >
+        <p>
+          From Abashiri to Kathmandu, a shared love of Japanese food and the
+          people around the table.
+        </p>
+      </section>
+      <section className="editorial-section corporate-shell about-prose">
+        {hokkaidoVisionParagraphs.slice(1).map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+        <p>
+          Our story begins with founder Arjun Adhikari's hospitality journey in
+          Japan, followed by Hokkaido Ramen House at Park Village in Nepal.
+          Today, our brands bring together restaurants, retail, wellness, and
+          trading.
+        </p>
+        <Link to="/our-story" className="editorial-button">
+          Our Story
+        </Link>
+      </section>
+      <section className="editorial-section corporate-shell">
+        <div className="section-heading">
+          <h2>
+            Hokkaido Group
+            <br />
+            <span className="heading-light">Social wall</span>
+          </h2>
+          <p className="content-note">A glimpse of our places</p>
+        </div>
+        <div className="social-wall">
+          {storyBrands.map((b) => (
+            <Link key={b.id} to={'/businesses/' + b.slug}>
+              <img src={b.image!} alt={b.name} loading="lazy" />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="editorial-section corporate-shell">
+        <h2 className="center-heading">Leadership Team</h2>
+        <div className="leadership-grid">
+          <article>
+            <img src={founderPhoto} alt="Arjun Adhikari" loading="lazy" />
+            <h3>Arjun Adhikari</h3>
+            <p>Founder and Chairman</p>
+            <details>
+              <summary>Read biography</summary>
+              <p>
+                Arjun Adhikari is a restaurateur and entrepreneur focused on
+                introducing and promoting Japanese food culture in Nepal. His
+                work connects culinary tradition, hospitality, and business
+                innovation.
+              </p>
+            </details>
           </article>
-        </ScrollReveal>
-      </SectionSurface>
-
-      <SectionSurface variant="ink" className="about-founder">
-        <ScrollReveal className="corporate-shell about-founder__grid">
-          <article className="about-founder__copy">
-            <p className="section-header__eyebrow">Founder</p>
-            <h2>Mr. Arjun Adhikari</h2>
-            <p className="about-founder__role">Founder and Chairman, Hokkaido Group Pvt. Ltd.</p>
-            <p>
-              Mr. Arjun Adhikari is a restaurateur and entrepreneur focused on introducing and promoting Japanese food
-              culture in Nepal. His work connects culinary tradition, hospitality, and business innovation through
-              Hokkaido Group's growing Japanese restaurant portfolio.
-            </p>
-            <p>
-              Public profiles of Hokkaido Group describe the company as founded and led by Mr. Adhikari,
-              with roots in his earlier Bistarai Bistarai restaurant in Hokkaido, Abashiri, Japan. His Nepal journey
-              includes Hokkaido Ramen House, the group's inaugural venture at Park Village, and the development of
-              multiple Japanese dining concepts in Kathmandu, Lalitpur, and Pokhara.
-            </p>
-            <div className="about-founder__connection">
-              <span>Japan ↔ Nepal</span>
-              <p>Hospitality shaped by experiences between Abashiri and Kathmandu.</p>
-            </div>
-          </article>
-
-          <figure className="about-founder__photo">
-            <img src={founderPhoto} alt="Mr. Arjun Adhikari" loading="lazy" />
-          </figure>
-        </ScrollReveal>
-      </SectionSurface>
-
-      <SectionSurface variant="ink" className="about-leadership" aria-labelledby="leadership-title">
-        <ScrollReveal className="corporate-shell">
-          <div className="about-leadership__heading">
-            <p className="section-header__eyebrow">Leadership team</p>
-            <h2 id="leadership-title">The people behind the experience.</h2>
-          </div>
-          <div className="about-leadership__grid">
-            {leadershipTeam.map((leader) => (
-              <article key={leader.name} className="about-leadership__card">
-                <figure>
-                  <img src={leader.image} alt={leader.name} width="960" height="1200" loading="lazy" />
-                </figure>
-                <div className="about-leadership__content">
-                  <p>{leader.role}</p>
-                  <h3>{leader.name}</h3>
-                  {leader.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                </div>
-              </article>
-            ))}
-          </div>
-        </ScrollReveal>
-      </SectionSurface>
-
-      <SectionSurface variant="rice-paper" className="corporate-section--alt">
-        <ScrollReveal className="corporate-shell">
-          <div className="about-section-heading">
-            <p className="section-header__eyebrow">Our Story</p>
-            <h2>Japanese hospitality, retail, wellness, and trading in Nepal.</h2>
-          </div>
-
-          <div className="about-brand-grid">
-            {storyBrands.map((business) => (
-              <article key={business.id} className="about-brand-card">
-                {business.image ? <img src={business.image} alt={`${business.name} venue`} loading="lazy" /> : null}
-                <div>
-                  <p>{business.category}</p>
-                  <h3>{business.name}</h3>
-                  <span>{business.locationSummary ?? business.address}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </ScrollReveal>
-      </SectionSurface>
-
+          {leadershipTeam.map((leader) => (
+            <article key={leader.name}>
+              <img src={leader.image} alt={leader.name} loading="lazy" />
+              <h3>{leader.name}</h3>
+              <p>{leader.role}</p>
+              <details>
+                <summary>Read biography</summary>
+                {leader.bio.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </details>
+            </article>
+          ))}
+        </div>
+      </section>
       <SiteFooter />
     </main>
   )

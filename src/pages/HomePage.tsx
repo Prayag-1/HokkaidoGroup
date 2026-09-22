@@ -6,6 +6,7 @@ import {
   Package,
   MapPinned,
   ArrowUpRight,
+  ChefHat,
 } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { ImageCarousel } from '../components/ImageCarousel'
@@ -22,6 +23,7 @@ const nav = [
     Icon: BedDouble,
   },
   { label: 'HOMA Nepal', to: '/mart', Icon: ShoppingCart },
+  { label: 'Catering', to: '/catering', Icon: ChefHat },
   { label: 'Imports', to: '/businesses/janeichi', Icon: Package },
   { label: 'Franchises', to: '/franchises', Icon: MapPinned },
 ]

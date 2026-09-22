@@ -15,6 +15,7 @@ const BusinessDetailPage = lazy(() => import('./pages/BusinessDetailPage').then(
 const MartPage = lazy(() => import('./pages/MartPage').then(m => ({ default: m.MartPage })))
 const FranchisesPage = lazy(() => import('./pages/FranchisesPage').then(m => ({ default: m.FranchisesPage })))
 const StoryPage = lazy(() => import('./pages/StoryPage').then(m => ({ default: m.StoryPage })))
+const CateringPage = lazy(() => import('./pages/CateringPage').then(m => ({ default: m.CateringPage })))
 
 function RouteFallback() {
   return (
@@ -64,6 +65,7 @@ function AppRoutes() {
           <Route path="/about-us" element={renderPage(AboutPage)} />
           <Route path="/our-brands" element={renderPage(BusinessDirectoryPage)} />
           <Route path="/mart" element={renderPage(MartPage)} />
+          <Route path="/catering" element={renderPage(CateringPage)} />
           <Route path="/franchises" element={renderPage(FranchisesPage)} />
           <Route path="/our-story" element={renderPage(StoryPage)} />
           <Route path="/about" element={renderPage(AboutPage)} />

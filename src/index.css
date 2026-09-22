@@ -1,4 +1,4 @@
-﻿@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap";
+﻿@import "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap";
 
 *,
 *::before,
@@ -7,13 +7,16 @@
 }
 
 html {
+  font-family: "Montserrat", Arial, sans-serif;
   scroll-behavior: smooth;
 }
 
-body {
+body,
+#root {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  font-family: "Montserrat", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -49,4 +52,18 @@ a {
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
   }
+}
+
+/* Native controls and portaled UI share the application font. */
+button, input, textarea, select, option, optgroup, dialog, summary {
+  font-family: var(--font-app);
+}
+
+/* Override Leaflet's independent font stack, including map controls. */
+.leaflet-container,
+.leaflet-container .leaflet-control,
+.leaflet-container .leaflet-popup-content,
+.leaflet-container .leaflet-tooltip,
+.leaflet-container .leaflet-bar a {
+  font-family: var(--font-app);
 }

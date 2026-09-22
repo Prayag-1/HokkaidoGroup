@@ -46,7 +46,7 @@
     <path d="M196 802h62"/>
   </g>
 
-  <g opacity=".1" fill="#111" font-family="Yu Mincho, Hiragino Mincho ProN, Noto Serif JP, serif" font-size="62" letter-spacing="14">
+  <g opacity=".1" fill="#111" font-family="Montserrat, Arial, sans-serif" font-size="62" letter-spacing="14">
     <text x="116" y="420" writing-mode="vertical-rl">北海道</text>
     <text x="1232" y="246" writing-mode="vertical-rl">寿司</text>
     <text x="650" y="912" writing-mode="vertical-rl">旬味</text>

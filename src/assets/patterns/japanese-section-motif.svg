@@ -11,7 +11,7 @@
     <circle cx="678" cy="32" r="16"/>
     <circle cx="574" cy="146" r="9"/>
   </g>
-  <g fill="#1B1511" opacity=".08" font-family="Yu Mincho, Hiragino Mincho ProN, Noto Serif JP, serif" font-size="58" letter-spacing="12">
+  <g fill="#1B1511" opacity=".08" font-family="Montserrat, Arial, sans-serif" font-size="58" letter-spacing="12">
     <text x="360" y="340" writing-mode="vertical-rl">和食</text>
     <text x="692" y="316" writing-mode="vertical-rl">北海道</text>
   </g>

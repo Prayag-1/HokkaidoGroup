@@ -51,7 +51,9 @@ export function ScrollReveal({
             setIsVisible(false)
           }
         },
-        { rootMargin, threshold: 0.16 },
+        // Large directories can exceed the viewport by many screens. Reveal
+        // on entry so their content never waits for an unreachable ratio.
+        { rootMargin, threshold: 0 },
       )
 
       observer.observe(node)

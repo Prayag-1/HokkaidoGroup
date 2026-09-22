@@ -1,0 +1,244 @@
+.catering-hero {
+  padding-top: 30px;
+  gap: 6%;
+}
+.catering-hero__media {
+  position: relative;
+}
+.catering-hero__media img {
+  width: 100%;
+  height: 690px;
+  object-fit: cover;
+}
+.catering-hero__media > span {
+  position: absolute;
+  bottom: 24px;
+  left: 28px;
+  color: var(--reference-white);
+  background: var(--reference-charcoal);
+  padding: 8px 16px;
+  font-size: 12px;
+}
+.catering-hero .eyebrow {
+  font-size: 12px;
+}
+.catering-hero h1 {
+  margin-bottom: 26px;
+}
+.catering-hero h2 {
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+.catering-hero .editorial-button {
+  margin-top: 10px;
+}
+.catering-occasions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 45px;
+}
+.catering-occasions article {
+  border-top: 1px solid var(--color-border);
+  padding-top: 30px;
+}
+.catering-occasions svg {
+  color: var(--reference-slate);
+  margin-bottom: 22px;
+}
+.catering-occasions h3 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.catering-occasions p {
+  color: var(--reference-muted);
+}
+.catering-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: center;
+  padding-block: 40px 75px;
+}
+.catering-story__copy {
+  padding-inline: 5%;
+}
+.catering-story__copy h2 {
+  margin-bottom: 28px;
+}
+.catering-story > img {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+}
+.catering-story--reverse > img {
+  grid-row: 1;
+  grid-column: 1;
+}
+.catering-story--reverse > div {
+  grid-column: 2;
+}
+.catering-gathering {
+  position: relative;
+  isolation: isolate;
+  min-height: 580px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--reference-white);
+}
+.catering-gathering > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.catering-gathering::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--reference-charcoal) 65%, transparent);
+}
+.catering-gathering > div {
+  max-width: 620px;
+}
+.catering-gathering h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 400;
+}
+.catering-gathering .editorial-button {
+  margin-top: 15px;
+}
+.catering-inquiry {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 8%;
+  scroll-margin-top: 110px;
+}
+.catering-inquiry__intro > a {
+  display: block;
+  width: fit-content;
+  overflow-wrap: anywhere;
+  margin-top: 8px;
+}
+.catering-inquiry__intro > img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  margin-top: 30px;
+}
+.catering-form {
+  background: var(--reference-cream);
+  padding: 36px;
+}
+.catering-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.catering-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.catering-form input,
+.catering-form select,
+.catering-form textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  margin-top: 8px;
+  min-height: 46px;
+  background: var(--reference-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  color: var(--reference-charcoal);
+  font-size: 16px;
+}
+.catering-form textarea {
+  resize: vertical;
+}
+.catering-form button {
+  cursor: pointer;
+}
+.catering-form__ready {
+  padding-top: 24px;
+  font-size: 14px;
+}
+@media (max-width: 1023px) {
+  .catering-hero__media img {
+    height: 620px;
+  }
+  .catering-story {
+    gap: 4%;
+  }
+  .catering-story > img {
+    height: 470px;
+  }
+  .catering-inquiry {
+    gap: 5%;
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+  .catering-form {
+    padding: 25px;
+  }
+  .catering-form__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+@media (max-width: 767px) {
+  .catering-hero {
+    padding-top: 0;
+  }
+  .catering-hero__media img {
+    height: 430px;
+  }
+  .catering-hero__media > span {
+    bottom: 18px;
+    left: 18px;
+  }
+  .catering-occasions {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .catering-occasions article {
+    padding-top: 22px;
+  }
+  .catering-story {
+    grid-template-columns: 1fr;
+    padding-block: 10px 45px;
+    gap: 28px;
+  }
+  .catering-story__copy {
+    padding-inline: 0;
+  }
+  .catering-story > img {
+    height: 420px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .catering-story--reverse > div {
+    grid-column: 1;
+  }
+  .catering-gathering {
+    min-height: 490px;
+    padding-block: 60px;
+  }
+  .catering-inquiry {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    scroll-margin-top: 95px;
+  }
+  .catering-inquiry__intro > img {
+    height: 220px;
+  }
+  .catering-form {
+    padding: 25px 20px;
+  }
+}

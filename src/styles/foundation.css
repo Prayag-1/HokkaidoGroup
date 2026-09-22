@@ -133,8 +133,9 @@
   --space-15: 7rem;
   --space-16: 8rem;
 
-  --font-heading: "Montserrat", Arial, sans-serif;
-  --font-body: "Montserrat", Arial, sans-serif;
+  --font-app: "Montserrat", Arial, sans-serif;
+  --font-heading: var(--font-app);
+  --font-body: var(--font-app);
   --font-weight-heading: 600;
   --font-weight-body: 400;
   --font-weight-link: 500;

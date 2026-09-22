@@ -1,3 +1,5 @@
+import { MartPage } from './MartPage'
+import { JaneichiPage } from './JaneichiPage'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, Mail, MapPin, MessageCircle } from 'lucide-react'
 import { LocationSpotlight } from '../components/LocationSpotlight'
@@ -32,6 +34,9 @@ export function BusinessDetailPage() {
       </main>
     )
   }
+
+  if (business.id === 'hokkaido-mart') return <MartPage />
+  if (business.id === 'janeichi') return <JaneichiPage business={business} />
 
   const locationLabel = business.locationSummary ?? business.address
   const aboutText = business.about ?? business.description

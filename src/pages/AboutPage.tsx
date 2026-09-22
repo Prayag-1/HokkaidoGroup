@@ -13,7 +13,7 @@ import sandeshPoudelPhoto from '../assets/gallery/staff/sandesh poudel.jpeg'
 const storyImage = businesses.find(
   (business) => business.id === 'hokkaido-ramen-house',
 )?.image
-const storyBrands = businesses.slice(0, 6)
+const storyPhotos = businesses.flatMap(b => b.galleryImages.map(src => ({ business: b, src })))
 const leadershipTeam = [
   {
     name: 'Sandesh Poudel',
@@ -113,9 +113,9 @@ export function AboutPage() {
           <p className="content-note">A glimpse of our places</p>
         </div>
         <div className="social-wall">
-          {storyBrands.map((b) => (
-            <Link key={b.id} to={'/businesses/' + b.slug}>
-              <img src={b.image!} alt={b.name} loading="lazy" />
+          {storyPhotos.map(({ business: b, src }, index) => (
+            <Link key={src} to={'/businesses/' + b.slug}>
+              <img src={src} alt={`${b.name} photo ${index + 1}`} loading="lazy" />
             </Link>
           ))}
         </div>

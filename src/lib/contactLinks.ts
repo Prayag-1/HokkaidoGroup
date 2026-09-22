@@ -5,11 +5,11 @@ function getInquiryLabel(business: Business) {
     return 'Reservation inquiry'
   }
 
-  if (business.category === 'Farm & Resort') {
+  if (business.id === 'dekkaido-farm-house') {
     return 'Visit inquiry'
   }
 
-  if (business.category === 'Retail') {
+  if (business.category === 'Skin Care') {
     return 'Product inquiry'
   }
 
@@ -21,11 +21,11 @@ function getInquiryLine(business: Business) {
     return 'I would like to make a reservation or dining inquiry.'
   }
 
-  if (business.category === 'Farm & Resort') {
+  if (business.id === 'dekkaido-farm-house') {
     return 'I would like to ask about visiting, booking, or availability.'
   }
 
-  if (business.category === 'Retail') {
+  if (business.category === 'Skin Care') {
     return 'I would like to ask about product availability and pricing.'
   }
 

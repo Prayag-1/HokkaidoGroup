@@ -26,6 +26,7 @@ const brandOptions = [
 
 type ContactFormProps = {
   className?: string
+  defaultBrand?: string
 }
 
 async function submitContactForm(values: ContactFormValues) {
@@ -52,7 +53,7 @@ async function submitContactForm(values: ContactFormValues) {
   return response.json()
 }
 
-export function ContactForm({ className }: ContactFormProps) {
+export function ContactForm({ className, defaultBrand = '' }: ContactFormProps) {
   const reduceMotion = useReducedMotion()
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
 
@@ -68,7 +69,7 @@ export function ContactForm({ className }: ContactFormProps) {
       name: '',
       email: '',
       phone: '',
-      brand: '',
+      brand: defaultBrand,
       message: '',
       _gotcha: '',
     },

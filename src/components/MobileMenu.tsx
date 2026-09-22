@@ -1,9 +1,10 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { BusinessImage } from './BusinessImage'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { primaryNavLinks } from '../config/nav'
-import { businesses, hokkaidoGroupLogo } from '../data/businesses'
+import { businesses, businessCategories, hokkaidoGroupLogo, menuContactPhone } from '../data/businesses'
 import { GroupContact } from './GroupContact'
 
 export function MobileMenu() {
@@ -133,32 +134,19 @@ export function MobileMenu() {
                     </NavLink>
                   ))}
                 </nav>
-                <GroupContact />
+                <GroupContact phone={menuContactPhone} />
               </div>
               <div className="site-menu__brands">
-                {[
-                  { title: 'Restaurants', category: 'Restaurant' },
-                  { title: 'Hotels & resort', category: 'Farm & Resort' },
-                  { title: 'Retail & imports', category: 'Other' },
-                ].map((group) => (
-                  <section key={group.title}>
-                    <h2>{group.title}</h2>
+                {businessCategories.map((category) => (
+                  <section key={category}>
+                    <h2>{category === 'Restaurant' ? 'Restaurants' : category}</h2>
                     <div className="site-menu__brand-grid">
                       {businesses
-                        .filter((b) =>
-                          group.category === 'Other'
-                            ? ['Retail', 'Trading'].includes(b.category)
-                            : b.category === group.category,
-                        )
+                        .filter((b) => b.category === category)
                         .map((b) => (
                           <article key={b.id}>
                             <Link to={`/businesses/${b.slug}`}>
-                              <img
-                                className={b.image === b.logo ? 'is-logo' : ''}
-                                src={b.image ?? b.logo ?? undefined}
-                                alt={b.name}
-                                loading="lazy"
-                              />
+                              <BusinessImage business={b} />
                               <h3>{b.name}</h3>
                             </Link>
                             <Link

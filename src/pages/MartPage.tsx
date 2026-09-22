@@ -1,63 +1,59 @@
-﻿import { Link } from 'react-router-dom'
-import { SiteFooter } from '../components/SiteFooter'
+﻿import { SiteFooter } from '../components/SiteFooter'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
-import { businesses } from '../data/businesses'
-const mart = businesses.find((b) => b.id === 'hokkaido-mart')!
+import { BusinessImage } from '../components/BusinessImage'
+import { LocationSpotlight } from '../components/LocationSpotlight'
+import { getBusinessBySlug } from '../data/businesses'
+
+const homa = getBusinessBySlug('hokkaido-mart')!
+// Only Kamaladi is on file. Add confirmed branches to businesses.ts, not here.
+const outlets = [homa]
+
 export function MartPage() {
   return (
-    <main id="main-content" className="editorial-page">
-      <PageBreadcrumb title="HOMA Nepal · Mart" />
+    <main id="main-content" className="editorial-page homa-page">
+      <PageBreadcrumb title={homa.name} />
       <section className="split-hero">
-        <div className="media-placeholder">
-          <img src={mart.logo!} alt="HOMA Nepal" />
-          <span>Store photography coming soon</span>
+        <div className="brand-photo-pending">
+          <BusinessImage business={homa} eager />
+          <p>Store photography coming soon</p>
         </div>
         <div>
-          <p className="eyebrow">Japanese retail in Kathmandu</p>
-          <h1>
-            HOMA
-            <br />
-            Nepal
-          </h1>
-          <h2>Everyday discoveries from Japan.</h2>
-          <p>{mart.about}</p>
-          <a
-            className="editorial-button"
-            href={`mailto:${mart.email}?subject=HOMA%20Nepal%20inquiry`}
-          >
-            Inquiry Now
-          </a>
+          <p className="eyebrow">{homa.category}</p>
+          <h1>{homa.name}</h1>
+          <h2>{homa.description}</h2>
+          <p>{homa.about}</p>
         </div>
       </section>
-      <section className="editorial-section corporate-shell mart-story">
-        <div>
-          <h2>A little Japan, closer to home.</h2>
-          <p>
-            {mart.description} Visit the Kamaladi shop to explore the current
-            selection, or contact the team about availability before making a
-            special trip.
-          </p>
-          <p>
-            From pantry ingredients and kitchenware to skincare and household
-            essentials, HOMA Nepal brings the group's Japanese retail selection
-            together in one place. For business sourcing and import
-            conversations, our Janeichi division can help you find the right
-            contact.
-          </p>
-          <blockquote>Japanese products for everyday life in Nepal.</blockquote>
-          <p>
-            For product inquiries, call{' '}
-            <a href={`tel:${mart.phone}`}>{mart.phone}</a> or email{' '}
-            <a href={`mailto:${mart.email}`}>{mart.email}</a>.
-          </p>
-          <Link className="text-link" to="/businesses/janeichi">
-            Explore Japanese imports
-          </Link>
-        </div>
-        <div className="media-placeholder media-placeholder--support">
-          <span>HOMA product collection</span>
-          <small>Product photography coming soon</small>
-        </div>
+      <section className="editorial-section corporate-shell">
+        <div className="section-heading"><h2>Visit HOMA Nepal</h2></div>
+        {outlets.map(outlet => (
+          <article className="brand-listing" key={outlet.id}>
+            <div className="brand-listing__media brand-photo-pending">
+              <BusinessImage business={outlet} />
+              <p>Branch photography coming soon</p>
+            </div>
+            <div>
+              <p className="eyebrow">{outlet.name}</p>
+              <h3>{outlet.locationSummary}</h3>
+              <p>{outlet.description}</p>
+              {outlet.websiteUrl ? (
+                <a className="editorial-button" href={outlet.websiteUrl} target="_blank" rel="noopener noreferrer">Learn more</a>
+              ) : (
+                <a className="editorial-button" href="#homa-location">Location & contact</a>
+              )}
+              {/* TODO(client): provide HOMA's official URL in businesses.ts. */}
+            </div>
+          </article>
+        ))}
+      </section>
+      <section className="franchise-cta">
+        <p className="eyebrow">Get in touch</p>
+        <h2>Discover HOMA Nepal</h2>
+        <a className="editorial-button" href={`mailto:${homa.email}?subject=HOMA%20Nepal%20inquiry`}>Inquiry Now</a>
+        <p><a href={`tel:${homa.phone}`}>{homa.phone}</a></p>
+      </section>
+      <section id="homa-location" className="editorial-section corporate-shell brand-location">
+        <LocationSpotlight businesses={outlets} eyebrow="Find us" title="HOMA Nepal location" description={homa.address ?? ''} />
       </section>
       <SiteFooter />
     </main>

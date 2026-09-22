@@ -49,7 +49,7 @@ import yakitori3 from "../assets/gallery/yakitori/yakitori3.webp"
 import yakitori4 from "../assets/gallery/yakitori/yakitori4.webp"
 
 
-export type BusinessCategory = 'Restaurant' | 'Retail' | 'Trading' | 'Farm & Resort'
+export type BusinessCategory = 'Restaurant' | 'Skin Care' | 'Imports' | 'General'
 
 export type Business = {
   id: string
@@ -70,6 +70,8 @@ export type Business = {
   image: string | null
   galleryImages: string[]
   logo: string | null
+  logoAspectRatio?: string
+  logoMaxWidth?: number
   websiteUrl: string | null
   featured: boolean
   verified: boolean
@@ -97,6 +99,9 @@ export const hokkaidoGroupCorporateContact: CorporateContact = {
   verified: false,
 }
 
+// Client-confirmed menu phone; existing outlet email/address remain unchanged.
+export const menuContactPhone = '9801011301'
+
 export const hokkaidoGroupLogo = hokkaidoGroupLogoImage
 
 export const businesses: Business[] = [
@@ -114,7 +119,7 @@ export const businesses: Business[] = [
     mapQuery: 'Park Village Resort Premises, Budhanilkantha, Kathmandu, Nepal',
     coordinates: null,
     image: ramenhouse1,
-    galleryImages: [ramenhouse2, ramenhouse3],
+    galleryImages: [ramenhouse1, ramenhouse2, ramenhouse3],
     logo: hokkaidoRamenHouseLogo,
     websiteUrl: null,
     featured: true,
@@ -134,7 +139,7 @@ export const businesses: Business[] = [
     mapQuery: 'Inside International Club, Sanepa, Lalitpur, Nepal',
     coordinates: null,
     image: house1,
-    galleryImages: [house0, house2, house3],
+    galleryImages: [house1, house0, house2, house3],
     logo: hokkaidoHouseLogo,
     websiteUrl: null,
     featured: true,
@@ -244,7 +249,8 @@ export const businesses: Business[] = [
     id: 'dekkaido-farm-house',
     slug: 'dekkaido-farm-house',
     name: 'Hokkaido Dekkaido',
-    category: 'Farm & Resort',
+    // TODO(client): confirm Dekkaido's category; General is provisional.
+    category: 'General',
     address: 'Chiseni Marg, Budhanilkantha, Kathmandu, Nepal',
     phone: '9801011301',
     email: 'dekkaidoonsen@gmail.com',
@@ -264,7 +270,7 @@ export const businesses: Business[] = [
     id: 'hokkaido-mart',
     slug: 'hokkaido-mart',
     name: 'HOMA Nepal',
-    category: 'Retail',
+    category: 'Skin Care',
     address: 'Kamaladi, Kathmandu, Nepal',
     phone: '9801011304',
     email: 'homanepal@gmail.com',
@@ -274,8 +280,10 @@ export const businesses: Business[] = [
     mapQuery: 'HOMA Nepal, Kamaladi, Kathmandu, Nepal',
     coordinates: null,
     image: homaNepalLogo,
-    galleryImages: [homaNepalLogo],
+    galleryImages: [],
     logo: homaNepalLogo,
+    logoAspectRatio: '248 / 204',
+    logoMaxWidth: 248,
     websiteUrl: null,
     featured: true,
     verified: false,
@@ -284,7 +292,7 @@ export const businesses: Business[] = [
     id: 'janeichi',
     slug: 'janeichi',
     name: 'Janeichi Business',
-    category: 'Trading',
+    category: 'Imports',
     address: 'Bansbari, Kathmandu, Nepal',
     phone: '9801011303',
     email: null,
@@ -294,7 +302,7 @@ export const businesses: Business[] = [
     mapQuery: 'Janeichi Business, Bansbari, Kathmandu, Nepal',
     coordinates: null,
     image: janeichiLogo,
-    galleryImages: [janeichiLogo],
+    galleryImages: [],
     logo: janeichiLogo,
     websiteUrl: null,
     featured: true,
@@ -302,7 +310,7 @@ export const businesses: Business[] = [
   },
 ]
 
-export const businessCategories: BusinessCategory[] = ['Restaurant', 'Retail', 'Trading', 'Farm & Resort']
+export const businessCategories: BusinessCategory[] = ['Restaurant', 'Skin Care', 'Imports', 'General']
 
 export const featuredBusinesses = businesses.filter((business) => business.featured)
 

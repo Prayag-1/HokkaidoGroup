@@ -1,4 +1,6 @@
-﻿import { Link } from 'react-router-dom'
+import { BusinessImage } from '../components/BusinessImage'
+import { OutletPhotos } from '../components/OutletPhotos'
+import { Link } from 'react-router-dom'
 import {
   BedDouble,
   ShoppingCart,
@@ -18,7 +20,7 @@ const experiences = [businesses[1], businesses[2], businesses[7], businesses[5]]
 const nav = [
   { label: 'Dining', to: '/our-brands?category=Restaurant', Icon: Utensils },
   {
-    label: 'Onsen & resort',
+    label: 'Hokkaido Dekkaido',
     to: '/businesses/dekkaido-farm-house',
     Icon: BedDouble,
   },
@@ -60,7 +62,7 @@ export function HomePage() {
       <section className="brand-logo-strip" aria-label="Our brands">
         {businesses.map((b) => (
           <Link key={b.id} to={`/businesses/${b.slug}`} aria-label={b.name}>
-            {b.logo && <img src={b.logo} alt={b.name} loading="lazy" />}
+            <BusinessImage business={b} logo />
           </Link>
         ))}
       </section>
@@ -74,7 +76,7 @@ export function HomePage() {
             <img src={b.image!} alt={b.name} loading="lazy" />
             <div>
               <span>
-                {b.category === 'Farm & Resort'
+                {b.id === 'dekkaido-farm-house'
                   ? 'A little time for yourself'
                   : 'Around the table'}
               </span>
@@ -88,18 +90,20 @@ export function HomePage() {
         {businesses
           .filter((b) => b.category === 'Restaurant')
           .map((b) => (
-            <Link
-              className="location-card"
-              key={b.id}
-              to={`/businesses/${b.slug}`}
-            >
-              <img src={b.image!} alt={b.name} loading="lazy" />
-              <div className="location-card__caption">
-                <span className="triangle" aria-hidden="true" />
-                <h3>{b.locationSummary}</h3>
-                <p>{b.name}</p>
-              </div>
-            </Link>
+            <article key={b.id} className="location-outlet">
+              <Link
+                className="location-card"
+                to={`/businesses/${b.slug}`}
+              >
+                <img src={b.image!} alt={b.name} loading="lazy" />
+                <div className="location-card__caption">
+                  <span className="triangle" aria-hidden="true" />
+                  <h3>{b.locationSummary}</h3>
+                  <p>{b.name}</p>
+                </div>
+              </Link>
+              <OutletPhotos business={b} />
+            </article>
           ))}
       </ImageCarousel>
       <section className="milestone-band">

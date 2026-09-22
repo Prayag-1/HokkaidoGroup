@@ -6,9 +6,9 @@ import { SectionSurface } from './SectionSurface'
 
 const categoryIconMap: Record<BusinessCategory, LucideIcon> = {
   Restaurant: HandPlatter,
-  Retail: ShoppingBag,
-  Trading: PackageSearch,
-  'Farm & Resort': Sprout,
+  'Skin Care': ShoppingBag,
+  Imports: PackageSearch,
+  General: Sprout,
 }
 
 export function CategoryDivisionBand() {

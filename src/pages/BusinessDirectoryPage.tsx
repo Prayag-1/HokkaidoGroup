@@ -1,4 +1,6 @@
-﻿import { Link, useSearchParams } from 'react-router-dom'
+import { BusinessImage } from '../components/BusinessImage'
+import { OutletPhotos } from '../components/OutletPhotos'
+import { Link, useSearchParams } from 'react-router-dom'
 import { SiteFooter } from '../components/SiteFooter'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
 import {
@@ -24,17 +26,15 @@ export function BusinessDirectoryPage() {
         )}
         {groups.map((group) => (
           <section key={group}>
-            <h2>{group === 'Farm & Resort' ? 'Hotel & resort' : group}</h2>
+            <h2>{group}</h2>
             {businesses
               .filter((b) => b.category === group)
               .map((b) => (
                 <article className="brand-listing" key={b.id}>
-                  <img
-                    className={b.image === b.logo ? 'is-logo' : ''}
-                    src={b.image!}
-                    alt={b.name}
-                    loading="lazy"
-                  />
+                  <div className="brand-listing__media">
+                    <BusinessImage business={b} />
+                    <OutletPhotos business={b} />
+                  </div>
                   <div>
                     <p className="eyebrow">{b.name}</p>
                     <h3>{b.locationSummary ?? b.address}</h3>

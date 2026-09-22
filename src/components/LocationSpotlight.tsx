@@ -1,3 +1,4 @@
+import { BusinessImage } from './BusinessImage'
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight, ExternalLink, MapPin } from 'lucide-react'
@@ -186,11 +187,11 @@ export function LocationSpotlight({
 
       {mappedBusinesses.length > 0 ? (
         <div className="location-spotlight__carousel">
-          <button type="button" className="location-spotlight__arrow" onClick={showPrevious} aria-label="Previous location">
+          <button type="button" className="location-spotlight__arrow" onClick={showPrevious} aria-label="Previous location" disabled={mappedBusinesses.length < 2}>
             <ChevronLeft aria-hidden="true" size={24} />
           </button>
 
-          <div className="location-spotlight__cards">
+          <div className={`location-spotlight__cards${mappedBusinesses.length === 1 ? ' location-spotlight__cards--single' : ''}`}>
             {visibleBusinesses.map((business) => (
               <article key={business.id} className="location-spotlight__card">
                 <div className="location-spotlight__map" aria-label={`${business.name} map`}>
@@ -219,12 +220,7 @@ export function LocationSpotlight({
                   ) : null}
                   <div className="location-spotlight__photo">
                     {business.image || business.logo ? (
-                      <img
-                        src={(business.image ?? business.logo) as string}
-                        alt={business.logo && !business.image ? `${business.name} logo` : `${business.name} venue photo`}
-                        loading="lazy"
-                        sizes="10rem"
-                      />
+                      <BusinessImage business={business} />
                     ) : (
                       <span aria-hidden="true">{getFallbackLabel(business.name)}</span>
                     )}
@@ -248,7 +244,7 @@ export function LocationSpotlight({
             ))}
           </div>
 
-          <button type="button" className="location-spotlight__arrow" onClick={showNext} aria-label="Next location">
+          <button type="button" className="location-spotlight__arrow" onClick={showNext} aria-label="Next location" disabled={mappedBusinesses.length < 2}>
             <ChevronRight aria-hidden="true" size={24} />
           </button>
         </div>

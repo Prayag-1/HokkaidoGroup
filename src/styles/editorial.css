@@ -206,7 +206,7 @@ body {
 .brand-logo-strip img {
   width: 90px;
   height: 90px;
-  object-fit: contain;
+  object-fit: cover;
 }
 .carousel-controls {
   display: flex;
@@ -893,5 +893,180 @@ body {
   }
   .timeline article > div {
     padding-left: 20px;
+  }
+}
+
+/* Shared image frames preserve source proportions, including the small HOMA logo. */
+.business-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  min-width: 0;
+}
+.business-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.business-image.business-image--logo {
+  position: relative;
+  background: var(--reference-gray);
+  padding: 24px;
+}
+.business-image.business-image--logo > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  max-height: calc(100% - 32px);
+  object-fit: cover;
+}
+.brand-logo-strip .business-image {
+  aspect-ratio: 1;
+  padding: 0;
+  background: transparent;
+}
+.site-menu__brand-grid .business-image {
+  aspect-ratio: 16 / 9;
+}
+.site-menu__brand-grid .business-image--logo > img {
+  width: auto;
+  height: auto;
+  max-height: calc(100% - 24px);
+}
+.brand-logo-strip .business-image--logo > img {
+  max-height: 100%;
+}
+.brand-listing > .brand-listing__media,
+.brand-listing:nth-of-type(even) > .brand-listing__media {
+  padding: 0;
+  min-width: 0;
+}
+.brand-listing:nth-of-type(even) > .brand-listing__media {
+  order: 1;
+}
+.outlet-photos {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+  scroll-snap-type: x proximity;
+}
+.outlet-photos img {
+  flex: 0 0 42%;
+  width: 42%;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+.outlet-photos:focus-visible {
+  outline: 2px solid var(--reference-slate);
+  outline-offset: 3px;
+}
+.brand-photo-pending {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 360px;
+  background: var(--reference-gray);
+  text-align: center;
+}
+.brand-photo-pending .business-image {
+  aspect-ratio: 16 / 9;
+  max-width: 680px;
+}
+.brand-photo-pending > p {
+  padding: 0 24px 24px;
+  font-size: 14px;
+  color: var(--reference-muted);
+}
+.janeichi-banner .brand-photo-pending {
+  aspect-ratio: 21 / 9;
+}
+.janeichi-intro {
+  text-align: center;
+  max-width: 860px;
+  padding-bottom: 0;
+}
+.janeichi-intro h1 {
+  font-size: clamp(32px, 5vw, 64px);
+}
+.janeichi-subtitle {
+  font-size: clamp(18px, 2vw, 24px);
+}
+.brand-callout {
+  border-left: 3px solid var(--reference-slate);
+  background: var(--reference-cream);
+  margin-block: 32px;
+  padding: 24px;
+  font-size: 22px;
+}
+.brand-inquiry {
+  max-width: 860px;
+}
+.brand-inquiry h2 {
+  margin-bottom: 30px;
+}
+.brand-inquiry,
+.brand-location {
+  scroll-margin-top: 100px;
+}
+.location-spotlight__cards.location-spotlight__cards--single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 720px;
+  width: 100%;
+  margin-inline: auto;
+}
+.location-spotlight__arrow:disabled {
+  visibility: hidden;
+}
+.location-spotlight__cards--single .location-spotlight__map {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 340px;
+}
+.location-spotlight__cards--single .location-spotlight__map iframe {
+  min-height: 340px;
+}
+.location-spotlight__cards--single .location-spotlight__caption {
+  position: static;
+  padding: 24px;
+}
+.location-spotlight__cards--single .location-spotlight__caption p,
+.location-spotlight__cards--single .location-spotlight__caption h3 {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--reference-charcoal);
+}
+.location-spotlight__photo .business-image {
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 8px;
+}
+.business-detail--restaurant .business-detail__gallery {
+  animation: none;
+}
+@media (max-width: 48rem) {
+  .brand-listing:nth-of-type(even) > .brand-listing__media {
+    order: 0;
+  }
+  .brand-photo-pending {
+    min-height: 260px;
+  }
+  .brand-photo-pending--support {
+    aspect-ratio: 4 / 3;
+  }
+  .janeichi-banner .brand-photo-pending {
+    aspect-ratio: 4 / 3;
+  }
+  .brand-photo-pending .business-image {
+    aspect-ratio: 4 / 3;
   }
 }

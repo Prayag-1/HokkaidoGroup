@@ -16,6 +16,14 @@ function renderWithQueryClient(ui: React.ReactElement) {
 }
 
 describe('ContactForm', () => {
+  it('keeps Janeichi selected while validating an inquiry', async () => {
+    const user = userEvent.setup()
+    renderWithQueryClient(<ContactForm defaultBrand="Janeichi" />)
+    expect(screen.getByRole('combobox', { name: /brand/i })).toHaveTextContent('Janeichi')
+    await user.click(screen.getByRole('button', { name: /send message/i }))
+    expect(await screen.findByText(/please enter your name/i)).toBeInTheDocument()
+    expect(screen.queryByText(/please select who this is for/i)).not.toBeInTheDocument()
+  })
   it('shows validation errors for missing required fields', async () => {
     const user = userEvent.setup()
     renderWithQueryClient(<ContactForm />)

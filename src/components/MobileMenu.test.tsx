@@ -33,6 +33,16 @@ function finishClosing() {
   act(() => vi.runAllTimers())
 }
 describe('site menu', () => {
+  it('keeps the requested contacts and division links together', () => {
+    openMenu()
+    expect(screen.getByRole('link', { name: '9801011301' })).toHaveAttribute('href', 'tel:9801011301')
+    expect(screen.getByRole('link', { name: 'hokkaidoramenhouse@gmail.com' })).toHaveAttribute('href', 'mailto:hokkaidoramenhouse@gmail.com')
+    for (const category of ['Skin Care', 'Imports', 'General']) {
+      expect(screen.getByRole('heading', { name: category })).toBeInTheDocument()
+    }
+    expect(screen.queryByText(/Onsen & resort/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Hokkaido Dekkaido' })).toBeInTheDocument()
+  })
   it('escapes the header containing block and locks background scrolling', () => {
     const { container } = openMenu()
     const dialog = screen.getByRole('dialog')

@@ -47,15 +47,15 @@ function SocialIcon({ label }: { label: string }) {
     )
   return <ExternalLink size={20} />
 }
-export function GroupContact() {
+export function GroupContact({ phone }: { phone?: string } = {}) {
   const group = hokkaidoGroupCorporateContact
   const contact = group.phone || group.email ? group : businesses[0]
   return (
     <div className="group-contact">
       <h3>Contact us</h3>
-      {contact !== group && <p>Hokkaido Ramen House · outlet contact</p>}
+      {contact !== group && <p>Hokkaido Ramen House · {phone ? 'email contact' : 'outlet contact'}</p>}
       <address>
-        {contact.phone && <a href={`tel:${contact.phone}`}>{contact.phone}</a>}
+        {(phone ?? contact.phone) && <a href={`tel:${phone ?? contact.phone}`}>{phone ?? contact.phone}</a>}
         {contact.email && (
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
         )}

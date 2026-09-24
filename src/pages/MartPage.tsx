@@ -41,12 +41,12 @@ export function MartPage() {
               ) : (
                 <a className="editorial-button" href="#homa-location">Location & contact</a>
               )}
-              {/* TODO(client): provide HOMA's official URL in businesses.ts. */}
+              {/* Add the confirmed official URL to businesses.ts when supplied. */}
             </div>
           </article>
         ))}
       </section>
-      <section className="franchise-cta">
+      <section className="editorial-section corporate-shell">
         <p className="eyebrow">Get in touch</p>
         <h2>Discover HOMA Nepal</h2>
         <a className="editorial-button" href={`mailto:${homa.email}?subject=HOMA%20Nepal%20inquiry`}>Inquiry Now</a>

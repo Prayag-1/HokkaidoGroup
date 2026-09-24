@@ -1,14 +1,4 @@
-﻿export type Franchise = {
-  name: string
-  brand: string
-  location: string
-  description: string
-  image: string
-  websiteUrl: string
-}
-// Add only client-confirmed franchise records. Links go directly to websiteUrl.
-export const franchises: Franchise[] = []
-export const editorialDrafts = [
+﻿export const editorialDrafts = [
   {
     title: 'At the Japanese table',
     description: 'Stories from our kitchens and the people behind each plate.',

@@ -4,17 +4,17 @@ Implemented September 21–22, 2026. Local preview: http://127.0.0.1:5173/.
 
 ## What changed
 
-- Home follows the requested sequence: full-width Hokkaido hero, brand logos, Experiences slider, New & Notable location carousel with triangle markers, milestones, Mission/Vision/Values, guest-story placeholder, journal previews, franchise section, community quote banner, shared footer.
+- Home follows the requested sequence: full-width Hokkaido hero, brand logos, Experiences slider, New & Notable location carousel with triangle markers, milestones, Mission/Vision/Values, guest-story placeholder, journal previews, membership section, community quote banner, shared footer.
 - `/our-brands` uses alternating image/text listings grouped as Restaurant, Retail, Trading, and Hotel & resort. Existing category query filters still work. Hotel & resort contains Hokkaido Dekkaido, the actual Farm & Resort business; no hotel brand was invented.
 - `/about-us` includes the 2018 introduction, story, `/our-story` timeline, local-image social wall, and existing leadership photos and biographies.
 - `/mart` represents HOMA Nepal, the existing retail business. Its Inquiry Now button opens an email addressed to the existing HOMA contact. It does not pretend a server submission succeeded.
-- `/franchises` has the introduction, location area, and partnership CTA. A shared card renders direct external website links in new tabs with `rel="noopener noreferrer"`; client-confirmed records are still required.
+- `/membership` is a coming-soon page with an interest form. The former `/franchises` route redirects there for compatibility.
 - `/about`, `/businesses`, all ten existing business detail routes, `/contact`, and existing `/careers`, `/press`, `/booking` redirects remain intact. Existing title, viewport, favicon, and other HTML metadata are retained.
 - Shared theme updates apply to retained pages and form components. Their phone, WhatsApp, email, and map links remain intact.
 
 ## Reference review
 
-Opened Home, Our Brands, About Us, Mart, and Franchises at 1280px and 375px. Inspected desktop and mobile menu opening and the live CSS/computed typography. Reference assets were used only for inspection; no Roadhouse image, logo, brand name, or copy was added to the application.
+Opened Home, Our Brands, About Us, Mart, and Membership at 1280px and 375px. Inspected desktop and mobile menu opening and the live CSS/computed typography. Reference assets were used only for inspection; no Roadhouse image, logo, brand name, or copy was added to the application.
 
 Sources:
 
@@ -22,7 +22,7 @@ Sources:
 - https://www.roadhousenepal.com/our-brands
 - https://www.roadhousenepal.com/about-us
 - https://www.roadhousenepal.com/mart
-- https://www.roadhousenepal.com/franchises
+- https://www.roadhousenepal.com/membership
 - https://www.roadhousenepal.com/template/web/assets/css/style.css
 - https://www.roadhousenepal.com/template/web/assets/css/custom-themes.css
 
@@ -69,7 +69,7 @@ Type checking exposed two existing Zod 4 compatibility issues. `src/lib/schemas.
 
 ## Every placeholder / client content needed
 
-- [ ] **Franchise records:** confirmed franchise brand and location names, descriptions, photographs, and exact official website URLs. `franchises` in `src/data/editorialContent.ts` is intentionally empty. The location section displays “Location announcements coming soon.” Home contains working franchise navigation and the section; real external cards appear when supplied. No guessed external destination or intermediate redirect is present.
+- [ ] **Membership copy:** approve the interim “Our membership program is on its way.” wording and provide final membership details when ready.
 - [ ] **Corporate phone/email:** both were empty in the source data. Menu/footer currently use the existing Ramen House phone and email, explicitly labeled “outlet contact.” Replace this fallback with confirmed group contact details in `src/data/businesses.ts`.
 - [ ] **Facebook, Instagram, YouTube URLs:** source social links were empty. The shared component supports their icons, but does not display invented or dead links. Supply confirmed URLs and mark approved records as verified.
 - [ ] **HOMA hero/store photo:** currently the genuine HOMA logo on a neutral panel with “Store photography coming soon.”
@@ -118,7 +118,7 @@ npm.cmd run build
 - `src/pages/BusinessDirectoryPage.tsx`
 - `src/pages/AboutPage.tsx`
 - `src/pages/MartPage.tsx` (new)
-- `src/pages/FranchisesPage.tsx` (new)
+- `src/pages/MembershipPage.tsx` (new)
 - `src/pages/StoryPage.tsx` (new)
 - `src/pages/ContactPage.tsx` (skip-link target)
 - `src/pages/BusinessDetailPage.tsx` (skip-link targets)
@@ -132,9 +132,7 @@ npm.cmd run build
 - `src/components/GroupContact.tsx` (new)
 - `src/components/PageBreadcrumb.tsx` (new)
 - `src/components/ImageCarousel.tsx` (new)
-- `src/components/FranchiseCard.tsx` (new)
 - `src/components/MobileMenu.test.tsx` (new)
-- `src/components/FranchiseCard.test.tsx` (new)
 - `src/config/nav.ts`
 - `src/data/editorialContent.ts` (new)
 - `src/lib/schemas.ts`

@@ -6,15 +6,14 @@ import {
   ShoppingCart,
   Utensils,
   Package,
-  MapPinned,
+  UsersRound,
   ArrowUpRight,
   ChefHat,
 } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { ImageCarousel } from '../components/ImageCarousel'
-import { FranchiseCard } from '../components/FranchiseCard'
 import { businesses } from '../data/businesses'
-import { editorialDrafts, franchises } from '../data/editorialContent'
+import { editorialDrafts } from '../data/editorialContent'
 import homeHeroImage from '../assets/gallery/sora/sora4.webp'
 const experiences = [businesses[1], businesses[2], businesses[7], businesses[5]]
 const nav = [
@@ -27,7 +26,7 @@ const nav = [
   { label: 'HOMA Nepal', to: '/mart', Icon: ShoppingCart },
   { label: 'Catering', to: '/catering', Icon: ChefHat },
   { label: 'Imports', to: '/businesses/janeichi', Icon: Package },
-  { label: 'Franchises', to: '/franchises', Icon: MapPinned },
+  { label: 'Membership', to: '/membership', Icon: UsersRound },
 ]
 export function HomePage() {
   return (
@@ -191,27 +190,17 @@ export function HomePage() {
           ))}
         </div>
       </section>
-      <section className="franchise-home editorial-section corporate-shell">
+      <section className="editorial-section corporate-shell">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Grow with Hokkaido</p>
-            <h2>Franchises</h2>
+            <p className="eyebrow">Stay connected</p>
+            <h2>Membership</h2>
           </div>
-          <Link className="editorial-button" to="/franchises">
-            Explore franchises <ArrowUpRight size={16} />
+          <Link className="editorial-button" to="/membership">
+            Membership coming soon <ArrowUpRight size={16} />
           </Link>
         </div>
-        {franchises.length > 0 ? (
-          <div className="journal-grid">
-            {franchises.map((f) => (
-              <FranchiseCard key={f.websiteUrl} franchise={f} />
-            ))}
-          </div>
-        ) : (
-          <p>
-            For partnership conversations, get in touch with Hokkaido Group.
-          </p>
-        )}
+        <p>Our membership program is on its way.</p>
       </section>
       <section
         className="community-banner"

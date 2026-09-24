@@ -6,8 +6,8 @@
 - `src/components/MobileMenu.tsx`, `GroupContact.tsx`, `src/config/nav.ts`: menu groups now come from canonical categories. The menu phone is updated, its existing Ramen House email is retained, and Dekkaido's navigation label is its name. The original menu had no street address to replace. Footer phone remains unchanged.
 - `src/components/BusinessImage.tsx`: shared fixed-aspect image frames with `object-fit: cover`; logos retain their native aspect ratio inside the frame. HOMA is capped at its 248px source width. Used in the home brand strip, menu, directory, shared business cards, brand pages, and map preview.
 - `src/components/OutletPhotos.tsx`, `BusinessCard.tsx`, `src/pages/BusinessDirectoryPage.tsx`, `HomePage.tsx`: additional outlet photographs in scrollable, keyboard-focusable card strips. No added image assets or dependencies.
-- `src/pages/AboutPage.tsx`: gallery wall expanded from six photos to all 31 outlet photos in the canonical records, including Yakitori and Dekkaido.
-- `src/pages/BusinessDetailPage.tsx`: Ramen House gallery now includes all three photos; Hokkaido House includes all four. Umami, Sora, Izakaya, Pokhara, and Yakitori already used all four available photos; no additional distinct files exist for these outlets. Restaurant galleries no longer inherit the automatic scrolling animation. HOMA and Janeichi route to their dedicated layouts.
+- `src/pages/AboutPage.tsx`: gallery wall expanded to outlet photos in the canonical records, including Express and Dekkaido.
+- `src/pages/BusinessDetailPage.tsx`: restaurant galleries use available photos and no longer inherit the automatic scrolling animation. HOMA and Janeichi route to their dedicated layouts.
 - `src/pages/JaneichiPage.tsx`: breadcrumb, wide banner placeholder with uncropped logo, title and existing subtitle, existing profile copy, highlighted description, supporting-photo placeholder, telephone link, and Inquiry Now anchor to the shared form preselected to Janeichi. No invented quote, testimonial, or long-form paragraphs.
 - `src/pages/MartPage.tsx`: shared by `/mart` and `/businesses/hokkaido-mart`; intro, hero placeholder, Kamaladi outlet card, inquiry CTA, and the existing `LocationSpotlight` component at the bottom. Official website links will open directly with `target="_blank" rel="noopener noreferrer"` when `websiteUrl` is supplied. Until then, the card links to location/contact information.
 - `src/components/LocationSpotlight.tsx`: shared image treatment, a single-location layout, and disabled redundant arrows for single-location maps.
@@ -17,7 +17,7 @@
 - `src/components/MobileMenu.test.tsx`, `ContactForm.test.tsx`: regressions for menu categories/contact retention and Janeichi inquiry preselection.
 - `vite.config.ts`: uses `defineConfig` from `vitest/config` so the existing test configuration passes TypeScript.
 
-Layout references, used only for structure: [Roadhouse Mart](https://www.roadhousenepal.com/mart) and [Roadhouse Franchises](https://www.roadhousenepal.com/franchises). No reference assets or copy were imported.
+Layout references, used only for structure: [Roadhouse Mart](https://www.roadhousenepal.com/mart) and [Roadhouse Membership](https://www.roadhousenepal.com/membership). No reference assets or copy were imported.
 
 ## Client decisions and content needed
 
@@ -35,9 +35,9 @@ Layout references, used only for structure: [Roadhouse Mart](https://www.roadhou
 | Hokkaido House | `house0.webp`, `house1.webp`, `house2.webp`, `house3.webp` (4) |
 | Hokkaido Umami | `umami1.webp`–`umami4.webp` (4) |
 | Hokkaido Sora | `sora1.webp`–`sora4.webp` (4) |
-| Hokkaido Izakaya | `Izakaya1.webp`, `izakaya2.webp`–`izakaya4.webp` (4) |
+| Hokkaido Asian Cuisine | `asian-cuisine-01.webp`–`asian-cuisine-04.webp` (4) |
 | Hokkaido Pokhara | `pokhara1.webp`–`pokhara4.webp` (4) |
-| Hokkaido Yakitori | `yakitori1.webp`–`yakitori4.webp` (4) |
+| Hokkaido Express | `express-01.webp`–`express-04.webp` (4) |
 | Hokkaido Dekkaido | `dekkaido1.webp`–`dekkaido4.webp` (4) |
 
 All listed photographs are under `src/assets/gallery/` in their existing outlet folders. The photo wall and cards reuse these files; no image was invented or attributed to another outlet.

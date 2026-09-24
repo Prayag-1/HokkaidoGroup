@@ -3,12 +3,16 @@ import * as Label from '@radix-ui/react-label'
 import { useMutation } from '@tanstack/react-query'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm, type Resolver } from 'react-hook-form'
 import { FormStatus } from './FormStatus'
 import { SelectField } from './SelectField'
 import { cn } from '../lib/cn'
 import { CONTACT_FORM_ENDPOINT } from '../lib/site-data'
-import { contactFormSchema, type ContactFormValues } from '../lib/schemas'
+import {
+  contactFormOptionalMessageSchema,
+  contactFormSchema,
+  type ContactFormValues,
+} from '../lib/schemas'
 
 const brandOptions = [
   'General Hokkaido Group inquiry',
@@ -18,8 +22,9 @@ const brandOptions = [
   'Hokkaido Sora',
   'Hokkaido Umami',
   'Hokkaido Pokhara',
-  'Hokkaido Yakitori',
-  'Hokkaido Izakaya',
+  'Hokkaido Express',
+  'Hokkaido Asian Cuisine',
+  'Membership',
   'homa',
   'Janeichi',
 ].map((option) => ({ value: option, label: option }))
@@ -27,9 +32,14 @@ const brandOptions = [
 type ContactFormProps = {
   className?: string
   defaultBrand?: string
+  hideBrand?: boolean
+  messageOptional?: boolean
 }
 
 async function submitContactForm(values: ContactFormValues) {
+  if (!CONTACT_FORM_ENDPOINT) {
+    throw new Error('This form is not configured yet. Please contact us by phone.')
+  }
   const response = await fetch(CONTACT_FORM_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -53,7 +63,7 @@ async function submitContactForm(values: ContactFormValues) {
   return response.json()
 }
 
-export function ContactForm({ className, defaultBrand = '' }: ContactFormProps) {
+export function ContactForm({ className, defaultBrand = '', hideBrand = false, messageOptional = false }: ContactFormProps) {
   const reduceMotion = useReducedMotion()
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
 
@@ -64,7 +74,7 @@ export function ContactForm({ className, defaultBrand = '' }: ContactFormProps) 
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(messageOptional ? contactFormOptionalMessageSchema : contactFormSchema) as Resolver<ContactFormValues>,
     defaultValues: {
       name: '',
       email: '',
@@ -145,24 +155,28 @@ export function ContactForm({ className, defaultBrand = '' }: ContactFormProps) 
         />
       </Label.Root>
 
-      <div>
-        <Controller
-          control={control}
-          name="brand"
-          render={({ field }) => (
-            <SelectField
-              id="contact-brand"
-              label="Brand"
-              value={field.value}
-              placeholder="Select who this is for"
-              options={brandOptions}
-              error={errors.brand ? 'Please select who this is for.' : undefined}
-              onBlur={field.onBlur}
-              onValueChange={field.onChange}
-            />
-          )}
-        />
-      </div>
+      {hideBrand ? (
+        <input type="hidden" {...register('brand')} />
+      ) : (
+        <div>
+          <Controller
+            control={control}
+            name="brand"
+            render={({ field }) => (
+              <SelectField
+                id="contact-brand"
+                label="Brand"
+                value={field.value}
+                placeholder="Select who this is for"
+                options={brandOptions}
+                error={errors.brand ? 'Please select who this is for.' : undefined}
+                onBlur={field.onBlur}
+                onValueChange={field.onChange}
+              />
+            )}
+          />
+        </div>
+      )}
 
       <Label.Root className="corporate-field" htmlFor="contact-message">
         Message

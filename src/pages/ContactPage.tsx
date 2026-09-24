@@ -5,7 +5,7 @@ import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
 import { businesses, hokkaidoGroupLogo } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
-import contactHeroImage from '../assets/gallery/izakaya/izakaya2.webp'
+import contactHeroImage from '../assets/gallery/asian cusine/asian-cuisine-02.webp'
 import contactDetailImage from '../assets/gallery/sora/sora4.webp'
 import contactRoomImage from '../assets/gallery/umami/umami1.webp'
 
@@ -125,7 +125,7 @@ export function ContactPage() {
                             <a
                               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
                               target="_blank"
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
                             >
                               Open map
                               <Navigation size={14} strokeWidth={2.2} aria-hidden="true" />
@@ -140,7 +140,7 @@ export function ContactPage() {
                             WhatsApp
                           </dt>
                           <dd>
-                            <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                            <a href={whatsAppUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                               <MessageSquare size={15} strokeWidth={2.2} aria-hidden="true" />
                               <span>{business.phone}</span>
                             </a>
@@ -154,7 +154,7 @@ export function ContactPage() {
                             Email
                           </dt>
                           <dd>
-                            <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                            <a href={gmailUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                               <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
                               <span>{business.email}</span>
                             </a>
@@ -178,3 +178,5 @@ export function ContactPage() {
     </main>
   )
 }
+
+\n

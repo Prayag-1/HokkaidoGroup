@@ -68,7 +68,7 @@ const leadershipTeam = [
 
 export function AboutPage() {
   return (
-    <main id="main-content" className="editorial-page">
+    <main id="main-content" className="editorial-page about-page">
       <PageBreadcrumb title="About us" />
       <h1 className="page-title">About us</h1>
       <section className="about-intro corporate-shell">

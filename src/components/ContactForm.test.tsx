@@ -4,6 +4,10 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { ContactForm } from './ContactForm'
 
+vi.mock('../lib/site-data', () => ({
+  CONTACT_FORM_ENDPOINT: 'https://formspree.io/f/unit-test-contact',
+}))
+
 function renderWithQueryClient(ui: React.ReactElement) {
   const queryClient = new QueryClient({
     defaultOptions: {

@@ -9,13 +9,17 @@ export const contactFormSchema = z.object({
   _gotcha: z.string().max(0).optional(),
 })
 
+export const contactFormOptionalMessageSchema = contactFormSchema.extend({
+  message: z.string().max(1000).optional(),
+})
+
 export type ContactFormValues = z.infer<typeof contactFormSchema>
 
 export const BOOKABLE_BRANDS = [
   'hokkaido-ramen-house',
   'hokkaido-house',
-  'hokkaido-yakitori',
-  'hokkaido-izakaya',
+  'hokkaido-express',
+  'hokkaido-asian-cuisine',
   'hokkaido-umami',
   'hokkaido-sora',
   'hokkaido-pokhara',

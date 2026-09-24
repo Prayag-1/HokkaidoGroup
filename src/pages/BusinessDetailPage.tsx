@@ -82,7 +82,7 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                       <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
                       <span>{emailValue}</span>
                     </a>
@@ -96,7 +96,7 @@ export function BusinessDetailPage() {
                     WhatsApp
                   </dt>
                   <dd>
-                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                       <MessageCircle size={16} strokeWidth={2.2} aria-hidden="true" />
                       <span>{phoneValue}</span>
                     </a>
@@ -151,7 +151,7 @@ export function BusinessDetailPage() {
                     WhatsApp
                   </dt>
                   <dd>
-                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noreferrer">
+                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                       <MessageCircle size={16} strokeWidth={2.2} aria-hidden="true" />
                       <span>{phoneValue}</span>
                     </a>
@@ -165,7 +165,7 @@ export function BusinessDetailPage() {
                     Email
                   </dt>
                   <dd>
-                    <a href={gmailUrl ?? undefined} target="_blank" rel="noreferrer">
+                    <a href={gmailUrl ?? undefined} target="_blank" rel="noopener noreferrer">
                       <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
                       <span>{emailValue}</span>
                     </a>
@@ -211,7 +211,7 @@ export function BusinessDetailPage() {
                 className="business-detail__map-link"
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(business.mapQuery)}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Open in Google Maps
                 <ExternalLink size={15} strokeWidth={2.2} aria-hidden="true" />
@@ -232,3 +232,5 @@ export function BusinessDetailPage() {
     </main>
   )
 }
+
+\n

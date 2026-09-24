@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
     name: 'A. Gurung',
     source: 'TripAdvisor',
     quote: 'The room stays quiet enough to notice the food. The pacing works well for a long meal.',
-    brand: 'Izakaya Hokkaido',
+    brand: 'Hokkaido Asian Cuisine',
   },
   {
     name: 'N. Koirala',

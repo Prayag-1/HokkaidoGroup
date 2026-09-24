@@ -159,9 +159,9 @@ Current entries include:
 - Hokkaido House
 - Hokkaido Umami
 - Hokkaido Sora
-- Hokkaido Izakaya
+- Hokkaido Asian Cuisine
 - Hokkaido Pokhara
-- Hokkaido Yakitori
+- Hokkaido Express
 - Hokkaido Dekkaido
 - HOMA Nepal
 - Janeichi Business

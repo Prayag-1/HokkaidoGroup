@@ -13,6 +13,14 @@ body {
   background: var(--reference-white);
   color: var(--reference-charcoal);
 }
+.editorial-page.about-page {
+  background-color: var(--reference-white);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.84)), url('../assets/patterns/a0804dc2-d333-4e3c-861a-4a9b7a76bc63.png');
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 .editorial-page h1,
 .editorial-page h2,
 .editorial-page h3 {
@@ -384,9 +392,6 @@ body {
 .journal-grid h3 {
   font-size: 24px;
 }
-.franchise-home {
-  border-top: 1px solid var(--color-border);
-}
 .community-banner,
 .story-banner {
   background-position: center;
@@ -657,11 +662,6 @@ body {
   border-bottom-color: var(--reference-slate);
   margin: 0 auto 25px;
 }
-.franchise-cta {
-  background: var(--reference-cream);
-  padding: 70px 25px;
-  text-align: center;
-}
 .timeline {
   max-width: 900px;
 }
@@ -718,6 +718,13 @@ body {
   }
 }
 @media (max-width: 767px) {
+  .editorial-page.about-page {
+    background-attachment: scroll;
+    background-position: center top;
+    background-size: auto 100svh;
+    background-repeat: repeat-y;
+  }
+
   .editorial-page .corporate-shell {
     width: calc(100% - 36px);
   }
@@ -796,10 +803,6 @@ body {
   .journal-grid {
     grid-template-columns: 1fr;
     gap: 35px;
-  }
-  .franchise-home .section-heading {
-    align-items: flex-start;
-    flex-direction: column;
   }
   .community-banner {
     padding: 65px 23px;

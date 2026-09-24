@@ -234,7 +234,7 @@ export function LocationSpotlight({
                   </p>
                   <h3>{business.name}</h3>
                   {business.mapHref ? (
-                    <a href={business.mapHref} target="_blank" rel="noreferrer">
+                    <a href={business.mapHref} target="_blank" rel="noopener noreferrer">
                       Open Google Maps
                       <ExternalLink aria-hidden="true" size={14} />
                     </a>
@@ -279,3 +279,5 @@ export function LocationSpotlight({
     </div>
   )
 }
+
+\n

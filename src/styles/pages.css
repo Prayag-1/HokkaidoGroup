@@ -1021,17 +1021,19 @@
 }
 
 .business-detail--restaurant .business-detail__hero-media {
+  aspect-ratio: 4 / 3;
   background: var(--bg-ink);
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  min-height: clamp(28rem, 54vw, 46rem);
+  min-height: 0;
 }
 
 .business-detail--restaurant .business-detail__hero-media img {
-  aspect-ratio: auto;
-  height: 100%;
-  object-position: center;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
 }
 
 .business-detail--restaurant .business-detail__hero-contact {
@@ -1092,6 +1094,9 @@
 
 .business-detail--restaurant .business-detail__gallery-item img {
   aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
   transition: none;
 }
 

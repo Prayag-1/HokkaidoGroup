@@ -27,8 +27,8 @@ const stepLabels: Record<BookingStep, string> = {
 const brandLabelMap: Record<(typeof BOOKABLE_BRANDS)[number], string> = {
   'hokkaido-ramen-house': 'Hokkaido Ramen (House)',
   'hokkaido-house': 'Hokkaido House',
-  'hokkaido-yakitori': 'Hokkaido Yakitori',
-  'hokkaido-izakaya': 'Hokkaido Izakaya',
+  'hokkaido-express': 'Hokkaido Express',
+  'hokkaido-asian-cuisine': 'Hokkaido Asian Cuisine',
   'hokkaido-umami': 'Hokkaido Umami',
   'hokkaido-sora': 'Hokkaido Sora',
   'hokkaido-pokhara': 'Hokkaido Pokhara',
@@ -36,6 +36,9 @@ const brandLabelMap: Record<(typeof BOOKABLE_BRANDS)[number], string> = {
 
 async function submitBooking(values: BookingFormValues) {
   const endpoint = BOOKING_FORM_ENDPOINTS[values.brand]
+  if (!endpoint) {
+    throw new Error('This form is not configured yet. Please contact the venue directly.')
+  }
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {

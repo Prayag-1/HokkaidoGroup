@@ -22,7 +22,8 @@ Corporate website for Hokkaido Group, built with React, TypeScript, Vite, React 
 - `src/lib/site-data.ts` - Formspree endpoint wiring
 - `src/theme.css` - canonical design tokens and global component styles
 - `src/assets/gallery/` - real business imagery imported through Vite
-- `public/favicon.svg` - brand favicon
+- `public/favicon-48.png`, `public/favicon.ico` - Hokkaido Group favicons
+- `public/apple-touch-icon.png` - home screen icon
 
 ## Design System
 

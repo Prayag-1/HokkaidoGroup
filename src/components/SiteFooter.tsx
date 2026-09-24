@@ -21,7 +21,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <p className="group-footer__copyright">
-          © {new Date().getFullYear()} Hokkaido Group. All rights reserved.
+          © {new Date().getFullYear()} Hokkaido Group. All rights reserved. — Made by Prayag Nepal
         </p>
       </div>
     </footer>

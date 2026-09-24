@@ -10,16 +10,16 @@ body {
   outline-offset: 5px;
 }
 .editorial-page {
-  background: var(--reference-white);
-  color: var(--reference-charcoal);
-}
-.editorial-page.about-page {
   background-color: var(--reference-white);
   background-image: linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.84)), url('../assets/patterns/a0804dc2-d333-4e3c-861a-4a9b7a76bc63.png');
   background-position: center top;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  color: var(--reference-charcoal);
+}
+.editorial-page.about-page {
+  background-color: var(--reference-white);
 }
 .editorial-page h1,
 .editorial-page h2,
@@ -639,6 +639,11 @@ body {
   gap: 60px;
   align-items: center;
 }
+.janeichi-profile {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 860px;
+  margin-inline: auto;
+}
 .mart-story blockquote {
   background: var(--reference-cream);
   border-left: 4px solid var(--reference-slate);
@@ -718,7 +723,15 @@ body {
   }
 }
 @media (max-width: 767px) {
-  .editorial-page.about-page {
+  .editorial-page {
+    background-attachment: scroll;
+    background-position: center top;
+    background-size: auto 100svh;
+    background-repeat: repeat-y;
+  }
+
+  .corporate-section--rice-paper,
+  .corporate-section--plain {
     background-attachment: scroll;
     background-position: center top;
     background-size: auto 100svh;
@@ -845,6 +858,9 @@ body {
   }
   .leadership-grid {
     gap: 35px 18px;
+  }
+  .janeichi-profile {
+    gap: 24px;
   }
   .leadership-grid h3 {
     font-size: 18px;

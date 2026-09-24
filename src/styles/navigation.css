@@ -148,6 +148,8 @@
 }
 .site-menu__brands h2 {
   font-size: 24px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
   margin: 0 0 22px;
   font-weight: 600;
 }

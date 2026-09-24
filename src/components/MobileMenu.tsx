@@ -139,7 +139,15 @@ export function MobileMenu() {
               <div className="site-menu__brands">
                 {businessCategories.map((category) => (
                   <section key={category}>
-                    <h2>{category === 'Restaurant' ? 'Restaurants' : category}</h2>
+                    <h2>
+                      {category === 'Restaurant'
+                        ? 'Restaurants'
+                        : category === 'Skin Care'
+                          ? 'HOMA Nepal — Skincare'
+                          : category === 'Imports'
+                            ? 'Japanese imports — Imports'
+                            : category}
+                    </h2>
                     <div className="site-menu__brand-grid">
                       {businesses
                         .filter((b) => b.category === category)

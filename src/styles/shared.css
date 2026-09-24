@@ -64,7 +64,12 @@
 
 .corporate-section--alt,
 .corporate-section--rice-paper {
-  background: var(--bg-rice-paper);
+  background-color: var(--bg-rice-paper);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.84)), url('../assets/patterns/a0804dc2-d333-4e3c-861a-4a9b7a76bc63.png');
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .corporate-page--home .corporate-section,
@@ -91,7 +96,12 @@
 }
 
 .corporate-section--plain {
-  background: var(--bg-rice-paper);
+  background-color: var(--bg-rice-paper);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.84)), url('../assets/patterns/a0804dc2-d333-4e3c-861a-4a9b7a76bc63.png');
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .corporate-page--home .business-card:nth-child(n) {

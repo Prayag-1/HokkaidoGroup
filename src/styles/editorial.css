@@ -370,6 +370,138 @@ body {
   background: var(--reference-gray);
   text-align: center;
 }
+.testimonial-section > .corporate-shell > h2 {
+  margin-bottom: 34px;
+}
+.reviews-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 24px;
+  padding: 24px 30px;
+  border: 1px solid var(--reference-border, #e8e8e8);
+  border-radius: 12px;
+  background: var(--reference-white);
+  text-align: left;
+}
+.reviews-summary__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 23px;
+}
+.google-wordmark {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+.google-wordmark span:nth-child(1), .google-wordmark span:nth-child(4) { color: #4285f4; }
+.google-wordmark span:nth-child(2), .google-wordmark span:nth-child(6) { color: #ea4335; }
+.google-wordmark span:nth-child(3) { color: #fbbc05; }
+.google-wordmark span:nth-child(5) { color: #34a853; }
+.reviews-summary > p {
+  grid-column: 1;
+  margin: 0;
+  color: var(--reference-muted);
+  font-size: 14px;
+}
+.reviews-summary > a {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #0b69e3;
+  color: #fff;
+  font-weight: 650;
+  text-decoration: none;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  text-align: left;
+}
+.testimonial-card {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(22px, 4vw, 36px);
+  background: var(--reference-white);
+  border: 1px solid var(--reference-border, #e8e8e8);
+  border-radius: 12px;
+}
+.testimonial-card__stars {
+  margin: 0 0 13px;
+  color: #f4b400;
+  font-size: 24px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.testimonial-card blockquote {
+  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.testimonial-card__review,
+.testimonial-card__review summary {
+  min-width: 0;
+  max-width: 100%;
+}
+.testimonial-card__review summary {
+  cursor: pointer;
+  list-style: none;
+}
+.testimonial-card__review summary::-webkit-details-marker {
+  display: none;
+}
+.testimonial-card__review blockquote {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+.testimonial-card__review[open] blockquote {
+  display: block;
+  overflow: visible;
+}
+.testimonial-card__read-more {
+  display: inline-block;
+  margin: -14px 0 18px;
+  color: #0b69e3;
+  font-weight: 600;
+}
+.testimonial-card__read-more::after {
+  content: 'Read more';
+}
+.testimonial-card__review[open] .testimonial-card__read-more::after {
+  content: 'Show less';
+}
+.testimonial-card__byline {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.testimonial-card__details {
+  margin: 0 0 12px;
+  color: var(--reference-muted);
+  font-size: 13px;
+}
+.testimonial-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--reference-charcoal);
+  font-size: 14px;
+  font-weight: 600;
+}
 .quote-mark {
   display: block;
   font-size: 95px;
@@ -694,6 +826,9 @@ body {
   }
 }
 @media (max-width: 1023px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .image-carousel > * {
     flex-basis: calc((100% - 24px) / 2);
   }
@@ -816,6 +951,43 @@ body {
   .journal-grid {
     grid-template-columns: 1fr;
     gap: 35px;
+  }
+  .testimonial-grid {
+    display: flex;
+    gap: 12px;
+    width: calc(100% + 18px);
+    min-width: 0;
+    overflow-x: auto;
+    padding: 0 18px 10px 0;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .testimonial-card {
+    flex: 0 0 min(86%, 340px);
+    width: auto;
+    padding: 18px;
+    scroll-snap-align: start;
+  }
+  .testimonial-card__review blockquote {
+    -webkit-line-clamp: 3;
+  }
+  .testimonial-card a {
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+  .reviews-summary {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .reviews-summary > p,
+  .reviews-summary > a {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .reviews-summary > a {
+    justify-self: start;
+    margin-top: 8px;
   }
   .community-banner {
     padding: 65px 23px;

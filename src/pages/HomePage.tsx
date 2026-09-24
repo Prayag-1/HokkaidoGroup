@@ -14,16 +14,17 @@ import { SiteFooter } from '../components/SiteFooter'
 import { ImageCarousel } from '../components/ImageCarousel'
 import { businesses } from '../data/businesses'
 import { editorialDrafts } from '../data/editorialContent'
+import { testimonials } from '../data/testimonials'
 import homeHeroImage from '../assets/gallery/sora/sora4.webp'
 const experiences = [businesses[1], businesses[2], businesses[7], businesses[5]]
 const nav = [
   { label: 'Dining', to: '/our-brands?category=Restaurant', Icon: Utensils },
   {
-    label: 'Hokkaido Dekkaido',
+    label: 'Rooms',
     to: '/businesses/dekkaido-farm-house',
     Icon: BedDouble,
   },
-  { label: 'HOMA Nepal', to: '/mart', Icon: ShoppingCart },
+  { label: 'Skincare', to: '/mart', Icon: ShoppingCart },
   { label: 'Catering', to: '/catering', Icon: ChefHat },
   { label: 'Imports', to: '/businesses/janeichi', Icon: Package },
   { label: 'Membership', to: '/membership', Icon: UsersRound },
@@ -157,16 +158,50 @@ export function HomePage() {
       </section>
       <section className="editorial-section testimonial-section">
         <div className="corporate-shell">
-          <h2>Guest stories</h2>
-          <span className="quote-mark" aria-hidden="true">
-            “
-          </span>
-          <p className="placeholder-copy">
-            Guest experiences will be shared here.
-          </p>
-          <p className="content-note">
-            Verified testimonials are being prepared.
-          </p>
+          <h2>What Our Customers Say</h2>
+          <div className="reviews-summary">
+            <div className="reviews-summary__brand" aria-label="Google Reviews">
+              <span className="google-wordmark" aria-hidden="true">
+                <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+              </span>
+              <strong>Reviews</strong>
+            </div>
+            <p>Guest feedback from Hokkaido Group restaurants</p>
+            <a
+              href="https://www.google.com/maps/place/@27.683036,85.306682,17z/data=!4m10!3m9!1s0x39eb190026389727:0x40b164b59e90bbb9!5m2!4m1!1i2!8m2!3d27.683036!4d85.306682!9m1!1b1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Review us on Google <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="testimonial-grid">
+            {testimonials.map((testimonial) => (
+              <article className="testimonial-card" key={`${testimonial.brand}-${testimonial.reviewer}`}>
+                {testimonial.rating && (
+                  <p className="testimonial-card__stars" aria-label={`${testimonial.rating} out of 5 stars`}>
+                    {'★'.repeat(testimonial.rating)}
+                  </p>
+                )}
+                {testimonial.quote.length > 180 ? (
+                  <details className="testimonial-card__review">
+                    <summary>
+                      <blockquote>“{testimonial.quote}”</blockquote>
+                      <span className="testimonial-card__read-more" aria-hidden="true" />
+                    </summary>
+                  </details>
+                ) : (
+                  <blockquote>“{testimonial.quote}”</blockquote>
+                )}
+                <p className="testimonial-card__byline">
+                  {testimonial.reviewer} · {testimonial.brand}
+                </p>
+                <a href={testimonial.reviewUrl} target="_blank" rel="noopener noreferrer">
+                  {testimonial.reviewLinkLabel} <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="editorial-section corporate-shell">

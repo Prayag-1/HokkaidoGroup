@@ -104,7 +104,10 @@ export const hokkaidoGroupCorporateContact: CorporateContact = {
   address: null,
   phone: '9801011301',
   email: 'hokkaidogroupnepal@gmail.com',
-  socialLinks: [],
+  socialLinks: [
+    { label: 'Facebook', url: 'https://www.facebook.com/p/Hokkaido-Group-61593789569146/', verified: true },
+    { label: 'Instagram', url: 'https://www.instagram.com/hokkaidogroup.np/', verified: true },
+  ],
   verified: false,
 }
 

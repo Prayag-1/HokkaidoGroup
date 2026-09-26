@@ -16,12 +16,12 @@ export function BusinessDirectoryPage() {
     : businessCategories
   return (
     <main id="main-content" className="editorial-page">
-      <PageBreadcrumb title="Our brands" />
-      <h1 className="page-title">Our brands</h1>
+      <PageBreadcrumb title="Our outlets" />
+      <h1 className="page-title">Our outlets</h1>
       <div className="corporate-shell brand-directory">
         {category && (
           <Link className="text-link" to="/our-brands">
-            View all brands
+            View all outlets
           </Link>
         )}
         {groups.map((group) => (

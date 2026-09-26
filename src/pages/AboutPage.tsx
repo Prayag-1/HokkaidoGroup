@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
 import { SiteFooter } from '../components/SiteFooter'
 import { hokkaidoVisionParagraphs } from '../data/corporateContent'
-import { businesses } from '../data/businesses'
+import { businesses, getBusinessImagePosition } from '../data/businesses'
+import { handleBusinessImageError } from '../lib/businessImages'
 import founderPhoto from '../assets/gallery/founder-arjun-adhikari.png'
 import lalBahadurPhoto from '../assets/gallery/staff/chef lala bahdur.jpeg'
 import bipulBasyalPhoto from '../assets/gallery/staff/hr manager.jpeg'
@@ -115,7 +116,7 @@ export function AboutPage() {
         <div className="social-wall">
           {storyPhotos.map(({ business: b, src }, index) => (
             <Link key={src} to={'/businesses/' + b.slug}>
-              <img src={src} alt={`${b.name} photo ${index + 1}`} loading="lazy" />
+              <img src={src} alt={`${b.name} photo ${index + 1}`} loading="lazy" style={{ objectPosition: getBusinessImagePosition(b, src) }} onError={(event) => handleBusinessImageError(event, b, 'a')} />
             </Link>
           ))}
         </div>
@@ -124,7 +125,7 @@ export function AboutPage() {
         <h2 className="center-heading">Leadership Team</h2>
         <div className="leadership-grid">
           <article>
-            <img src={founderPhoto} alt="Arjun Adhikari" loading="lazy" />
+            <img src={founderPhoto} alt="Arjun Adhikari" loading="lazy" onError={(event) => event.currentTarget.remove()} />
             <h3>Arjun Adhikari</h3>
             <p>Founder and Chairman</p>
             <details>
@@ -139,7 +140,7 @@ export function AboutPage() {
           </article>
           {leadershipTeam.map((leader) => (
             <article key={leader.name}>
-              <img src={leader.image} alt={leader.name} loading="lazy" />
+              <img src={leader.image} alt={leader.name} loading="lazy" onError={(event) => event.currentTarget.remove()} />
               <h3>{leader.name}</h3>
               <p>{leader.role}</p>
               <details>

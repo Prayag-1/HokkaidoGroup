@@ -1299,6 +1299,9 @@
   overflow: hidden;
   position: relative;
 }
+.business-card__media:has(.business-image--unavailable) {
+  display: none;
+}
 
 .business-card__media::after {
   background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--shadow-color) 22%, transparent));

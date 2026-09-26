@@ -897,14 +897,20 @@ body {
   .home-banner__nav {
     bottom: 30px;
     left: 20px;
-    right: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px 25px;
+    right: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    gap: 16px 8px;
+    width: min(80vw, calc(100vw - 40px));
+    max-width: min(80vw, calc(100vw - 40px));
+    box-sizing: border-box;
+    transform: translateX(-5vw);
   }
   .home-banner__nav a {
     font-size: 10px;
-    min-width: 75px;
+    min-width: 0;
+    max-width: 100%;
     gap: 6px;
   }
   .home-banner__nav svg {
@@ -1130,6 +1136,10 @@ body {
 }
 .brand-logo-strip .business-image--logo > img {
   max-height: 100%;
+}
+.brand-logo-strip a:has(.business-image--unavailable),
+.site-menu__brand-grid article:has(.business-image--unavailable) {
+  display: none;
 }
 .brand-listing > .brand-listing__media,
 .brand-listing:nth-of-type(even) > .brand-listing__media {

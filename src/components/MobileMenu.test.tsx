@@ -36,8 +36,10 @@ describe('site menu', () => {
   it('keeps the requested contacts and division links together', () => {
     openMenu()
     expect(screen.getByRole('link', { name: '9801011301' })).toHaveAttribute('href', 'tel:9801011301')
-    expect(screen.getByRole('link', { name: 'hokkaidoramenhouse@gmail.com' })).toHaveAttribute('href', 'mailto:hokkaidoramenhouse@gmail.com')
-    for (const category of ['HOMA Nepal — Skincare', 'Japanese imports — Imports', 'General']) {
+    expect(screen.getByRole('link', { name: 'hokkaidogroupnepal@gmail.com' })).toHaveAttribute('href', 'mailto:hokkaidogroupnepal@gmail.com')
+    expect(screen.getByRole('link', { name: 'Our outlets' })).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Imports' })).not.toBeInTheDocument()
+    for (const category of ['HOMA Nepal — Skincare', 'Imports', 'General']) {
       expect(screen.getByRole('heading', { name: category })).toBeInTheDocument()
     }
     expect(screen.queryByText(/Onsen & resort/i)).not.toBeInTheDocument()

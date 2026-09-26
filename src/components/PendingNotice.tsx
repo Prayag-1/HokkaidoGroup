@@ -5,7 +5,7 @@ type PendingNoticeProps = {
   className?: string
 }
 
-export function PendingNotice({ label = 'Details coming soon', className }: PendingNoticeProps) {
+export function PendingNotice({ label = 'Details are not available yet', className }: PendingNoticeProps) {
   return (
     <div className={cn('corporate-pending-note', className)} role="note">
       <span aria-hidden="true" />

@@ -2,7 +2,8 @@ import { useState, type KeyboardEvent, type TouchEvent } from 'react'
 import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from 'framer-motion'
-import type { Business } from '../data/businesses'
+import { getBusinessImagePosition, type Business } from '../data/businesses'
+import { handleBusinessImageError } from '../lib/businessImages'
 
 type FeaturedOutletsCarouselProps = {
   businesses: Business[]
@@ -92,6 +93,8 @@ export function FeaturedOutletsCarousel({ businesses }: FeaturedOutletsCarouselP
                   src={cardImage}
                   alt={business.logo && cardImage === business.logo ? `${business.name} logo` : `${business.name} venue photo`}
                   loading={index === 0 ? 'eager' : 'lazy'}
+                  style={{ objectPosition: getBusinessImagePosition(business, cardImage) }}
+                  onError={(event) => handleBusinessImageError(event, business, '.featured-outlets__card')}
                   sizes="(max-width: 40rem) 86vw, 28rem"
                 />
               ) : null}

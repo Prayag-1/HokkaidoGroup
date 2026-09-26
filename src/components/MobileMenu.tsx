@@ -145,7 +145,7 @@ export function MobileMenu() {
                         : category === 'Skin Care'
                           ? 'HOMA Nepal — Skincare'
                           : category === 'Imports'
-                            ? 'Japanese imports — Imports'
+                            ? 'Imports'
                             : category}
                     </h2>
                     <div className="site-menu__brand-grid">

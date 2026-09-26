@@ -1,6 +1,6 @@
 ﻿import { ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { businesses, hokkaidoGroupCorporateContact } from '../data/businesses'
+import { hokkaidoGroupCorporateContact } from '../data/businesses'
 function SocialIcon({ label }: { label: string }) {
   if (/facebook/i.test(label))
     return (
@@ -49,11 +49,11 @@ function SocialIcon({ label }: { label: string }) {
 }
 export function GroupContact({ phone }: { phone?: string } = {}) {
   const group = hokkaidoGroupCorporateContact
-  const contact = group.phone || group.email ? group : businesses[0]
+  const contact = group
   return (
     <div className="group-contact">
       <h3>Contact us</h3>
-      {contact !== group && <p>Hokkaido Ramen House · {phone ? 'email contact' : 'outlet contact'}</p>}
+      <p>{contact.name}</p>
       <address>
         {(phone ?? contact.phone) && <a href={`tel:${phone ?? contact.phone}`}>{phone ?? contact.phone}</a>}
         {contact.email && (

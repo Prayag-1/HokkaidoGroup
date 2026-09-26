@@ -13,9 +13,8 @@ export function MartPage() {
     <main id="main-content" className="editorial-page homa-page">
       <PageBreadcrumb title={homa.name} />
       <section className="split-hero">
-        <div className="brand-photo-pending">
-          <BusinessImage business={homa} eager />
-          <p>Store photography coming soon</p>
+        <div className="brand-photo-pending" aria-label="HOMA Nepal brand mark">
+          <BusinessImage business={homa} eager logo />
         </div>
         <div>
           <p className="eyebrow">{homa.category}</p>
@@ -28,10 +27,6 @@ export function MartPage() {
         <div className="section-heading"><h2>Visit HOMA Nepal</h2></div>
         {outlets.map(outlet => (
           <article className="brand-listing" key={outlet.id}>
-            <div className="brand-listing__media brand-photo-pending">
-              <BusinessImage business={outlet} />
-              <p>Branch photography coming soon</p>
-            </div>
             <div>
               <p className="eyebrow">{outlet.name}</p>
               <h3>{outlet.locationSummary}</h3>

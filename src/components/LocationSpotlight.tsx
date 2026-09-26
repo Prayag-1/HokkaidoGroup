@@ -230,7 +230,7 @@ export function LocationSpotlight({
                 <div className="location-spotlight__caption">
                   <p>
                     <MapPin aria-hidden="true" size={16} />
-                    {business.locationSummary ?? business.address ?? 'Location details coming soon'}
+                    {business.locationSummary ?? business.address ?? 'Location details are not available'}
                   </p>
                   <h3>{business.name}</h3>
                   {business.mapHref ? (

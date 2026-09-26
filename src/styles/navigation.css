@@ -241,11 +241,13 @@
     justify-self: center;
   }
   .corporate-logo span {
-    font-size: 17px;
+    font-size: 13px;
+    letter-spacing: 0;
+    white-space: nowrap;
   }
   .corporate-logo img {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
   }
   .corporate-hamburger {
     grid-column: 3;

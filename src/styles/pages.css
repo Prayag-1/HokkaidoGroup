@@ -1077,6 +1077,7 @@
 .business-detail--restaurant .business-detail__gallery {
   display: grid;
   gap: var(--space-3);
+  grid-auto-rows: clamp(8rem, 18vw, 14rem);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   overflow: visible;
 }
@@ -1085,6 +1086,7 @@
   border-radius: 0;
   box-shadow: none;
   flex: initial;
+  height: 100%;
   min-height: 0;
 }
 
@@ -1093,15 +1095,16 @@
 }
 
 .business-detail--restaurant .business-detail__gallery-item img {
-  aspect-ratio: 4 / 3;
-  height: auto;
+  aspect-ratio: auto;
+  display: block;
+  height: 100%;
   object-fit: cover;
   width: 100%;
   transition: none;
 }
 
 .business-detail--restaurant .business-detail__gallery-item:first-child img {
-  aspect-ratio: 4 / 5;
+  height: 100%;
 }
 
 .business-detail__hero-contact a,

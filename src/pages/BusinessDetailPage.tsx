@@ -6,8 +6,9 @@ import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
-import { getBusinessBySlug } from '../data/businesses'
+import { getBusinessBySlug, getBusinessImagePosition } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
+import { handleBusinessImageError } from '../lib/businessImages'
 
 export function BusinessDetailPage() {
   const { slug } = useParams()
@@ -112,6 +113,8 @@ export function BusinessDetailPage() {
                 src={business.image as string}
                 alt={business.logo && business.image === business.logo ? `${business.name} logo` : `${business.name} venue photo`}
                 loading="eager"
+                style={{ objectPosition: getBusinessImagePosition(business, business.image as string) }}
+                onError={(event) => handleBusinessImageError(event, business, 'figure')}
                 sizes="(max-width: 64rem) 100vw, 44rem"
               />
             </figure>
@@ -191,6 +194,8 @@ export function BusinessDetailPage() {
                     src={src}
                     alt={business.logo && src === business.logo ? `${business.name} logo` : `${business.name} photo ${index + 1}`}
                     loading="lazy"
+                    style={{ objectPosition: getBusinessImagePosition(business, src) }}
+                    onError={(event) => handleBusinessImageError(event, business, 'figure')}
                     sizes="(max-width: 40rem) 100vw, (max-width: 64rem) 50vw, 33vw"
                   />
                 </figure>

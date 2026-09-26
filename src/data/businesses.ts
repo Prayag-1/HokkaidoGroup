@@ -1,17 +1,17 @@
 import asianCuisine1 from '../assets/gallery/asian cusine/asian-cuisine-01.webp'
-import asianCuisine2 from "../assets/gallery/asian cusine/asian-cuisine-02.webp"
-import asianCuisine3 from "../assets/gallery/asian cusine/asian-cuisine-03.webp"
+import asianCuisine2 from '../assets/gallery/asian cusine/asian-cuisine-02.webp'
+import asianCuisine3 from '../assets/gallery/asian cusine/asian-cuisine-03.webp'
 import asianCuisine4 from "../assets/gallery/asian cusine/asian-cuisine-04.webp"
+import asianCuisine5 from '../assets/gallery/asian cusine/asian-cuisine-05.webp'
+import asianCuisine6 from '../assets/gallery/asian cusine/asian-cuisine-06.webp'
 
 import ramenhouse1 from "../assets/gallery/ramenhouse/ramenhouse1.webp"
-import ramenhouse2 from "../assets/gallery/ramenhouse/ramenhouse2.webp"
 import ramenhouse3 from "../assets/gallery/ramenhouse/ramenhouse3.webp"
 import ramenhouseNew1 from "../assets/gallery/ramenhouse/DSC02765.jpg.webp"
 import ramenhouseNew2 from "../assets/gallery/ramenhouse/DSC02773.jpg.webp"
 
 import house0 from "../assets/gallery/hokkaidohouse/house0.webp"
 import house1 from "../assets/gallery/hokkaidohouse/house1.webp"
-import house2 from "../assets/gallery/hokkaidohouse/house2.webp"
 import house3 from "../assets/gallery/hokkaidohouse/house3.webp"
 import janeichiLogo from '../assets/gallery/janeichi/janeichi-logo.webp'
 import hokkaidoGroupLogoImage from '../assets/logo/Hokkaido Group.jpg'
@@ -36,7 +36,6 @@ import sora3 from "../assets/gallery/sora/sora3.webp"
 import sora4 from "../assets/gallery/sora/sora4.webp"
 
 import pokharaImage from '../assets/gallery/pokhara/pokhara1.webp'
-import pokhara2 from "../assets/gallery/pokhara/pokhara2.webp"
 import pokhara3 from "../assets/gallery/pokhara/pokhara3.webp"
 import pokhara4 from "../assets/gallery/pokhara/pokhara4.webp"
 import pokharaNew1 from "../assets/gallery/pokhara/DSC09843.webp"
@@ -76,7 +75,9 @@ export type Business = {
     lng: number
   } | null
   image: string | null
+  imagePosition?: string
   galleryImages: string[]
+  galleryImagePositions?: string[]
   logo: string | null
   logoAspectRatio?: string
   logoMaxWidth?: number
@@ -101,8 +102,8 @@ export type CorporateContact = {
 export const hokkaidoGroupCorporateContact: CorporateContact = {
   name: 'Hokkaido Group',
   address: null,
-  phone: null,
-  email: null,
+  phone: '9801011301',
+  email: 'hokkaidogroupnepal@gmail.com',
   socialLinks: [],
   verified: false,
 }
@@ -111,6 +112,13 @@ export const hokkaidoGroupCorporateContact: CorporateContact = {
 export const menuContactPhone = '9801011301'
 
 export const hokkaidoGroupLogo = hokkaidoGroupLogoImage
+
+export function getBusinessImagePosition(business: Business, src: string) {
+  const galleryIndex = business.galleryImages.indexOf(src)
+  return galleryIndex >= 0
+    ? business.galleryImagePositions?.[galleryIndex] ?? 'center'
+    : business.imagePosition ?? 'center'
+}
 
 export const businesses: Business[] = [
   {
@@ -127,7 +135,8 @@ export const businesses: Business[] = [
     mapQuery: 'Park Village Resort Premises, Budhanilkantha, Kathmandu, Nepal',
     coordinates: null,
     image: ramenhouse1,
-    galleryImages: [ramenhouse1, ramenhouse2, ramenhouse3, ramenhouseNew1, ramenhouseNew2],
+    galleryImages: [ramenhouse1, ramenhouseNew1, ramenhouseNew2, ramenhouse3],
+    galleryImagePositions: ['center', 'center 55%', 'center 48%', 'center'],
     logo: hokkaidoRamenHouseLogo,
     websiteUrl: null,
     featured: true,
@@ -147,7 +156,8 @@ export const businesses: Business[] = [
     mapQuery: 'Inside International Club, Sanepa, Lalitpur, Nepal',
     coordinates: null,
     image: house1,
-    galleryImages: [house1, house0, house2, house3],
+    galleryImages: [house1, house0, house3],
+    galleryImagePositions: ['center', 'center', 'center'],
     logo: hokkaidoHouseLogo,
     websiteUrl: null,
     featured: true,
@@ -207,7 +217,9 @@ export const businesses: Business[] = [
     mapQuery: 'Hokkaido Asian Cuisine, Radisson Hotel, Lazimpat, Kathmandu, Nepal',
     coordinates: null,
     image: asianCuisine1,
-    galleryImages: [asianCuisine1, asianCuisine2, asianCuisine3, asianCuisine4],
+    imagePosition: 'center 55%',
+    galleryImages: [asianCuisine1, asianCuisine2, asianCuisine3, asianCuisine4, asianCuisine5, asianCuisine6],
+    galleryImagePositions: ['center 55%', 'center 52%', 'center 38%', 'center', 'center 48%', 'center 62%'],
     logo: asianCuisineLogo,
     websiteUrl: null,
     featured: true,
@@ -227,7 +239,8 @@ export const businesses: Business[] = [
     mapQuery: 'Hokkaido Pokhara, Inside Courtyard by Marriott, Nadipur, Pokhara, Nepal',
     coordinates: null,
     image: pokharaImage,
-    galleryImages: [pokharaImage, pokhara2, pokhara3, pokhara4, pokharaNew1, pokharaNew2, pokharaNew3, pokharaNew4, pokharaNew5, pokharaNew6],
+    galleryImages: [pokharaImage, pokhara3, pokhara4, pokharaNew1, pokharaNew2, pokharaNew3, pokharaNew4, pokharaNew5, pokharaNew6],
+    galleryImagePositions: ['center 48%', 'center', 'center', 'center 48%', 'center 48%', 'center 56%', 'center 55%', 'center 40%', 'center 58%'],
     logo: hokkaidoPokharaLogo,
     websiteUrl: null,
     featured: false,
@@ -246,8 +259,9 @@ export const businesses: Business[] = [
     locationSummary: 'Le Sherpa, Panipokhari, Kathmandu',
     mapQuery: 'Hokkaido Express, Le Sherpa, Panipokhari, Kathmandu, Nepal',
     coordinates: null,
-    image: express1,
+    image: express3,
     galleryImages: [express1, express2, express3, express4],
+    galleryImagePositions: ['center', 'center 58%', 'center 55%', 'center 68%'],
     logo: hokkaidoExpressLogo,
     websiteUrl: null,
     featured: false,

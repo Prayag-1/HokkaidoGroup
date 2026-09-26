@@ -12,9 +12,9 @@ import {
 } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { ImageCarousel } from '../components/ImageCarousel'
-import { businesses } from '../data/businesses'
-import { editorialDrafts } from '../data/editorialContent'
+import { businesses, getBusinessImagePosition } from '../data/businesses'
 import { testimonials } from '../data/testimonials'
+import { handleBusinessImageError } from '../lib/businessImages'
 import homeHeroImage from '../assets/gallery/sora/sora4.webp'
 const experiences = [businesses[1], businesses[2], businesses[7], businesses[5]]
 const nav = [
@@ -59,7 +59,7 @@ export function HomePage() {
           ))}
         </nav>
       </section>
-      <section className="brand-logo-strip" aria-label="Our brands">
+      <section className="brand-logo-strip" aria-label="Our outlets">
         {businesses.map((b) => (
           <Link key={b.id} to={`/businesses/${b.slug}`} aria-label={b.name}>
             <BusinessImage business={b} logo />
@@ -73,7 +73,7 @@ export function HomePage() {
             to={`/businesses/${b.slug}`}
             className="experience-card"
           >
-            <img src={b.image!} alt={b.name} loading="lazy" />
+            <img src={b.image!} alt={b.name} loading="lazy" style={{ objectPosition: getBusinessImagePosition(b, b.image!) }} onError={(event) => handleBusinessImageError(event, b, '.experience-card')} />
             <div>
               <span>
                 {b.id === 'dekkaido-farm-house'
@@ -95,7 +95,7 @@ export function HomePage() {
                 className="location-card"
                 to={`/businesses/${b.slug}`}
               >
-                <img src={b.image!} alt={b.name} loading="lazy" />
+                <img src={b.image!} alt={b.name} loading="lazy" style={{ objectPosition: getBusinessImagePosition(b, b.image!) }} onError={(event) => handleBusinessImageError(event, b, '.location-outlet')} />
                 <div className="location-card__caption">
                   <span className="triangle" aria-hidden="true" />
                   <h3>{b.locationSummary}</h3>
@@ -206,36 +206,15 @@ export function HomePage() {
       </section>
       <section className="editorial-section corporate-shell">
         <div className="section-heading">
-          <h2>From Hokkaido</h2>
-          <span className="content-note">Journal · coming soon</span>
-        </div>
-        <div className="journal-grid">
-          {editorialDrafts.map((item, index) => (
-            <article key={item.title}>
-              <img
-                src={experiences[index].image!}
-                alt={experiences[index].name}
-                loading="lazy"
-              />
-              <p className="eyebrow">Story preview</p>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <span className="content-note">Full story coming soon</span>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="editorial-section corporate-shell">
-        <div className="section-heading">
           <div>
             <p className="eyebrow">Stay connected</p>
             <h2>Membership</h2>
           </div>
           <Link className="editorial-button" to="/membership">
-            Membership coming soon <ArrowUpRight size={16} />
+            Register your interest <ArrowUpRight size={16} />
           </Link>
         </div>
-        <p>Our membership program is on its way.</p>
+        <p>Register your interest to hear when membership updates are available.</p>
       </section>
       <section
         className="community-banner"
@@ -248,7 +227,7 @@ export function HomePage() {
             closer to Nepalese communities.”
           </blockquote>
           <p className="content-note">
-            From our vision · community programme details coming soon
+            Guided by our vision to bring Japanese hospitality closer to Nepalese communities.
           </p>
           <Link
             className="editorial-button editorial-button--light"

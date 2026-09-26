@@ -1,7 +1,8 @@
 ﻿import { Link } from 'react-router-dom'
 import { SiteFooter } from '../components/SiteFooter'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
-import { businesses } from '../data/businesses'
+import { businesses, getBusinessImagePosition } from '../data/businesses'
+import { handleBusinessImageError } from '../lib/businessImages'
 export function StoryPage() {
   return (
     <main id="main-content" className="editorial-page">
@@ -27,7 +28,7 @@ export function StoryPage() {
               Budhanilkantha, introducing the group's Japanese dining experience
               to Nepal.
             </p>
-            <img src={businesses[0].image!} alt="Hokkaido Ramen House" />
+            <img src={businesses[0].image!} alt="Hokkaido Ramen House" style={{ objectPosition: getBusinessImagePosition(businesses[0], businesses[0].image! ) }} onError={(event) => handleBusinessImageError(event, businesses[0], 'article')} />
           </div>
         </article>
         <article>

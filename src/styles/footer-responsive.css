@@ -259,6 +259,62 @@
 }
 
 @media (max-width: 40rem) {
+  .business-detail--restaurant .business-detail__hero-shell,
+  .business-detail__hero-shell {
+    grid-template-columns: minmax(0, 1fr);
+    width: calc(100vw - 2.5rem);
+    max-width: calc(100vw - 2.5rem);
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .business-detail__hero-copy,
+  .business-detail__hero-copy .section-header__heading,
+  .business-detail__hero-copy .section-header__description,
+  .business-detail__japanese-note {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .business-detail__hero-copy {
+    width: 100%;
+  }
+
+  .business-detail__japanese-note {
+    box-sizing: border-box;
+    max-width: calc(100vw - 5rem);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .business-detail--restaurant .business-detail__hero-copy .section-header__heading {
+    box-sizing: border-box;
+    font-size: clamp(1.875rem, 8.4vw, 2.4rem);
+    line-height: 1.02;
+    max-width: 100%;
+    width: 100%;
+    max-width: calc(100vw - 5rem) !important;
+    min-width: 0 !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .business-detail__hero-media {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .business-detail__info-grid,
+  .business-detail__location-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .business-detail__panel {
+    min-width: 0;
+  }
+
   .corporate-shell {
     width: min(100% - var(--space-5), 76rem);
   }

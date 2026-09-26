@@ -3,14 +3,18 @@ import { ArrowUpRight, Building2, Mail, MapPin, MessageSquare, Navigation, Phone
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
-import { businesses, hokkaidoGroupLogo } from '../data/businesses'
+import { businesses, getBusinessImagePosition, hokkaidoGroupLogo } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
+import { handleBusinessImageError } from '../lib/businessImages'
 import contactHeroImage from '../assets/gallery/asian cusine/asian-cuisine-02.webp'
 import contactDetailImage from '../assets/gallery/sora/sora4.webp'
 import contactRoomImage from '../assets/gallery/umami/umami1.webp'
 
 export function ContactPage() {
   const cityCount = new Set(businesses.map((business) => business.address?.match(/Kathmandu|Lalitpur|Pokhara/)?.[0]).filter(Boolean)).size
+  const asianCuisine = businesses.find((business) => business.id === 'asian-cuisine')!
+  const sora = businesses.find((business) => business.id === 'hokkaido-sora')!
+  const umami = businesses.find((business) => business.id === 'hokkaido-umami')!
 
   return (
     <main id="main-content" className="corporate-page corporate-contact-page contact-page--editorial">
@@ -57,13 +61,13 @@ export function ContactPage() {
           <div className="contact-hero__visual">
             <div className="contact-showcase" aria-label="Hokkaido Group dining spaces">
               <figure className="contact-showcase__primary">
-                <img src={contactHeroImage} alt="Hokkaido Group dining room" loading="eager" />
+                <img src={contactHeroImage} alt="Hokkaido Group dining room" loading="eager" style={{ objectPosition: getBusinessImagePosition(asianCuisine, contactHeroImage) }} onError={(event) => handleBusinessImageError(event, asianCuisine, '.contact-hero__collage')} />
               </figure>
               <figure className="contact-showcase__tile contact-showcase__tile--top">
-                <img src={contactDetailImage} alt="Hokkaido Sora dining view" loading="eager" />
+                <img src={contactDetailImage} alt="Hokkaido Sora dining view" loading="eager" style={{ objectPosition: getBusinessImagePosition(sora, contactDetailImage) }} onError={(event) => handleBusinessImageError(event, sora, '.contact-hero__collage')} />
               </figure>
               <figure className="contact-showcase__tile contact-showcase__tile--bottom">
-                <img src={contactRoomImage} alt="Hokkaido Umami dining room" loading="eager" />
+                <img src={contactRoomImage} alt="Hokkaido Umami dining room" loading="eager" style={{ objectPosition: getBusinessImagePosition(umami, contactRoomImage) }} onError={(event) => handleBusinessImageError(event, umami, '.contact-hero__collage')} />
               </figure>
               <div className="contact-showcase__badge" data-surface="ink">
                 <img src={hokkaidoGroupLogo} alt="" aria-hidden="true" />
@@ -97,9 +101,9 @@ export function ContactPage() {
                 <article key={business.id} className={`contact-brand-card${contactCardImage ? '' : ' contact-brand-card--logo-only'}`}>
                   <div className="contact-brand-card__media">
                     {contactCardImage ? (
-                      <img src={contactCardImage} alt={`${business.name} location`} loading="lazy" />
+                      <img src={contactCardImage} alt={`${business.name} location`} loading="lazy" style={{ objectPosition: getBusinessImagePosition(business, contactCardImage) }} onError={(event) => handleBusinessImageError(event, business, '.contact-brand-card__media')} />
                     ) : business.logo ? (
-                      <img src={business.logo} alt={`${business.name} logo`} loading="lazy" />
+                      <img src={business.logo} alt={`${business.name} logo`} loading="lazy" onError={(event) => handleBusinessImageError(event, business, '.contact-brand-card__media')} />
                     ) : (
                       <span>{business.name}</span>
                     )}

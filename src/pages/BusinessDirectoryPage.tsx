@@ -5,15 +5,17 @@ import { SiteFooter } from '../components/SiteFooter'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
 import {
   businessCategories,
-  businesses,
+  outletBusinesses,
   type BusinessCategory,
 } from '../data/businesses'
 export function BusinessDirectoryPage() {
   const [searchParams] = useSearchParams()
   const category = searchParams.get('category')
-  const groups = businessCategories.includes(category as BusinessCategory)
+  const groups = (businessCategories.includes(category as BusinessCategory)
     ? [category as BusinessCategory]
-    : businessCategories
+    : businessCategories).filter((group) =>
+      outletBusinesses.some((business) => business.category === group),
+    )
   return (
     <main id="main-content" className="editorial-page">
       <PageBreadcrumb title="Our outlets" />
@@ -27,7 +29,7 @@ export function BusinessDirectoryPage() {
         {groups.map((group) => (
           <section key={group}>
             <h2>{group}</h2>
-            {businesses
+            {outletBusinesses
               .filter((b) => b.category === group)
               .map((b) => (
                 <article className="brand-listing" key={b.id}>

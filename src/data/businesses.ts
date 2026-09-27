@@ -51,9 +51,11 @@ import dekkaido3 from "../assets/gallery/dekkaido/dekkaido3.webp"
 import dekkaido4 from "../assets/gallery/dekkaido/dekkaido4.webp"
 
 import express1 from "../assets/gallery/Express/express-01.webp"
-import express2 from "../assets/gallery/Express/express-02.webp"
-import express3 from "../assets/gallery/Express/express-03.webp"
 import express4 from "../assets/gallery/Express/express-04.webp"
+import expressNew1 from "../assets/gallery/Express/DSC05442.jpg.jpeg"
+import expressNew2 from "../assets/gallery/Express/DSC05444.jpg.jpeg"
+import expressNew3 from "../assets/gallery/Express/DSC05490.jpg.jpeg"
+import expressNew4 from "../assets/gallery/Express/DSC05518.jpg.jpeg"
 
 
 export type BusinessCategory = 'Restaurant' | 'Skin Care' | 'Imports' | 'General'
@@ -262,9 +264,9 @@ export const businesses: Business[] = [
     locationSummary: 'Le Sherpa, Panipokhari, Kathmandu',
     mapQuery: 'Hokkaido Express, Le Sherpa, Panipokhari, Kathmandu, Nepal',
     coordinates: null,
-    image: express3,
-    galleryImages: [express1, express2, express3, express4],
-    galleryImagePositions: ['center', 'center 58%', 'center 55%', 'center 68%'],
+    image: expressNew3,
+    galleryImages: [expressNew3, expressNew1, expressNew2, expressNew4, express1, express4],
+    galleryImagePositions: ['center 48%', 'center 48%', 'center 48%', 'center 48%', 'center', 'center'],
     logo: hokkaidoExpressLogo,
     websiteUrl: null,
     featured: false,
@@ -336,6 +338,11 @@ export const businesses: Business[] = [
 ]
 
 export const businessCategories: BusinessCategory[] = ['Restaurant', 'Skin Care', 'Imports', 'General']
+
+// HOMA Nepal and Janeichi have dedicated pages and are not part of the outlet directory.
+export const outletBusinesses = businesses.filter(
+  (business) => business.id !== 'hokkaido-mart' && business.id !== 'janeichi',
+)
 
 export const featuredBusinesses = businesses.filter((business) => business.featured)
 

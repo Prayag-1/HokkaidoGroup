@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { ImageCarousel } from '../components/ImageCarousel'
-import { businesses, getBusinessImagePosition } from '../data/businesses'
+import { businesses, getBusinessImagePosition, outletBusinesses } from '../data/businesses'
 import { testimonials } from '../data/testimonials'
 import { handleBusinessImageError } from '../lib/businessImages'
 import homeHeroImage from '../assets/gallery/sora/sora4.webp'
@@ -60,7 +60,7 @@ export function HomePage() {
         </nav>
       </section>
       <section className="brand-logo-strip" aria-label="Our outlets">
-        {businesses.map((b) => (
+        {outletBusinesses.map((b) => (
           <Link key={b.id} to={`/businesses/${b.slug}`} aria-label={b.name}>
             <BusinessImage business={b} logo />
           </Link>
@@ -120,7 +120,7 @@ export function HomePage() {
               <dd>Our first restaurant</dd>
             </div>
             <div>
-              <dt>{businesses.length}</dt>
+              <dt>{outletBusinesses.length}</dt>
               <dd>Brands in our directory</dd>
             </div>
             <div>

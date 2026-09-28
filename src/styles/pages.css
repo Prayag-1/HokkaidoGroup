@@ -1107,6 +1107,11 @@
   height: 100%;
 }
 
+.business-detail--express .business-detail__hero-media img,
+.business-detail--express .business-detail__gallery-item img {
+  object-fit: contain;
+}
+
 .business-detail__hero-contact a,
 .business-detail__contact-list a,
 .contact-brand-card__detail a {

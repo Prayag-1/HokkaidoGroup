@@ -52,7 +52,7 @@ export function BusinessDetailPage() {
   const whatsAppUrl = getBusinessWhatsAppUrl(business)
 
   return (
-    <main id="main-content" className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}`}>
+    <main id="main-content" className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}${business.id === 'hokkaido-express' ? ' business-detail--express' : ''}`}>
       <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--first business-detail__hero-surface">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header business-detail__hero-copy">

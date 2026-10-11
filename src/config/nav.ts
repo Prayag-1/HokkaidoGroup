@@ -4,6 +4,7 @@ export const primaryNavLinks = [
   { to: '/membership', label: 'Membership' },
   { to: '/catering', label: 'Catering' },
   { to: '/mart', label: 'HOMA Nepal' },
+  { to: '/businesses/janeichi', label: 'Imports' },
   { to: '/our-brands?category=Restaurant', label: 'Dining' },
   { to: '/businesses/dekkaido-farm-house', label: 'Rooms' },
   { to: '/contact', label: 'Contact' },

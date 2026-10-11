@@ -37,6 +37,10 @@
   --accent-blue: var(--reference-slate);
   --accent-blue-on-ink: var(--reference-cream);
   --accent-detail: var(--reference-slate);
+  --accent-vermillion: #b3262d;
+  --accent-vermillion-hover: #8f1e24;
+  --button-primary-hover-bg: color-mix(in srgb, var(--accent-vermillion) 94%, var(--reference-charcoal));
+  --button-primary-active-bg: color-mix(in srgb, var(--accent-vermillion) 88%, var(--reference-charcoal));
 
   --surface-card-on-rice-paper: var(--reference-cream);
   --surface-muted-on-rice-paper: var(--reference-gray);
@@ -65,14 +69,14 @@
   --shadow-color: #000000;
   --transparent: transparent;
 
-  --color-primary: var(--accent-slate);
-  --color-primary-hover: var(--accent-slate-hover);
-  --color-primary-active: var(--accent-slate-active);
+  --color-primary: var(--accent-vermillion);
+  --color-primary-hover: var(--accent-vermillion-hover);
+  --color-primary-active: var(--accent-vermillion-hover);
   --color-primary-contrast: var(--reference-white);
-  --color-primary-soft: rgba(60, 83, 101, 0.16);
-  --color-primary-border: rgba(60, 83, 101, 0.42);
-  --color-primary-disabled: rgba(60, 83, 101, 0.38);
-  --color-primary-text: var(--accent-slate);
+  --color-primary-soft: color-mix(in srgb, var(--accent-vermillion) 16%, transparent);
+  --color-primary-border: color-mix(in srgb, var(--accent-vermillion) 42%, transparent);
+  --color-primary-disabled: color-mix(in srgb, var(--accent-vermillion) 38%, transparent);
+  --color-primary-text: var(--accent-vermillion);
   --color-accent-teal: var(--accent-moss);
   --color-accent-teal-soft: rgba(60, 83, 101, 0.1);
   --color-accent-neutral: var(--accent-neutral);
@@ -147,6 +151,7 @@
   --type-h6: 1rem;
   --type-body: 1rem;
   --type-small: 0.875rem;
+  --type-xs: var(--type-label);
   --type-label: 0.75rem;
   --type-eyebrow: 0.75rem;
   --font-size-body-copy: var(--type-body);
@@ -162,6 +167,9 @@
   --elevation-card-rest: 0 1px 1px rgba(0, 0, 0, 0.28);
   --elevation-card-hover: 0 18px 38px rgba(0, 0, 0, 0.42);
   --elevation-panel: 0 20px 50px rgba(0, 0, 0, 0.34);
+  --elevation-button-hover: var(--elevation-card-rest);
+  --button-focus-light: var(--reference-cream);
+  --button-focus-dark: var(--reference-charcoal);
 
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
@@ -176,8 +184,8 @@
   --button-primary-bg: var(--color-primary);
   --button-primary-text: var(--color-primary-contrast);
   --button-primary-border: var(--color-primary);
-  --button-primary-hover-bg: var(--color-primary-hover);
-  --button-primary-hover-border: var(--color-primary-hover);
+  --button-primary-hover-border: var(--button-primary-hover-bg);
+  --button-primary-active-border: var(--button-primary-active-bg);
   --button-secondary-bg: transparent;
   --button-secondary-text: var(--color-ink);
   --button-secondary-border: var(--color-ink);
@@ -191,6 +199,16 @@
   --header-text: var(--fg-on-ink);
   --header-border: var(--border-on-ink);
   --header-active: var(--accent-slate-on-ink);
+  --header-height: 5.625rem;
+  --header-height-mobile: 5rem;
+  --content-max-width: 76rem;
+  --content-inline-padding: var(--space-8);
+  --header-logo-size: 3.5rem;
+  --header-logo-size-mobile: 2.25rem;
+  --header-inline-padding: var(--space-8);
+  --header-mobile-gap: var(--space-2);
+  --header-nav-gap: var(--space-5);
+  --tap-target-size: 2.75rem;
   --footer-bg: var(--bg-ink);
   --footer-heading: var(--fg-on-ink);
   --footer-text: var(--fg-on-ink-muted);
@@ -228,7 +246,17 @@ body {
 
 .corporate-shell {
   margin-inline: auto;
-  width: min(100% - var(--space-8), 76rem);
+  width: min(calc(100% - var(--content-inline-padding) - var(--content-inline-padding)), var(--content-max-width));
+}
+
+.corporate-page [id] {
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+@media (max-width: 767px) {
+  .corporate-page [id] {
+    scroll-margin-top: calc(var(--header-height-mobile) + var(--space-3));
+  }
 }
 
 [data-surface="ink"] {
@@ -260,6 +288,10 @@ body {
   --color-bg-disabled: var(--surface-disabled-on-ink);
   --color-border: var(--border-on-ink);
   --color-border-strong: var(--border-on-ink-strong);
+  --button-secondary-text: var(--fg-on-ink);
+  --button-secondary-border: var(--fg-on-ink);
+  --button-secondary-hover-bg: var(--fg-on-ink);
+  --button-secondary-hover-text: var(--bg-ink);
   --color-rule: rgba(250, 249, 241, 0.78);
   --color-rule-soft: rgba(250, 249, 241, 0.24);
   --button-secondary-text: var(--fg-on-ink);

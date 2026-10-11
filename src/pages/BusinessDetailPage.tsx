@@ -6,9 +6,10 @@ import { LocationSpotlight } from '../components/LocationSpotlight'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
-import { getBusinessBySlug, getBusinessImagePosition } from '../data/businesses'
+import { businesses, getBusinessBySlug, getBusinessImagePosition } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
 import { handleBusinessImageError } from '../lib/businessImages'
+import { PageBreadcrumb } from '../components/PageBreadcrumb'
 
 export function BusinessDetailPage() {
   const { slug } = useParams()
@@ -25,7 +26,7 @@ export function BusinessDetailPage() {
               <p className="section-header__description">
                 The requested business may not have been added to the directory yet.
               </p>
-              <Link to="/businesses" className="corporate-button corporate-button--primary">
+              <Link to="/businesses" className="corporate-button btn-primary">
                 Return to Directory
               </Link>
             </div>
@@ -53,6 +54,7 @@ export function BusinessDetailPage() {
 
   return (
     <main id="main-content" className={`corporate-page business-detail--editorial${isRestaurant ? ' business-detail--restaurant' : ''}${business.id === 'hokkaido-express' ? ' business-detail--express' : ''}`}>
+      {isRestaurant ? <PageBreadcrumb title={business.name} parent={{ label: 'Our Restaurants', to: '/businesses' }} /> : null}
       <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--first business-detail__hero-surface">
         <ScrollReveal className={`corporate-shell business-detail__hero-shell${hasHeroMedia ? '' : ' business-detail__hero-shell--text-only'}`}>
           <div className="section-header corporate-section__header business-detail__hero-copy">
@@ -126,59 +128,16 @@ export function BusinessDetailPage() {
         </ScrollReveal>
       </SectionSurface>
 
-      <SectionSurface variant="rice-paper" className="corporate-section--alt">
-        <ScrollReveal className="corporate-shell business-detail__info-grid">
-          <article className="business-detail__panel">
-            <p className="section-header__eyebrow">Profile</p>
-            <h2 className="business-detail__panel-title">What to expect</h2>
-            {aboutText ? <p className="business-detail__copy">{aboutText}</p> : null}
-          </article>
-
-          <article className="business-detail__panel">
-            <p className="section-header__eyebrow">Visit</p>
-            <h2 className="business-detail__panel-title">Contact details</h2>
-            <dl className="business-detail__contact-list">
-              {business.address ? (
-                <div>
-                  <dt>
-                    <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
-                    Address
-                  </dt>
-                  <dd>{business.address}</dd>
-                </div>
-              ) : null}
-              {phoneValue ? (
-                <div>
-                  <dt>
-                    <MessageCircle size={15} strokeWidth={2.2} aria-hidden="true" />
-                    WhatsApp
-                  </dt>
-                  <dd>
-                    <a href={whatsAppUrl ?? undefined} target="_blank" rel="noopener noreferrer">
-                      <MessageCircle size={16} strokeWidth={2.2} aria-hidden="true" />
-                      <span>{phoneValue}</span>
-                    </a>
-                  </dd>
-                </div>
-              ) : null}
-              {emailValue ? (
-                <div>
-                  <dt>
-                    <Mail size={15} strokeWidth={2.2} aria-hidden="true" />
-                    Email
-                  </dt>
-                  <dd>
-                    <a href={gmailUrl ?? undefined} target="_blank" rel="noopener noreferrer">
-                      <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
-                      <span>{emailValue}</span>
-                    </a>
-                  </dd>
-                </div>
-              ) : null}
-            </dl>
-          </article>
-        </ScrollReveal>
-      </SectionSurface>
+      {isRestaurant && business.menu ? (
+        <SectionSurface variant="rice-paper" className="corporate-section--alt" id="menu">
+          <ScrollReveal className="corporate-shell outlet-menu">
+            <p className="corporate-eyebrow">Menu</p>
+            <h2>{business.name} menu</h2>
+            {business.menu.sections?.map((section) => <section key={section.title}><h3>{section.title}</h3><ul>{section.items.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
+            {business.menu.pdfUrl && <a className="corporate-button btn-secondary" href={business.menu.pdfUrl} target="_blank" rel="noopener noreferrer">Download menu (PDF)</a>}
+          </ScrollReveal>
+        </SectionSurface>
+      ) : null}
 
       {galleryImages.length > 0 ? (
         <SectionSurface variant={isRestaurant ? 'ink' : 'rice-paper'} className="corporate-section--alt">
@@ -204,6 +163,21 @@ export function BusinessDetailPage() {
           </ScrollReveal>
         </SectionSurface>
       ) : null}
+
+      <SectionSurface variant="rice-paper" className="corporate-section--alt">
+        <ScrollReveal className="corporate-shell business-detail__info-grid">
+          {aboutText ? <article className="business-detail__panel"><p className="section-header__eyebrow">About</p><h2 className="business-detail__panel-title">What to expect</h2><p className="business-detail__copy">{aboutText}</p></article> : null}
+          <article className="business-detail__panel">
+            <p className="section-header__eyebrow">Visit</p><h2 className="business-detail__panel-title">Contact details</h2>
+            <dl className="business-detail__contact-list">
+              {business.address ? <div><dt><MapPin size={15} aria-hidden="true" />Address</dt><dd>{business.address}</dd></div> : null}
+              {business.openingHours ? <div><dt>Opening hours</dt><dd>{business.openingHours}</dd></div> : null}
+              {phoneValue ? <div><dt><MessageCircle size={15} aria-hidden="true" />WhatsApp</dt><dd><a href={whatsAppUrl ?? undefined} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" /><span>{phoneValue}</span></a></dd></div> : null}
+              {emailValue ? <div><dt><Mail size={15} aria-hidden="true" />Email</dt><dd><a href={gmailUrl ?? undefined} target="_blank" rel="noopener noreferrer"><Mail size={16} aria-hidden="true" /><span>{emailValue}</span></a></dd></div> : null}
+            </dl>
+          </article>
+        </ScrollReveal>
+      </SectionSurface>
 
       <SectionSurface variant="rice-paper">
         <ScrollReveal className="corporate-shell business-detail__location-grid">
@@ -232,6 +206,16 @@ export function BusinessDetailPage() {
           />
         </ScrollReveal>
       </SectionSurface>
+
+      {isRestaurant ? (
+        <SectionSurface variant="rice-paper" className="corporate-section--alt">
+          <div className="corporate-shell outlet-other-locations">
+            <p className="corporate-eyebrow">Explore more</p>
+            <h2>Other locations</h2>
+            <ul>{businesses.filter((other) => other.category === 'Restaurant' && other.id !== business.id).map((other) => <li key={other.id}><Link to={`/businesses/${other.slug}`}>{other.name}</Link><span>{other.locationSummary ?? other.address}</span></li>)}</ul>
+          </div>
+        </SectionSurface>
+      ) : null}
 
       <SiteFooter />
     </main>

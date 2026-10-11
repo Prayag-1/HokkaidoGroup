@@ -160,7 +160,7 @@
   }
 
   .corporate-header__inner {
-    gap: var(--space-4);
+    gap: var(--header-mobile-gap);
   }
 
   .corporate-hamburger {
@@ -262,8 +262,6 @@
   .business-detail--restaurant .business-detail__hero-shell,
   .business-detail__hero-shell {
     grid-template-columns: minmax(0, 1fr);
-    width: calc(100vw - 2.5rem);
-    max-width: calc(100vw - 2.5rem);
     min-width: 0;
     margin-inline: auto;
   }
@@ -283,7 +281,7 @@
 
   .business-detail__japanese-note {
     box-sizing: border-box;
-    max-width: calc(100vw - 5rem);
+    max-width: 100%;
     white-space: normal;
     overflow-wrap: anywhere;
   }
@@ -294,7 +292,7 @@
     line-height: 1.02;
     max-width: 100%;
     width: 100%;
-    max-width: calc(100vw - 5rem) !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -316,7 +314,7 @@
   }
 
   .corporate-shell {
-    width: min(100% - var(--space-5), 76rem);
+    width: min(calc(100% - var(--content-inline-padding) - var(--content-inline-padding)), var(--content-max-width));
   }
 
   .corporate-section,
@@ -331,14 +329,14 @@
 
   .corporate-hero__inner.home-hero__inner {
     gap: var(--space-7);
-    max-width: calc(100vw - var(--space-5));
+    max-width: 100%;
     min-height: auto;
-    width: calc(100vw - var(--space-5));
+    width: 100%;
   }
 
   .home-hero .corporate-hero__copy {
-    max-width: calc(100vw - var(--space-5));
-    width: calc(100vw - var(--space-5));
+    max-width: 100%;
+    width: 100%;
   }
 
   .home-hero .corporate-hero__copy h1 {

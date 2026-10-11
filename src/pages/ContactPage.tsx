@@ -3,6 +3,7 @@ import { ArrowUpRight, Building2, Mail, MapPin, MessageSquare, Navigation, Phone
 import { ScrollReveal } from '../components/ScrollReveal'
 import { SectionSurface } from '../components/SectionSurface'
 import { SiteFooter } from '../components/SiteFooter'
+import { ContactForm } from '../components/ContactForm'
 import { businesses, getBusinessImagePosition, hokkaidoGroupLogo } from '../data/businesses'
 import { getBusinessGmailUrl, getBusinessWhatsAppUrl } from '../lib/contactLinks'
 import { handleBusinessImageError } from '../lib/businessImages'
@@ -33,11 +34,11 @@ export function ContactPage() {
               business conversations.
             </p>
             <div className="contact-hero__actions">
-              <a href="#brand-contacts" className="corporate-button corporate-button--primary">
+              <a href="#group-enquiries" className="corporate-button btn-primary">
                 <Building2 size={17} strokeWidth={2.2} aria-hidden="true" />
-                Brand contacts
+                Group enquiry
               </a>
-              <a href="#brand-contacts" className="corporate-button corporate-button--secondary">
+              <a href="#brand-contacts" className="corporate-button btn-secondary">
                 <MessageSquare size={17} strokeWidth={2.2} aria-hidden="true" />
                 Quick links
               </a>
@@ -81,18 +82,29 @@ export function ContactPage() {
         </ScrollReveal>
       </SectionSurface>
 
+      <SectionSurface id="group-enquiries" variant="rice-paper" className="group-enquiry-section">
+        <ScrollReveal className="corporate-shell">
+          <div className="section-header corporate-section__header">
+            <p className="section-header__eyebrow">Group enquiries</p>
+            <h2 className="section-header__heading">Send a group enquiry</h2>
+            <p className="section-header__description">For general questions and partnership enquiries.</p>
+          </div>
+          <ContactForm defaultBrand="General Hokkaido Group inquiry" hideBrand />
+        </ScrollReveal>
+      </SectionSurface>
+
       <SectionSurface id="brand-contacts" variant="rice-paper" className="contact-directory">
         <ScrollReveal className="corporate-shell">
           <div className="section-header corporate-section__header">
             <p className="section-header__eyebrow">Brand directory</p>
             <h2 className="section-header__heading">Call, email, or find the right location.</h2>
             <p className="section-header__description">
-              Direct contact details for every Hokkaido Group outlet and division.
+              Direct contact details for Hokkaido Group restaurants.
             </p>
           </div>
 
           <div className="contact-brand-grid">
-            {businesses.map((business) => {
+            {businesses.filter((business) => business.category === 'Restaurant').map((business) => {
               const contactCardImage = business.image && business.image !== business.logo ? business.image : null
               const gmailUrl = getBusinessGmailUrl(business)
               const whatsAppUrl = getBusinessWhatsAppUrl(business)
@@ -182,4 +194,3 @@ export function ContactPage() {
     </main>
   )
 }
-

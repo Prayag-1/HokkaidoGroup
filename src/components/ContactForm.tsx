@@ -202,11 +202,10 @@ export function ContactForm({ className, defaultBrand = '', hideBrand = false, m
       </div>
 
       <div className="corporate-form__actions">
-        <button type="submit" className="corporate-button corporate-button--primary" disabled={mutation.isPending || isSubmitting}>
+        <button type="submit" className="corporate-button btn-primary" disabled={mutation.isPending || isSubmitting}>
           {mutation.isPending || isSubmitting ? 'Sending...' : 'Send message'}
         </button>
       </div>
     </motion.form>
   )
 }
-

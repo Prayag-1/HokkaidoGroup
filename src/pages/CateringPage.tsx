@@ -90,7 +90,7 @@ export function CateringPage() {
             about the flavours, setting, and small details that will make it
             yours.
           </p>
-          <a className="editorial-button" href="#catering-inquiry">
+          <a className="editorial-button btn-primary" href="#catering-inquiry">
             Plan your gathering <ArrowUpRight size={17} />
           </a>
         </div>
@@ -182,7 +182,7 @@ export function CateringPage() {
             the occasion; we’ll help you explore the possibilities.
           </p>
           <a
-            className="editorial-button editorial-button--light"
+            className="editorial-button btn-secondary editorial-button--light"
             href="#catering-inquiry"
           >
             Inquiry Now <ArrowUpRight size={16} />
@@ -291,7 +291,7 @@ export function CateringPage() {
               placeholder="Menu ideas, dietary preferences, and anything else you would like us to know."
             />
           </label>
-          <button className="editorial-button" type="submit">
+          <button className="editorial-button btn-primary" type="submit">
             Prepare inquiry <Mail size={16} />
           </button>
           {emailDraft && (
@@ -300,7 +300,7 @@ export function CateringPage() {
                 Your inquiry is ready. Open Gmail below, review the details,
                 and send it to the team.
               </p>
-              <a className="editorial-button" href={emailDraft} target="_blank" rel="noopener noreferrer">
+              <a className="editorial-button btn-primary" href={emailDraft} target="_blank" rel="noopener noreferrer">
                 Open Gmail <ArrowUpRight size={16} />
               </a>
             </div>

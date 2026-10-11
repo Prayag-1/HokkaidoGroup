@@ -401,15 +401,15 @@ export function BookingForm({ className }: BookingFormProps) {
       </div>
 
       <div className="corporate-form__actions corporate-form__actions--split">
-        <button type="button" className="corporate-button corporate-button--secondary" onClick={goBack} disabled={step === 'brand'}>
+        <button type="button" className="corporate-button btn-secondary" onClick={goBack} disabled={step === 'brand'}>
           Back
         </button>
         {step === 'confirmation' ? (
-          <button type="submit" className="corporate-button corporate-button--primary" disabled={mutation.isPending || isSubmitting}>
+          <button type="submit" className="corporate-button btn-primary" disabled={mutation.isPending || isSubmitting}>
             {mutation.isPending || isSubmitting ? 'Sending…' : 'Confirm booking'}
           </button>
         ) : (
-          <button type="button" className="corporate-button corporate-button--primary" onClick={goNext}>
+          <button type="button" className="corporate-button btn-primary" onClick={goNext}>
             Next
           </button>
         )}

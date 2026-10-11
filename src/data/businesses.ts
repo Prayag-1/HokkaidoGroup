@@ -13,7 +13,7 @@ import ramenhouseNew2 from "../assets/gallery/ramenhouse/DSC02773.jpg.webp"
 import house0 from "../assets/gallery/hokkaidohouse/house0.webp"
 import house1 from "../assets/gallery/hokkaidohouse/house1.webp"
 import house3 from "../assets/gallery/hokkaidohouse/house3.webp"
-import janeichiLogo from '../assets/gallery/janeichi/janeichi-logo.webp'
+import janeichiLogo from '../assets/logo/images.png'
 import hokkaidoGroupLogoImage from '../assets/logo/Hokkaido Group.jpg'
 import hokkaidoRamenHouseLogo from '../assets/logo/Hokkaido Ramen.jpg'
 import hokkaidoHouseLogo from '../assets/logo/Hokkaido House.jpg'
@@ -23,7 +23,11 @@ import hokkaidoDekkaidoLogo from '../assets/logo/Hokkaido Dekkaido.jpg'
 import hokkaidoSoraLogo from '../assets/logo/Hokkaido Sora.jpg'
 import hokkaidoUmamiLogo from '../assets/logo/Hokkaido Umami.jpg'
 import asianCuisineLogo from '../assets/logo/Hokkaido Asian Cuisine.png'
+import asianCuisineFooterLogo from '../assets/logo/Hokkaido Asian Cuisine footer.webp'
+import expressFooterLogo from '../assets/logo/Hokkaido Express footer.webp'
+import janeichiFooterLogo from '../assets/logo/Janeichi footer.webp'
 import homaNepalLogo from '../assets/logo/images.png'
+import janeichiBusinessLogo from '../assets/gallery/janeichi/janeichi-logo.webp'
 
 import umamiImage from '../assets/gallery/umami/umami1.webp'
 import umami2 from '../assets/gallery/umami/umami2.webp'
@@ -52,10 +56,10 @@ import dekkaido4 from "../assets/gallery/dekkaido/dekkaido4.webp"
 
 import express1 from "../assets/gallery/Express/express-01.webp"
 import express4 from "../assets/gallery/Express/express-04.webp"
-import expressNew1 from "../assets/gallery/Express/DSC05442.jpg.jpeg"
-import expressNew2 from "../assets/gallery/Express/DSC05444.jpg.jpeg"
-import expressNew3 from "../assets/gallery/Express/DSC05490.jpg.jpeg"
-import expressNew4 from "../assets/gallery/Express/DSC05518.jpg.jpeg"
+import expressNew1 from "../assets/gallery/Express/DSC05442.jpg.webp"
+import expressNew2 from "../assets/gallery/Express/DSC05444.jpg.webp"
+import expressNew3 from "../assets/gallery/Express/DSC05490.jpg.webp"
+import expressNew4 from "../assets/gallery/Express/DSC05518.jpg.webp"
 
 
 export type BusinessCategory = 'Restaurant' | 'Skin Care' | 'Imports' | 'General'
@@ -80,7 +84,10 @@ export type Business = {
   imagePosition?: string
   galleryImages: string[]
   galleryImagePositions?: string[]
+  menu?: { sections?: { title: string; items: string[] }[]; pdfUrl?: string }
+  openingHours?: string
   logo: string | null
+  footerLogo?: string | null
   logoAspectRatio?: string
   logoMaxWidth?: number
   websiteUrl: string | null
@@ -226,6 +233,7 @@ export const businesses: Business[] = [
     galleryImages: [asianCuisine1, asianCuisine2, asianCuisine3, asianCuisine4, asianCuisine5, asianCuisine6],
     galleryImagePositions: ['center 55%', 'center 52%', 'center 38%', 'center', 'center 48%', 'center 62%'],
     logo: asianCuisineLogo,
+    footerLogo: asianCuisineFooterLogo,
     websiteUrl: null,
     featured: true,
     verified: false,
@@ -268,6 +276,7 @@ export const businesses: Business[] = [
     galleryImages: [expressNew3, expressNew1, expressNew2, expressNew4, express1, express4],
     galleryImagePositions: ['center 48%', 'center 48%', 'center 48%', 'center 48%', 'center', 'center'],
     logo: hokkaidoExpressLogo,
+    footerLogo: expressFooterLogo,
     websiteUrl: null,
     featured: false,
     verified: false,
@@ -330,7 +339,8 @@ export const businesses: Business[] = [
     coordinates: null,
     image: janeichiLogo,
     galleryImages: [],
-    logo: janeichiLogo,
+    logo: janeichiBusinessLogo,
+    footerLogo: janeichiFooterLogo,
     websiteUrl: null,
     featured: true,
     verified: false,

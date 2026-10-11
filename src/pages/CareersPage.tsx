@@ -14,7 +14,7 @@ export function CareersPage() {
             description="Open roles and hiring updates will appear when they are ready for the public site."
             icon={Briefcase}
             action={
-              <Link to="/contact" className="corporate-button corporate-button--primary">
+              <Link to="/contact" className="corporate-button btn-primary">
                 Contact the Group
               </Link>
             }

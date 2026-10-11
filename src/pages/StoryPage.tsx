@@ -39,7 +39,7 @@ export function StoryPage() {
               The portfolio spans restaurants, Japanese retail, sourcing and
               trading, and onsen and resort experiences.
             </p>
-            <Link className="editorial-button" to="/our-brands">
+            <Link className="editorial-button btn-primary" to="/our-brands">
               Explore our brands
             </Link>
           </div>

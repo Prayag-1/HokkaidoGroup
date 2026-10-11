@@ -47,11 +47,21 @@ function SocialIcon({ label }: { label: string }) {
     )
   return <ExternalLink size={20} />
 }
-export function GroupContact({ phone }: { phone?: string } = {}) {
+export function GroupContact({ phone, socialFirst = false }: { phone?: string; socialFirst?: boolean } = {}) {
   const group = hokkaidoGroupCorporateContact
   const contact = group
+  const socials = (
+    <div className="social-links">
+      {group.socialLinks.filter((social) => social.verified).map((social) => (
+        <a key={social.url} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+          <SocialIcon label={social.label} />
+        </a>
+      ))}
+    </div>
+  )
   return (
     <div className="group-contact">
+      {socialFirst ? socials : null}
       <h3>Contact us</h3>
       <p>{contact.name}</p>
       <address>
@@ -61,23 +71,7 @@ export function GroupContact({ phone }: { phone?: string } = {}) {
         )}
         <Link to="/contact">All outlet contacts</Link>
       </address>
-      <div className="social-links">
-        {group.socialLinks
-          .filter((s) => s.verified)
-          .map((s) => {
-            return (
-              <a
-                key={s.url}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-              >
-                <SocialIcon label={s.label} />
-              </a>
-            )
-          })}
-      </div>
+      {socialFirst ? null : socials}
     </div>
   )
 }

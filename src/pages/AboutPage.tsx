@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { PageBreadcrumb } from '../components/PageBreadcrumb'
 import { SiteFooter } from '../components/SiteFooter'
-import { hokkaidoVisionParagraphs } from '../data/corporateContent'
+import { corporatePrinciples, hokkaidoVisionParagraphs } from '../data/corporateContent'
 import { businesses, getBusinessImagePosition } from '../data/businesses'
 import { handleBusinessImageError } from '../lib/businessImages'
 import founderPhoto from '../assets/gallery/founder-arjun-adhikari.png'
@@ -15,6 +15,12 @@ const storyImage = businesses.find(
   (business) => business.id === 'hokkaido-ramen-house',
 )?.image
 const storyPhotos = businesses.flatMap(b => b.galleryImages.map(src => ({ business: b, src })))
+const brandGroups = [
+  { title: 'Restaurants', businesses: businesses.filter((business) => business.category === 'Restaurant') },
+  { title: 'Japanese Lifestyle', businesses: businesses.filter((business) => business.category === 'Skin Care') },
+  { title: 'Imports & Distribution', businesses: businesses.filter((business) => business.category === 'Imports') },
+  { title: 'Other Ventures', businesses: businesses.filter((business) => business.category === 'General') },
+]
 const leadershipTeam = [
   {
     name: 'Sandesh Poudel',
@@ -91,18 +97,33 @@ export function AboutPage() {
         </p>
       </section>
       <section className="editorial-section corporate-shell about-prose">
-        {hokkaidoVisionParagraphs.slice(1).map((p) => (
-          <p key={p}>{p}</p>
-        ))}
         <p>
           Our story begins with founder Arjun Adhikari's hospitality journey in
           Japan, followed by Hokkaido Ramen House at Park Village in Nepal.
           Today, our brands bring together restaurants, retail, wellness, and
           trading.
         </p>
-        <Link to="/our-story" className="editorial-button">
+        <Link to="/our-story" className="editorial-button btn-primary">
           Our Story
         </Link>
+      </section>
+      <section className="editorial-section corporate-shell about-principles" aria-labelledby="about-principles-title">
+        <p className="eyebrow">How we work</p>
+        <h2 id="about-principles-title">Hospitality Philosophy</h2>
+        <p>{hokkaidoVisionParagraphs[1]}</p>
+        <div className="principles">
+          {corporatePrinciples.map((principle) => <article key={principle.title}><h3>Our {principle.title}</h3><p>{principle.text}</p></article>)}
+        </div>
+      </section>
+      <section className="editorial-section corporate-shell about-brands" id="our-brands" aria-labelledby="our-brands-title">
+        <p className="eyebrow">Hokkaido Group</p>
+        <h2 id="our-brands-title">Our Brands</h2>
+        {brandGroups.map((group) => group.businesses.length > 0 ? (
+          <section className="about-brands__group" key={group.title}>
+            <h3>{group.title}</h3>
+            <ul>{group.businesses.map((business) => <li key={business.id}><Link to={business.id === 'hokkaido-mart' ? '/mart' : `/businesses/${business.slug}`}>{business.name}</Link></li>)}</ul>
+          </section>
+        ) : null)}
       </section>
       <section className="editorial-section corporate-shell">
         <div className="section-heading">

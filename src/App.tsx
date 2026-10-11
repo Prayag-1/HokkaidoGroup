@@ -39,7 +39,7 @@ function NotFoundPage() {
             <p className="section-header__eyebrow">404</p>
             <h1 className="section-header__heading">Page not found</h1>
             <p className="section-header__description">The page you requested could not be found.</p>
-            <a href="/" className="corporate-button corporate-button--primary">Return home</a>
+            <a href="/" className="corporate-button btn-primary">Return home</a>
           </div>
         </div>
       </SectionSurface>
@@ -69,8 +69,8 @@ function AppRoutes() {
       '/about': { title: 'About Hokkaido Group', description: 'Learn about Hokkaido Group and its Japanese hospitality businesses in Nepal.' },
       '/about-us': { title: 'About Hokkaido Group', description: 'Learn about Hokkaido Group and its Japanese hospitality businesses in Nepal.' },
       '/our-story': { title: 'Our Story | Hokkaido Group', description: 'The story of Hokkaido Group and Japanese hospitality in Nepal.' },
-      '/businesses': { title: 'Our Businesses | Hokkaido Group', description: 'Explore Hokkaido Group’s restaurants, retail, and business divisions across Nepal.' },
-      '/our-brands': { title: 'Our Businesses | Hokkaido Group', description: 'Explore Hokkaido Group’s restaurants, retail, and business divisions across Nepal.' },
+      '/businesses': { title: 'Our Restaurants | Hokkaido Group', description: 'Find Hokkaido Group restaurants by city and neighbourhood, view location details, and plan your visit.' },
+      '/our-brands': { title: 'Our Restaurants | Hokkaido Group', description: 'Find Hokkaido Group restaurants by city and neighbourhood, view location details, and plan your visit.' },
       '/mart': { title: 'HOMA Nepal | Hokkaido Group', description: 'Explore Japanese skincare, pantry goods, and lifestyle products at HOMA Nepal.' },
       '/catering': { title: 'Catering | Hokkaido Group', description: 'Ask Hokkaido Group about catering for private celebrations and corporate gatherings.' },
       '/membership': { title: 'Membership | Hokkaido Group', description: 'Register your interest in Hokkaido Group membership updates.' },
@@ -109,13 +109,35 @@ function AppRoutes() {
 
   useEffect(() => {
     if (location.hash) {
-      const target = document.getElementById(location.hash.slice(1))
-      if (target) {
-        requestAnimationFrame(() => {
-          target.scrollIntoView({ behavior: 'auto', block: 'start' })
+      let frame = 0
+      let timeout = 0
+      const scrollToTarget = () => {
+        const target = document.getElementById(location.hash.slice(1))
+        if (!target) return false
+        frame = requestAnimationFrame(() => {
+          const headerHeight = document.querySelector('.corporate-header')?.getBoundingClientRect().height ?? 0
+          const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 12
+          window.scrollTo({ top: Math.max(0, top), behavior: 'auto' })
         })
+        return true
       }
-      return
+      if (scrollToTarget()) return () => cancelAnimationFrame(frame)
+
+      const observer = new MutationObserver(() => {
+        if (!scrollToTarget()) return
+        observer.disconnect()
+        window.clearTimeout(timeout)
+      })
+      observer.observe(document.getElementById('root') ?? document.body, {
+        childList: true,
+        subtree: true,
+      })
+      timeout = window.setTimeout(() => observer.disconnect(), 5000)
+      return () => {
+        observer.disconnect()
+        window.clearTimeout(timeout)
+        cancelAnimationFrame(frame)
+      }
     }
 
     window.scrollTo({ top: 0, behavior: 'auto' })
@@ -123,7 +145,7 @@ function AppRoutes() {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader key={location.pathname} />
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={renderPage(HomePage)} />

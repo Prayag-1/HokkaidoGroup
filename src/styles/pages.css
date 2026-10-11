@@ -17,17 +17,6 @@
   color: var(--bg-ink);
 }
 
-.corporate-cta .corporate-button--primary {
-  background: var(--surface-card);
-  border-color: var(--surface-card);
-  color: var(--color-primary-text);
-}
-
-.corporate-cta .corporate-button--primary:hover {
-  background: var(--surface-subtle);
-  border-color: var(--surface-subtle);
-}
-
 .business-directory__group-header {
   align-items: end;
   border-bottom: 1px solid color-mix(in srgb, var(--accent-detail) 18%, transparent);
@@ -156,7 +145,7 @@
   margin: 0;
   overflow: hidden;
   position: sticky;
-  top: 7rem;
+  top: calc(var(--header-height) + var(--space-4));
 }
 
 .about-story__image img {
@@ -362,18 +351,6 @@
 
 .business-directory--editorial .corporate-section__header .section-header__eyebrow::after {
   background: color-mix(in srgb, var(--fg-on-ink) 42%, transparent);
-}
-
-.business-directory--editorial .corporate-section__actions .corporate-button {
-  background: transparent;
-  border-color: color-mix(in srgb, var(--fg-on-ink) 45%, transparent);
-  border-radius: 0;
-  color: var(--fg-on-ink);
-}
-
-.business-directory--editorial .corporate-section__actions .corporate-button:hover {
-  background: color-mix(in srgb, var(--fg-on-ink) 10%, transparent);
-  border-color: var(--fg-on-ink);
 }
 
 .business-directory--editorial .corporate-section__header {
@@ -866,7 +843,7 @@
   width: clamp(2.5rem, 7vw, 5.5rem);
 }
 
-.contact-page--editorial .contact-hero__actions .corporate-button--secondary {
+.contact-page--editorial .contact-hero__actions .btn-secondary {
   border-color: color-mix(in srgb, var(--fg-on-ink) 35%, transparent);
   color: var(--fg-on-ink);
 }
@@ -1666,4 +1643,3 @@
 .business-detail__location-grid .location-spotlight__cards {
   grid-template-columns: 1fr;
 }
-

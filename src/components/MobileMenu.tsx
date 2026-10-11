@@ -1,14 +1,15 @@
 import { BusinessImage } from './BusinessImage'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { X } from 'lucide-react'
+import { ChevronDown, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
-import { primaryNavLinks } from '../config/nav'
+import { experienceNavLinks, primaryNavLinks } from '../config/nav'
 import { businesses, businessCategories, hokkaidoGroupLogo, menuContactPhone } from '../data/businesses'
 import { GroupContact } from './GroupContact'
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState<'restaurants' | 'experiences' | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -65,10 +66,11 @@ export function MobileMenu() {
       <button
         ref={trigger}
         className="corporate-hamburger"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open navigation menu"
+        onClick={() => isOpen ? closeMenu() : setIsOpen(true)}
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={isOpen}
         aria-controls="site-menu"
+        data-open={isOpen}
       >
         <span />
         <span />
@@ -128,11 +130,38 @@ export function MobileMenu() {
             <div className="site-menu__layout">
               <div className="site-menu__navigation">
                 <nav aria-label="All pages">
-                  {primaryNavLinks.map((link) => (
+                  <h2>Explore</h2>
+                  {primaryNavLinks.filter((link) => link.label !== 'Our Restaurants').map((link) => (
                     <NavLink key={link.to} to={link.to}>
                       {link.label}
                     </NavLink>
                   ))}
+                  <button
+                    type="button"
+                    className="site-menu__accordion-trigger"
+                    aria-expanded={openMenu === 'restaurants'}
+                    aria-controls="mobile-restaurants-menu"
+                    onClick={() => setOpenMenu((current) => current === 'restaurants' ? null : 'restaurants')}
+                  >
+                    Our Restaurants <ChevronDown aria-hidden="true" />
+                  </button>
+                  <div id="mobile-restaurants-menu" className="site-menu__accordion-content" hidden={openMenu !== 'restaurants'}>
+                    <NavLink to="/businesses">All Restaurants</NavLink>
+                  </div>
+                  <button
+                    type="button"
+                    className="site-menu__accordion-trigger"
+                    aria-expanded={openMenu === 'experiences'}
+                    aria-controls="mobile-experiences-menu"
+                    onClick={() => setOpenMenu((current) => current === 'experiences' ? null : 'experiences')}
+                  >
+                    Experiences <ChevronDown aria-hidden="true" />
+                  </button>
+                  <div id="mobile-experiences-menu" className="site-menu__accordion-content" hidden={openMenu !== 'experiences'}>
+                    {experienceNavLinks.map((link) => (
+                      <NavLink key={link.to} to={link.to}>{link.label}</NavLink>
+                    ))}
+                  </div>
                 </nav>
                 <GroupContact phone={menuContactPhone} />
               </div>
@@ -170,6 +199,9 @@ export function MobileMenu() {
                 ))}
               </div>
             </div>
+            <Link className="header-restaurant-cta site-menu__restaurant-cta btn-primary" to="/businesses">
+              Find a Restaurant
+            </Link>
           </div>
         </dialog>,
         document.body,

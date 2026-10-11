@@ -33,7 +33,7 @@ export function BookingPage() {
         </ScrollReveal>
 
         <div className="corporate-shell corporate-actions">
-          <Link to="/" className="corporate-button corporate-button--secondary">
+          <Link to="/" className="corporate-button btn-secondary">
             Return Home
           </Link>
         </div>

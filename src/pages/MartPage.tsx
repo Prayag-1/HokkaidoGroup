@@ -32,9 +32,9 @@ export function MartPage() {
               <h3>{outlet.locationSummary}</h3>
               <p>{outlet.description}</p>
               {outlet.websiteUrl ? (
-                <a className="editorial-button" href={outlet.websiteUrl} target="_blank" rel="noopener noreferrer">Learn more</a>
+                <a className="editorial-button btn-primary" href={outlet.websiteUrl} target="_blank" rel="noopener noreferrer">Learn more</a>
               ) : (
-                <a className="editorial-button" href="#homa-location">Location & contact</a>
+                <a className="editorial-button btn-primary" href="#homa-location">Location & contact</a>
               )}
               {/* Add the confirmed official URL to businesses.ts when supplied. */}
             </div>
@@ -44,7 +44,7 @@ export function MartPage() {
       <section className="editorial-section corporate-shell">
         <p className="eyebrow">Get in touch</p>
         <h2>Discover HOMA Nepal</h2>
-        <a className="editorial-button" href={`mailto:${homa.email}?subject=HOMA%20Nepal%20inquiry`}>Inquiry Now</a>
+        <a className="editorial-button btn-primary" href={`mailto:${homa.email}?subject=HOMA%20Nepal%20inquiry`}>Inquiry Now</a>
         <p><a href={`tel:${homa.phone}`}>{homa.phone}</a></p>
       </section>
       <section id="homa-location" className="editorial-section corporate-shell brand-location">
